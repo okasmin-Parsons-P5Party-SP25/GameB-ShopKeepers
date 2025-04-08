@@ -2,7 +2,7 @@ import * as titleScene from "./titleScene.js";
 import * as playScene from "./playScene.js";
 import { setupQuizUI } from "./quiz.js";
 
-import { p5Events } from "./utilities.js";
+import { p5Events, canvasDims } from "./utilities.js";
 
 let currentScene; // the scene being displayed
 
@@ -17,7 +17,7 @@ window.preload = function () {
 };
 
 window.setup = function () {
-  createCanvas(window.innerWidth, 600);
+  createCanvas(canvasDims.width, canvasDims.height);
   noFill();
   noStroke();
 

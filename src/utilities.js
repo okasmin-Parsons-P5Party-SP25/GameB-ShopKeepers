@@ -19,3 +19,8 @@ export const p5Events = [
   "touchStarted",
   "touchEnded",
 ];
+
+export const canvasDims = {
+  width: window.innerWidth,
+  height: 600,
+};

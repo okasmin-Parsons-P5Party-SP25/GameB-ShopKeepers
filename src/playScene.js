@@ -1,4 +1,4 @@
-import { changeScene, scenes } from "./main.js";
+import { canvasDims } from "./utilities.js";
 
 export function enter() {}
 
@@ -7,16 +7,18 @@ export function update() {}
 export function draw() {
   background("antiquewhite");
 
-  // draw info
+  const groundHeight = 40;
+
+  // draw ground
   push();
   fill("black");
-  text("play scene", 10, 20);
+  rect(0, canvasDims.height - groundHeight, canvasDims.width, groundHeight);
   pop();
 
   // draw ball
   push();
   fill("green");
-  ellipse(100, 100, 100, 100);
+  ellipse(100, canvasDims.height - groundHeight - 50, 100, 100);
   pop();
 }
 

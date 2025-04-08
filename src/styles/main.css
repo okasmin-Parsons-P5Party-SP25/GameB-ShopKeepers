@@ -1,12 +1,32 @@
+body {
+  overflow: hidden;
+}
+
 h1 {
   color: #bed280;
 }
 
+button {
+  z-index: 100;
+  margin: 8px;
+}
+
 #quiz {
-  display: flex;
+  width: 75%;
+  /* top: 200; */
+  position: absolute;
+  /* height: fit-content; */
+  border: 1px solid #152e50;
+  z-index: 10;
+
+  border-radius: 20px;
+  padding: 50px;
+
+  /* display: flex; */
   background-color: #bed280;
   color: black;
-  flex-direction: column;
+  /* flex-direction: column; */
+  /* align-items: center; */
 
   button {
     width: 200px;
@@ -16,6 +36,7 @@ h1 {
     display: flex;
     flex-direction: column;
     width: 20%;
+    align-items: center;
   }
 
   #submit-quiz {
@@ -33,8 +54,34 @@ h1 {
   #questions-screen.hidden {
     display: none;
   }
+
+  #questions-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 #quiz.hidden {
   display: none;
+}
+
+#top-container {
+  height: 100px;
+  width: 100%;
+}
+
+#popup-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+canvas {
+  position: absolute;
+  top: 160px;
+  left: 0;
+  z-index: 0;
 }
