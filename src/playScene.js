@@ -49,6 +49,6 @@ const drawShops = () => {
     if (!guest.shopType) continue;
     const shopType = guest.shopType;
     const shopImage = shopImages[shopType];
-    image(shopImage, 200, topOfGroundY - 350, 400, 400);
+    image(shopImage, 50 + 400 * i, topOfGroundY - 350, 400, 400);
   }
 };
