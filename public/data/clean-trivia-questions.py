@@ -2,7 +2,7 @@ import json
 import html
 
 # Load your JSON file
-with open('/Users/lisaquinley/Dropbox/Parsons_MS_Data-Visualization/Spring-2025/PSAM-5550_Collab-p5Party/GameB-ShopKeepers/public/data/book_questions.json', 'r', encoding='utf-8') as file:
+with open('/Users/lisaquinley/Dropbox/Parsons_MS_Data-Visualization/Spring-2025/PSAM-5550_Collab-p5Party/GameB-ShopKeepers/public/data/animal_questions.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
 # Track seen questions
@@ -26,7 +26,7 @@ for item in data["results"]:
 data["results"] = unique_results
 
 # Write the cleaned data to a new file
-with open('cleaned_file_book_questions.json', 'w', encoding='utf-8') as outfile:
+with open('cleaned_file_animal_questions.json', 'w', encoding='utf-8') as outfile:
     json.dump(data, outfile, indent=4, ensure_ascii=False)
 
 print(f"Cleaned and removed duplicates. {len(unique_results)} unique questions remain.")

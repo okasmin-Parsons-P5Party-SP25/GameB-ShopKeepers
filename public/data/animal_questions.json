@@ -27,6 +27,54 @@
             "type": "multiple",
             "difficulty": "medium",
             "category": "Animals",
+            "question": "What is the largest species of shark?",
+            "correct_answer": "Whale Shark",
+            "incorrect_answers": [
+                "Great White Shark",
+                "Hammerhead Shark",
+                "Tiger Shark"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Animals",
+            "question": "What is the largest species of penguin?",
+            "correct_answer": "Emperor Penguin",
+            "incorrect_answers": [
+                "King Penguin",
+                "Gentoo Penguin",
+                "Macaroni Penguin"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Animals",
+            "question": "What is the largest species of owl?",
+            "correct_answer": "Blakiston's Fish Owl",
+            "incorrect_answers": [
+                "Great Horned Owl",
+                "Eurasian Eagle Owl",
+                "Snowy Owl"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Animals",
+            "question": "What is the largest species of tortoise?",
+            "correct_answer": "Galapagos Tortoise",
+            "incorrect_answers": [
+                "Aldabra Giant Tortoise",
+                "Leatherback Sea Turtle",
+                "Green Sea Turtle"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Animals",
             "question": "Which of these species is not extinct?",
             "correct_answer": "Komodo dragon",
             "incorrect_answers": [
@@ -89,6 +137,30 @@
                 "2",
                 "4",
                 "0"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Animals",
+            "question": "What is the largest species of deer?",
+            "correct_answer": "Moose",
+            "incorrect_answers": [
+                "Elk",
+                "Red Deer",
+                "Sika Deer"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Animals",
+            "question": "What is the largest species of dolphin?",
+            "correct_answer": "Orca",
+            "incorrect_answers": [
+                "Bottlenose Dolphin",
+                "Common Dolphin",
+                "Risso's Dolphin"
             ]
         },
         {
@@ -205,6 +277,88 @@
                 "Pigeons",
                 "Bears",
                 "Alligators"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Science &amp; Nature",
+            "question": "What is the largest living organism currently known to man?",
+            "correct_answer": "Honey Fungus",
+            "incorrect_answers": [
+                "Blue Whale",
+                "Redwood Tree",
+                "The Coral Reef"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Science &amp; Nature",
+            "question": "How many legs is it biologically impossible for a centipede to have?",
+            "correct_answer": "100",
+            "incorrect_answers": [
+                "26",
+                "50",
+                "74"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Science &amp; Nature",
+            "question": "What does the scientific name of the Cambrian-Period sea creature Anomalocaris mean?",
+            "correct_answer": "Abnormal Shrimp",
+            "incorrect_answers": [
+                "Deformed Fish",
+                "Strange Crab",
+                "Anomalous Clam"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Science &amp; Nature",
+            "question": "The Western Lowland Gorilla is scientifically know as?",
+            "correct_answer": "Gorilla Gorilla Gorilla",
+            "incorrect_answers": [
+                "Gorilla Gorilla Diehli",
+                "Gorilla Beringei Graueri",
+                "Gorilla Beringei Beringei"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Science &amp; Nature",
+            "question": "Which major extinction event was caused by an asteroid collision and eliminated the majority of non-avian dinosaurs?",
+            "correct_answer": "Cretaceous-Paleogene",
+            "incorrect_answers": [
+                "Triassic–Jurassic",
+                "Permian–Triassic",
+                "Ordovician–Silurian"
+            ]
+        },
+        {
+            "type": "boolean",
+            "difficulty": "easy",
+            "category": "Science &amp; Nature",
+            "question": "Great Whites sometimes perform the bump-and-bite attack (a test bite) on victims.",
+            "correct_answer": "True",
+            "incorrect_answers": [
+                "False"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Science &amp; Nature",
+            "question": "What is the scientific name of the red fox?",
+            "correct_answer": "Vulpes Vulpes",
+            "incorrect_answers": [
+                "Vulpes Redus",
+                "Red Fox",
+                "Vulpes Vulpie"
             ]
         },
         {
