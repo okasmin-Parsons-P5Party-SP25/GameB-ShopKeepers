@@ -9,7 +9,29 @@ h1 {
   flex-direction: column;
 
   button {
-    width: 120px;
+    width: 200px;
+  }
+
+  #answers-container {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+  }
+
+  #submit-quiz {
+    background-color: aqua;
+  }
+
+  .guessed-button {
+    background-color: yellow;
+  }
+
+  #answers-screen.hidden {
+    display: none;
+  }
+
+  #questions-screen.hidden {
+    display: none;
   }
 }
 

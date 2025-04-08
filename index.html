@@ -20,14 +20,15 @@
       <button>choose type</button>
       <button id="quiz-button">play quiz</button>
       <div id="quiz" class="hidden">
-        <div id="question">question goes here</div>
-        <div id="answers-container">
-          <div id="answer1">1</div>
-          <div id="answer2">2</div>
-          <div id="answer3">3</div>
-          <div id="answer4">4</div>
+        <div id="questions-screen">
+          <h4 id="question"></h4>
+          <div id="answers-container"></div>
+          <button id="submit-quiz">submit</button>
         </div>
-        <button id="submit-quiz">submit</button>
+        <div id="answers-screen" class="hidden">
+          <h4>the answer...</h4>
+          <div id="answer-revealed"></div>
+        </div>
       </div>
     </div>
   </body>
