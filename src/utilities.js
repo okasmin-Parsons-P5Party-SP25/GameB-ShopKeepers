@@ -24,3 +24,9 @@ export const canvasDims = {
   width: window.innerWidth,
   height: 600,
 };
+
+export const shopTypes = {
+  plant: "plant",
+  bakery: "bakery",
+  books: "books",
+};

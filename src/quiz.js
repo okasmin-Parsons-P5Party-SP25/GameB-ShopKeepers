@@ -30,6 +30,7 @@ const questionsScreenDiv = document.getElementById("questions-screen");
 const answerScreenDiv = document.getElementById("answers-screen");
 
 const revealedAnswerDiv = document.getElementById("answer-revealed");
+const closeButton = document.getElementById("close-quiz");
 
 /**
  * attach event listeners
@@ -52,20 +53,23 @@ const onSubmit = () => {
 };
 
 const onClickQuiz = async () => {
-  quizDiv.classList.toggle("hidden");
-
   if (quizDiv.classList.contains("hidden")) {
     clearQuiz();
-  } else {
+    await generateQuiz();
+
+    quizDiv.classList.remove("hidden");
+
     questionsScreenDiv.classList.remove("hidden");
     answerScreenDiv.classList.add("hidden");
-
-    await generateQuiz();
   }
 };
 
+const onClickClose = () => {
+  clearQuiz();
+  quizDiv.classList.add("hidden");
+};
+
 const clearQuiz = () => {
-  // console.log("clear quiz");
   guessed = undefined;
   correctAnswer = undefined;
   answersDiv.innerHTML = "";
@@ -88,18 +92,17 @@ const generateQuiz = async () => {
   const incorrect = currentQuestion["incorrect_answers"];
   const allAnswers = [correct, ...incorrect];
 
-  // console.log(allAnswers);
-
   shuffle(allAnswers).forEach((answer) => {
-    // console.log(answer);
     const answerButton = document.createElement("button");
     answerButton.textContent = answer;
+
+    answerButton.classList.add("answer-button");
 
     answerButton.addEventListener("click", () => {
       // only allow 1 guess
       if (guessed) return;
 
-      answerButton.classList.toggle("guessed-button");
+      answerButton.classList.toggle("selected-button");
       console.log(`clicked ${answer}`);
       guessed = answer;
     });
@@ -109,8 +112,8 @@ const generateQuiz = async () => {
 };
 
 export const setupQuizUI = () => {
-  // button to open/close quiz
   quizButton.addEventListener("click", onClickQuiz);
+  closeButton.addEventListener("click", onClickClose);
 
   // submit quiz button
   submitButton.addEventListener("click", onSubmit);

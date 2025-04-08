@@ -6,6 +6,13 @@
     <link rel="icon" href="favicon.png" />
     <link rel="stylesheet" href="src/styles/main.css" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+
     <script defer src="https://cdn.jsdelivr.net/npm/p5@1.9.1/lib/p5.js"></script>
     <script
       defer
@@ -18,11 +25,12 @@
     <div>
       <div id="top-container">
         <h1>Shop Keepers</h1>
-        <button>choose type</button>
+        <button id="choose-type-button">choose shop type</button>
         <button id="quiz-button">play quiz</button>
       </div>
       <div id="popup-container">
-        <div id="quiz" class="hidden">
+        <div id="quiz" class="hidden popupItem">
+          <button class="close-button" id="close-quiz">X</button>
           <div id="questions-screen">
             <h4 id="question"></h4>
             <div id="answers-container"></div>
@@ -32,6 +40,11 @@
             <h4>the answer...</h4>
             <div id="answer-revealed"></div>
           </div>
+        </div>
+        <div id="choose-type" class="hidden popupItem">
+          <button class="close-button" id="close-choose-type">X</button>
+          <div>Choose what type of shop you want!</div>
+          <div id="type-choices"></div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import * as titleScene from "./titleScene.js";
 import * as playScene from "./playScene.js";
 import { setupQuizUI } from "./quiz.js";
+import { setupChooseTypeUI } from "./chooseShopType.js";
 
 import { p5Events, canvasDims } from "./utilities.js";
 
@@ -25,6 +26,7 @@ window.setup = function () {
   changeScene(scenes.play);
 
   setupQuizUI();
+  setupChooseTypeUI();
 };
 
 window.draw = function () {
