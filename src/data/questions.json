@@ -1,0 +1,413 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Sports",
+      "question": "Which basketball team has attended the most NBA grand finals?",
+      "correct_answer": "Los Angeles Lakers",
+      "incorrect_answers": ["Boston Celtics", "Philadelphia 76ers", "Golden State Warriors"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Video Games",
+      "question": "Which of the following Call of Duty games was a PS3 launch title?",
+      "correct_answer": "Call of Duty 3",
+      "incorrect_answers": [
+        "Call of Duty 4: Modern Warfare",
+        "Call of Duty: World at War",
+        "Call of Duty: Roads to Victory"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Music",
+      "question": "What is the relationship between the band members of American rock band King of Leon?",
+      "correct_answer": "Brothers &amp; cousins",
+      "incorrect_answers": ["Childhood friends", "Former classmates", "Fraternity house members"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Geography",
+      "question": "Which country was NOT formerly part of Yugoslavia?",
+      "correct_answer": "Albania",
+      "incorrect_answers": ["Croatia", "Serbia", "Macedonia"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "easy",
+      "category": "Entertainment: Board Games",
+      "question": "The top human players can easily beat the top computers at chess",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science: Computers",
+      "question": "The programming language &#039;Swift&#039; was created to replace what other programming language?",
+      "correct_answer": "Objective-C",
+      "incorrect_answers": ["C#", "Ruby", "C++"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Entertainment: Video Games",
+      "question": "In the game Call of Duty, what is the last level where you play as an American soldier?",
+      "correct_answer": "Festung Recogne",
+      "incorrect_answers": ["Ste. Mere-Eglise (Day)", "Chateau", "Brecourt"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Animals",
+      "question": "What scientific suborder does the family Hyaenidae belong to?",
+      "correct_answer": "Feliformia",
+      "incorrect_answers": ["Haplorhini", "Caniformia", "Ciconiiformes"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Music",
+      "question": "Who is the lead singer of the Smashing Pumpkins?",
+      "correct_answer": "Billy Corgan",
+      "incorrect_answers": ["Brett Scallions", "Eddie Vedder", "Chino Moreno"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "easy",
+      "category": "Mythology",
+      "question": "In the Greek Mythology, the god of war is called Mars.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "History",
+      "question": "What is the name of the ship which was only a few miles away from the RMS Titanic when it struck an iceberg on April 14, 1912?",
+      "correct_answer": "Californian",
+      "incorrect_answers": ["Carpathia", "Cristol", "Commerce"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "History",
+      "question": "Which of these countries was NOT a part of the Soviet Union?",
+      "correct_answer": "Afghanistan",
+      "incorrect_answers": ["Turkmenistan", "Kazakhstan", "Uzbekistan"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Music",
+      "question": "In the song &ldquo;The Ultimate Showdown of Ultimate Destiny,&rdquo; who is the only one to survive the battle?",
+      "correct_answer": "Mr. Rogers",
+      "incorrect_answers": ["Batman", "Chuck Norris", "Godzilla"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "easy",
+      "category": "Science &amp; Nature",
+      "question": "The Earth revolves around the Sun in one year.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Entertainment: Japanese Anime &amp; Manga",
+      "question": "In the anime Initial D, how does Takumi Fujiwara describe a drift?",
+      "correct_answer": "&#039;. . . the front tires slide so the car won&#039;t face the inside&#039;",
+      "incorrect_answers": [
+        "&#039;. . . the wheels lose traction, making the car slide sideways&#039;",
+        "&#039;. . . the car oversteers through a curve, causing it to turn faster&#039;",
+        "&#039;. . . you turn a lot&#039;"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Television",
+      "question": "In the Star Trek universe, what color is Vulcan blood?",
+      "correct_answer": "Green",
+      "incorrect_answers": ["Blue", "Red", "Purple"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Entertainment: Music",
+      "question": "Electronic artists Boys Noize and Skrillex have collaborated and released tracks under what name?",
+      "correct_answer": "Dog Blood",
+      "incorrect_answers": ["Jack &Uuml;", "What So Not", "Noisia"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "easy",
+      "category": "Entertainment: Music",
+      "question": "Korean girl group, TWICE, consists of 9 members",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Video Games",
+      "question": "The city of Rockport is featured in which of the following video games?",
+      "correct_answer": "Need for Speed: Most Wanted (2005)",
+      "incorrect_answers": ["Infamous 2", "Saints Row: The Third", "Burnout Revenge"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Japanese Anime &amp; Manga",
+      "question": "Which of the following originated as a manga?",
+      "correct_answer": "Akira",
+      "incorrect_answers": ["Cowboy Bebop", "High School DxD", "Gurren Lagann"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Entertainment: Video Games",
+      "question": "In Stardew Valley, what is the reward for completing all of the Bulletin Board bundles?",
+      "correct_answer": "Additional Friendship points",
+      "incorrect_answers": ["Glittering Boulder removed", "Bus is repaired", "Greenhouse"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "The book 1984 was published in 1949.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Video Games",
+      "question": "How many flagship monsters appear in Monster Hunter Gernerations?",
+      "correct_answer": "4",
+      "incorrect_answers": ["1", "2", "3"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Musicals &amp; Theatres",
+      "question": "In which Shakespearean play will you find the suicide of Ophelia?",
+      "correct_answer": "Hamlet",
+      "incorrect_answers": ["Macbeth", "Othello", "King Lear"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Music",
+      "question": "According to their 1974 hit, what were Brownsville Station doing &quot;In The Boys&#039; Room&quot;?",
+      "correct_answer": "Smokin&#039;",
+      "incorrect_answers": ["Hangin&#039;", "Lovin&#039;", "Peein&#039;"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Entertainment: Music",
+      "question": "What album is the song &#039;New Slang&#039; by The Shins found on?",
+      "correct_answer": "Oh, Inverted World",
+      "incorrect_answers": ["Wincing The Night Away", "Chutes Too Narrow", "Port Of Morrow"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Science &amp; Nature",
+      "question": "What is the lowest layer of the Earth&#039;s atmosphere named?",
+      "correct_answer": "Troposphere",
+      "incorrect_answers": ["Stratosphere", "Mesosphere", "Thermosphere"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "medium",
+      "category": "Entertainment: Video Games",
+      "question": "Hidden in the files for &quot;Mario Kart Arcade GP&quot; is a picture of the Beslan school hostage crisis.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "General Knowledge",
+      "question": "What is on display in the Madame Tussaud&#039;s museum in London?",
+      "correct_answer": "Wax sculptures",
+      "incorrect_answers": ["Designer clothing", "Unreleased film reels", "Vintage cars"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "What is the name of the protagonist of J.D. Salinger&#039;s novel Catcher in the Rye?",
+      "correct_answer": "Holden Caulfield",
+      "incorrect_answers": ["Fletcher Christian", "Jay Gatsby", "Randall Flagg"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Film",
+      "question": "Who played the female lead in the 1933 film &quot;King Kong&quot;?",
+      "correct_answer": "Fay Wray",
+      "incorrect_answers": ["Jean Harlow", "Vivien Leigh", "Mae West"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "General Knowledge",
+      "question": "Which canal connects the Mediterranean Sea with the Red Sea?",
+      "correct_answer": "Suez Canal",
+      "incorrect_answers": ["Panama Canal", "Sinai Canal", "Qaraqum Canal"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Japanese Anime &amp; Manga",
+      "question": "Which of these is not a world in the anime &quot;Buddyfight&quot;?",
+      "correct_answer": "Ancient Dragon World",
+      "incorrect_answers": ["Dragon World", "Star Dragon World", "Darkness Dragon World"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Television",
+      "question": "Grant Gustin plays which superhero on the CW show of the same name?",
+      "correct_answer": "The Flash",
+      "incorrect_answers": ["The Arrow", "Black Canary", "Daredevil"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "History",
+      "question": "In 1453, which important city fell?",
+      "correct_answer": "Constantinople",
+      "incorrect_answers": ["Rome", "Hamburg", "Athens"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "medium",
+      "category": "Entertainment: Music",
+      "question": "Metallica collaborated with Rowan Atkinson&#039;s Mr Bean on a 1992 comic relief single.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "medium",
+      "category": "General Knowledge",
+      "question": "The average woman is 5 inches / 13 centimeters shorter than the average man.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Animals",
+      "question": "Unlike on most salamanders, this part of a newt is flat?",
+      "correct_answer": "Tail",
+      "incorrect_answers": ["Head", "Teeth", "Feet"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "Who was the original author of Frankenstein?",
+      "correct_answer": "Mary Shelley",
+      "incorrect_answers": ["Edgar Allan Poe", "Bram Stoker", "H. P. Lovecraft"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Animals",
+      "question": "Which of these species is not extinct?",
+      "correct_answer": "Komodo dragon",
+      "incorrect_answers": ["Japanese sea lion", "Tasmanian tiger", "Saudi gazelle"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "General Knowledge",
+      "question": "Who is a co-founder of music streaming service Spotify?",
+      "correct_answer": "Daniel Ek",
+      "incorrect_answers": ["Sean Parker", "Felix Miller", "Michael Breidenbruecker"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Science: Gadgets",
+      "question": "Mobile hardware and software company &quot;Blackberry Limited&quot; was founded in which country?",
+      "correct_answer": "Canada",
+      "incorrect_answers": ["Norway", "United States of America", "United Kingdom"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Geography",
+      "question": "What is the land connecting North America and South America?",
+      "correct_answer": "Isthmus of Panama",
+      "incorrect_answers": ["Isthmus of Suez", "Urals", "Australasia"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science &amp; Nature",
+      "question": "What is the powerhouse of the cell?",
+      "correct_answer": "Mitochondria",
+      "incorrect_answers": ["Ribosome", "Redbull", "Nucleus"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "easy",
+      "category": "Entertainment: Video Games",
+      "question": "Luigi is taller than Mario?",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "medium",
+      "category": "Entertainment: Video Games",
+      "question": "Metal Gear Solid V: The Phantom Pain runs on the Fox Engine.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "History",
+      "question": "From 1940 to 1942, what was the capital-in-exile of Free France ?",
+      "correct_answer": "Brazzaville",
+      "incorrect_answers": ["Algiers", "Paris", "Tunis"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Video Games",
+      "question": "In the Assassin&#039;s Creed series,what was the name of Desmond Miles given by Abstergo?",
+      "correct_answer": "Subject 17",
+      "incorrect_answers": ["Subject 16", "Subject 18", "Alta&iuml;r Ibn-La&#039;Ahad"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Science: Computers",
+      "question": "What does the computer software acronym JVM stand for?",
+      "correct_answer": "Java Virtual Machine",
+      "incorrect_answers": ["Java Vendor Machine", "Java Visual Machine", "Just Virtual Machine"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Japanese Anime &amp; Manga",
+      "question": "Krusty is the guild master of which guild in &quot;Log Horizon&quot;?",
+      "correct_answer": "D. D. D",
+      "incorrect_answers": ["Silver Sword", "West Wind Brigade", "Oceanic Systems (Marine Agency)"]
+    }
+  ]
+}

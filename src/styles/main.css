@@ -1,3 +1,18 @@
 h1 {
   color: #bed280;
 }
+
+#quiz {
+  display: flex;
+  background-color: #bed280;
+  color: black;
+  flex-direction: column;
+
+  button {
+    width: 120px;
+  }
+}
+
+#quiz.hidden {
+  display: none;
+}
