@@ -1,4 +1,4 @@
-import { canvasDims } from "./utilities.js";
+import { canvasDims, shopTypes, upgradeTypes } from "./utilities.js";
 
 export let shared;
 export let guests;
@@ -11,12 +11,25 @@ const topOfGroundY = canvasDims.height - groundHeight;
 export function preload() {
   partyConnect("wss://demoserver.p5party.org", "shop_keepers");
   shared = partyLoadShared("shared", {});
+
   me = partyLoadMyShared({
-    shopType: undefined,
-    inventory: 0,
-    money: 0,
-    upgradeLevel: 0,
+    shopType: undefined, // one of shopTypes,
+    inventory: [], // list of inventoryTypes (increment from questions, decrement when bought)
+    money: 0, // number (increment from sell inventory, decrement when buy upgrades)
+    upgrades: [], // list of upgradeTypes
   });
+
+
+
+  // example me object with data
+    const me_example = partyLoadMyShared({
+    shopType: shopTypes.bakery,
+    inventory: [{bread: 10}], //this will be saved as inventoryTypes.bakery.bread
+    money: 20,
+    upgrades: [upgradeTypes.light, upgradeTypes.awning],
+  });
+
+
 
   guests = partyLoadGuestShareds();
 

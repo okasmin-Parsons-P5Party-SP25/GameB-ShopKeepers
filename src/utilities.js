@@ -31,6 +31,34 @@ export const shopTypes = {
   books: "books",
 };
 
+const plantInventoryTypes = {};
+const bookInventoryTypes = {};
+const bakeryInventoryTypes = {
+  bread: "bread",
+  croissant: "croissant",
+  pie: "pie"
+};
+
+export const inventoryTypes = {
+  plant: plantInventoryTypes,
+  bakery: bakeryInventoryTypes,
+  books: bookInventoryTypes
+};
+
+// constant across each shop type?
+export const upgradeTypes = {
+  light: "light",
+  awning: "awning",
+  secondFloor: "second floor",
+};
+
+export const upgradeOptions = {
+  plant: [],
+  bakery: [{type: upgradeTypes.light, cost: 10}, {type: upgradeTypes.awning, cost: 20}],
+  books: [],
+};
+
+
 // select popup UI elements
 // const chooseTypeDiv = document.getElementById("choose-type");
 // const quizDiv = document.getElementById("quiz");
