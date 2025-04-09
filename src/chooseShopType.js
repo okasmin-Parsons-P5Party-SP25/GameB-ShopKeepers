@@ -18,7 +18,6 @@ const onClickClose = () => {
 };
 
 export const setupChooseTypeUI = () => {
-  console.log("me", me);
   chooseTypeButton.addEventListener("click", onClickChooseType);
   closeButton.addEventListener("click", onClickClose);
 

@@ -121,3 +121,11 @@ canvas {
   display: flex;
   flex-direction: column;
 }
+
+#upgrade-market {
+  display: flex;
+}
+
+#upgrade-market.hidden {
+  display: none;
+}

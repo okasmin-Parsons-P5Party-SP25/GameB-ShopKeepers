@@ -30,3 +30,15 @@ export const shopTypes = {
   bakery: "bakery",
   books: "books",
 };
+
+// select popup UI elements
+// const chooseTypeDiv = document.getElementById("choose-type");
+// const quizDiv = document.getElementById("quiz");
+// const upgradeMarketDiv = document.getElementById("upgrade-market");
+
+// function to hide all popups
+// export const closeAllPopups = () => {
+//   chooseTypeDiv.classList.add("hidden");
+//   quizDiv.classList.add("hidden");
+//   upgradeMarketDiv.classList.add("hidden");
+// };
