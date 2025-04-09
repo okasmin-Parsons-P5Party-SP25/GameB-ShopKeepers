@@ -13,7 +13,8 @@ export function preload() {
   shared = partyLoadShared("shared", {});
   me = partyLoadMyShared({
     shopType: undefined,
-    inventory: [],
+    inventory: 0,
+    money: 0,
     upgradeLevel: 0,
   });
 
@@ -27,11 +28,12 @@ export function preload() {
 }
 
 export function enter() {
-  console.log("guests", guests);
-  console.log("me", me);
+  updateUI();
 }
 
-export function update() {}
+export function update() {
+  updateUI();
+}
 
 export function draw() {
   background("#eceadb");
@@ -51,4 +53,12 @@ const drawShops = () => {
     const shopImage = shopImages[shopType];
     image(shopImage, 50 + 400 * i, topOfGroundY - 350, 400, 400);
   }
+};
+
+const updateUI = () => {
+  const myInventoryDiv = document.getElementById("my-inventory");
+  myInventoryDiv.textContent = `my inventory:${me.inventory}`;
+
+  const myMoneyDiv = document.getElementById("my-money");
+  myMoneyDiv.textContent = `my money:${me.money}`;
 };

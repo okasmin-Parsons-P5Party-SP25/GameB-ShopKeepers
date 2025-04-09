@@ -112,3 +112,12 @@ canvas {
   top: 10px;
   position: absolute;
 }
+
+#ui-container {
+  display: flex;
+}
+
+#my-info {
+  display: flex;
+  flex-direction: column;
+}

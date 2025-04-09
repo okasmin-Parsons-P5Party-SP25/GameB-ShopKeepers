@@ -1,7 +1,12 @@
+import { me } from "./playScene";
+
 // store quiz choices until submit button is clicked
 // TODO update this to array once add multiplayer
 let guessed = undefined;
 let correctAnswer = undefined;
+
+// TODO update this depending on tbd factors
+let winAmount = 5;
 
 /**
  * fetch data
@@ -40,7 +45,6 @@ const onSubmit = () => {
   if (!guessed || !correctAnswer) return;
 
   const correct = guessed === correctAnswer;
-  // console.log(`correct: ${correct}`);
 
   questionsScreenDiv.classList.toggle("hidden");
   answerScreenDiv.classList.toggle("hidden");
@@ -49,7 +53,16 @@ const onSubmit = () => {
   const greatWork = "great work! ";
   const reveal = `the correct answer was: ${correctAnswer}`;
 
-  revealedAnswerDiv.textContent = correct ? greatWork + reveal : lost + reveal;
+  let text = "";
+
+  if (correct) {
+    handleWin();
+    text = greatWork + reveal;
+  } else {
+    text = lost + reveal;
+  }
+
+  revealedAnswerDiv.textContent = text;
 };
 
 const onClickQuiz = async () => {
@@ -109,6 +122,10 @@ const generateQuiz = async () => {
 
     answersDiv.appendChild(answerButton);
   });
+};
+
+const handleWin = () => {
+  me.inventory += winAmount;
 };
 
 export const setupQuizUI = () => {
