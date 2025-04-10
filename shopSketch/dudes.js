@@ -1,43 +1,115 @@
 
-const width = 700
-const height = 500
+const width = window.innerWidth
+const height = window.innerHeight
 const bgColor = "#FBF9F4"
 
-const dudes = []
+
+
+let shopInfo = {
+    type:shopTypes.bakery,
+    items:Object.values(bakeryInventoryTypes),
+
+    x:500,
+    y:height/3,
+
+    dudes:[],
+    images:[]
+}
+
+let shopInfo2 = {
+    type:shopTypes.books,
+    items:Object.values(bookInventoryTypes),
+
+    x:width/2 -50,
+    y:height/3,
+
+    dudes:[],
+    images:[]
+}
+let dudeImages = []
+let numDudes = 2
+let shopData  ={
+    1:shopInfo,
+    2:shopInfo2
+}
+
+
+// REMOVE THIS STUFF
+function preload(){
+    preload_dudes()
+}
 
 function setup(){
+    console.log(shopInfo)
     createCanvas(width,height)
     background(bgColor)
-    angleMode(RADIANS)
-    noStroke()
-    for(i=0;i<10;i++){
-        let speed = random()
-        let y = random()*height/2+height/4
-        let dude = new Dude(0,y,width/2, y + 20,speed +.1)
-        dudes.push(dude)
-    }
+    setup_dudes()
 }
 
 function draw(){
     background(bgColor)
-    for(let dude of dudes){
-        dude.update()
+    noFill()
+    draw_dudes()
+}
+
+// CODE IS THIS STUFF
+function preload_dudes(){
+    for(let [i,shopInfo] of Object.entries(shopData)){
+        for(const item of shopInfo.items){
+            shopInfo.images[item] = loadImage(`./images/${shopInfo.type}_items/${item}.png`)
+        }
+        
+    }
+    for(let i=0;i<numDudes;i++){
+        dudeImages.push(loadImage(`./images/dudes/${i}.png`))
     }
 }
 
 
+function setup_dudes(){
+    for(let [id, shopInfo] of Object.entries(shopData)){   
+        for(i=0;i<2;i++){
+            let speed = random()*2 + .5
+            let y = random()*height/2+ height/2
+            let dude = new Dude(0,y,id,speed)
+            console.log(shopInfo)
+            shopInfo['dudes'].push(dude)
+        }
+    }
+   
+}
+
+function draw_dudes(){
+    for(let shopInfo of Object.values(shopData)){
+        noFill()
+        stroke('black')
+        rect(shopInfo.x- 50, shopInfo.y-50, 100,100)
+            for(let dude of shopInfo.dudes){
+            dude.update()
+        }
+    }
+ 
+}
+
+
 class Dude{
-    constructor(x,y, xEnd, yEnd, speed,items = []){
+    constructor(x,y,shop_id, speed,items = []){
+        //positioning
         this.x = x
         this.y = y
-        this.xEnd = xEnd
-        this.yEnd = yEnd
         this.speed = speed
         this.vx = speed
         this.vy = 0
+       
+        //drawing the dude
         this.items = items
-        this.type = random([1,2,3])
+        this.type = random([0,1])
         this.alive = true
+
+        //shop specific stuff
+        this.xEnd = shopData[shop_id].x
+        this.yEnd = shopData[shop_id].y
+        this.shopId = shop_id
     }
 
     update(){
@@ -55,7 +127,8 @@ class Dude{
         }
         else if(dist(this.x,this.y, this.xEnd, this.yEnd)<10){
             this.xEnd = width
-            this.items.push('item')
+            let item = random(shopData[this.shopId].items)
+            this.items.push(item)
         }
         
     }
@@ -63,33 +136,27 @@ class Dude{
     move(){
         let dx = this.xEnd - this.x;
         let dy = this.yEnd - this.y;
-        let nZoom = 3
-        let n =  noise(nZoom*this.x,nZoom*this.y)*2*PI*.1
+        let nZoom = .01
+        let n =  (noise(nZoom*this.x,nZoom*this.y)-.5)*2
 
         let angle = Math.atan2(dy, dx);
 
-        this.vx = cos(angle + n)
-        this.vy = sin(angle +n)
+        this.vx = cos(angle)
+        this.vy = sin(angle)
         
         this.x +=this.vx*this.speed
-        this.y +=this.vy*this.speed
+        this.y +=this.vy*this.speed+n
     }
 
     draw(){
-        if(this.type ==1){
-            fill('black')
-        }else if(this.type ==2){
-            fill('grey')
-        }else if(this.type ==3){
-            fill('blue')
-        }
-        rect(this.x,this.y, 5,15)
+        image(dudeImages[this.type],this.x,this.y,20,35)
+        // rect(this.x,this.y, 5,15)
 
         for(let item of this.items){
-            if(item =='item'){
-                fill('red')
-                ellipse(this.x ,this.y+ 4, 5,5)
-            }
+            // fill('red')
+            // text(item, this.x,this.y)
+            image(shopData[this.shopId].images[item], this.x+4,this.y +4,20,20)
+    
         }
     }
 }
