@@ -40,11 +40,13 @@ const shelfColor = {
 
 let texture;
 let speckle_texture;
+let item;
 
 function preload(){
     texture = loadImage('./images/textures/white-paper-texture.jpg')
     // texture = loadImage('./images/textures/white-gypsum-wall.jpg')
     speckle_texture = loadImage('./images/textures/cardboard-texture.jpg')
+    item = loadImage('./images/bakery_items/cookie.png')
 }
 
 function setup(){
@@ -67,8 +69,12 @@ function draw(){
     background(bgColor)
    
     noStroke()
-    drawBookShop(width/2 - 150,300, 150,250,100)
+    // drawBookShop(width/2 - 150,300, 150,250,100)
+    // drawBakery(width/2 +50,300, 200,200,80)
+    // drawBakery(width/2 +50,300, 150,180,40)
+    // drawBakery(width/2 +50,300, 180,180,60)
     drawBakery(width/2 +50,300, 200,200,80)
+    image(item,width/2 +5, 300,20,20)
 
     addTexture()
 
