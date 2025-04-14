@@ -1,6 +1,6 @@
 
-const width = 700
-const height = 500
+const width = 800
+const height = 600
 const bgColor = "#FBF9F4"
 const draw_placement_dot = false
 
@@ -22,7 +22,7 @@ const faceType = {
 
 }
 
-const angle = 30
+const angle = 40
 
 const wallColors = {
     front:"#F2EBDC",
@@ -40,13 +40,18 @@ const shelfColor = {
 
 let texture;
 let speckle_texture;
-let item;
+let item_images = {}
 
 function preload(){
     texture = loadImage('./images/textures/white-paper-texture.jpg')
     // texture = loadImage('./images/textures/white-gypsum-wall.jpg')
     speckle_texture = loadImage('./images/textures/cardboard-texture.jpg')
-    item = loadImage('./images/bakery_items/cookie.png')
+    item_images['cookie'] = loadImage('./images/bakery_items/cookie.png')
+    item_images['cake'] = loadImage('./images/bakery_items/cake.png')
+    item_images['bread'] = loadImage('./images/bakery_items/bread1.png')
+    item_images['croissant'] = loadImage('./images/bakery_items/croissant.png')
+    item_images['pie'] = loadImage('./images/bakery_items/pie.png')
+    item_images['loaf'] = loadImage('./images/bakery_items/loaf.png')
 }
 
 function setup(){
@@ -64,17 +69,19 @@ function setup(){
 
 }
 
+
+
 function draw(){
       
     background(bgColor)
    
     noStroke()
-    // drawBookShop(width/2 - 150,300, 150,250,100)
-    // drawBakery(width/2 +50,300, 200,200,80)
-    // drawBakery(width/2 +50,300, 150,180,40)
-    // drawBakery(width/2 +50,300, 180,180,60)
-    drawBakery(width/2 +50,300, 200,200,80)
-    image(item,width/2 +5, 300,20,20)
+    let y = height/2+100
+   
+    drawBakery(20,y ,level = 1, upgrades = {}, inventory = {'cookie':5, 'cake':2, 'croissant': 3})
+    drawBakery(230,y,level = 2, upgrades = {}, inventory = {'bread':4, 'pie':2})
+    drawBakery(500,y,level = 3, upgrades = {}, inventory = {'cookie':5, 'cake':5, 'croissant': 3,'loaf':5, 'pie':1,'bread':3})
+    // image(item,width/2 +5, 300,20,20)
 
     addTexture()
 
@@ -82,20 +89,17 @@ function draw(){
 
 function addTexture(){
     push()
-     addFlecks()
+    addFlecks()
+    imageMode(CORNER)
 
     blendMode(MULTIPLY)
     tint(255,100)
     image(speckle_texture,0,0,width, height)
     
     blendMode(SOFT_LIGHT)
-    // tint(229, 192, 122, [10]);
-    // tint(216, 166, 94, [10]);
-    // tint(177, 133, 70, [30]);//darker orange
     tint(195, 124, 93, [80]);//redish
     image(texture,0,0,width, height)
     pop()
-   
 
 }
 
@@ -157,44 +161,120 @@ function drawBookShop(x,y, shop_w, shop_h, shop_l){
     text("B  O  O  K  S", x+shop_w/2-30,y-shop_h + 25) 
 }
 
- 
-function drawBakery(x,y, shop_w, shop_h, shop_l){
+function drawBakery(x,y, level, upgrades,inventory){
+    let shop_w, shop_h, shop_l;
+    if(level ==1){  
+        [shop_w, shop_h, shop_l] = [150,180,40]   
+    }else if(level ==2){
+        [shop_w, shop_h, shop_l] = [180,200,60]
+    }else{
+        [shop_w, shop_h, shop_l] = [200,220,80]
+    }
+
+    //draw the back
+    drawBox(x,y,shop_w, shop_h,shop_l) 
+
+    //draw middle elements
+    fill("red")
+    // rect(x+50,y-120, 20,20)
+
+    //draw the front
+    let shelves = drawBakeryFront(x,y, shop_w, shop_h)
+
+    //draw inventory 
+    drawInventory(shelves, inventory)
+}
+
+function drawInventory(shelves, inventory){
+    let empty_shelfs = shelves
+    let nonempty_shelfs = []
+
+    for(let [item, amount] of Object.entries(inventory)){
+        let existing_shelf = false
+        for(let shelf of nonempty_shelfs){
+            if(shelf.item == item){
+                existing_shelf = true
+            }
+        }
+        if(existing_shelf == false){
+            if(empty_shelfs <1){
+                console.log("no space")
+                return
+            }else{
+                let shelf = empty_shelfs[0]
+                empty_shelfs.shift()
+                nonempty_shelfs.push(shelf)
+                shelf.item = item
+                shelf.amount = amount
+                let overlap = shelf.w/amount
+                for(let i=0;i<amount;i++){
+                    ellipse(shelf.x, shelf.y,2,2)
+                    imageMode(CORNER)
+                    push()
+                    
+                    let img_w = shelf.h*item_images[item].width/item_images[item].height
+                    image(item_images[item], (shelf.x)+i*overlap, shelf.y, img_w, shelf.h)
+                    pop()
+                }
+            }
+
+        }
+    }
+
+}
+
+function drawBakeryFront(x,y, shop_w, shop_h){
     const window_w = shop_w/2+20
     const window_h = shop_h/3
     //base
-    drawBox(x,y,shop_w, shop_h,shop_l) 
+    // drawBox(x,y,shop_w, shop_h,shop_l) 
     drawBox(x+window_w+10,y,window_w, 20,20, modes.BACK_CORNER)
 
     //below window shelves
-    drawShelves(x+ 10,y-30, nRows=2,nCols=2, gap=5, shelf_w=window_w,shelf_h=50, shelf_l=10 )
+    let shelves = drawShelves(x+ 10,y-30, nRows=2,nCols=2, gap=5, shelf_w=window_w,shelf_h=50, shelf_l=10 )
     drawWindow(x+10,y-40-50,window_w, window_h,40, modes.BOTTOM_CORNER)
 
     //side shelves
-    drawShelves(x+ window_w + 20,y-(window_h + 60)/2, nRows=4,nCols=1, gap=5, shelf_w=shop_w-window_w-30,shelf_h=window_h + 60, shelf_l=10  )
+    let shelves2= drawShelves(x+ window_w + 20,y-(window_h + 60)/2, nRows=4,nCols=1, gap=5, shelf_w=shop_w-window_w-30,shelf_h=window_h + 60, shelf_l=10  )
 
+    shelves = [...shelves,...shelves2]
     //text
     fill(shelfColor.back)
     text("B  A  K  E  R  Y", x+shop_w/2-40,y-shop_h + 25) 
+    return shelves
 }
 
 function drawShelves(x,y, nRows, nCols, gap, shelf_w, shelf_h, shelf_l){
-    push()
-    translate(0,-shelf_h/2)
+    let shelves_info = []
 
+    push()
+    // translate(0,-shelf_h/2)  
     let w = (shelf_w- (nCols-1)*gap)/nCols
     let h = (shelf_h - (nRows-1)*gap)/nRows
     for(let i=0;i<nRows;i++){
         for(j = 0; j<nCols; j++){
+            let shelf_info = {
+                x:x+j*(w+gap) + shelf_l/2,
+                y: y+i*(h+gap)-shelf_h/2 - shelf_l - 10,
+                w:w-shelf_l*2,
+                h:h-shelf_l,
+                item:"",
+                amount:0
+            }
+
              drawBoxInset(
                 x+j*(w+gap),
-                y+i*(h+gap),
+                y+i*(h+gap)-shelf_h/2,
                 w,
                 h,
                 shelf_l,
                 modes.BOTTOM_CORNER)
+            shelves_info.push(shelf_info)
         }
+
     }
     pop()
+    return shelves_info
 
 }
 
