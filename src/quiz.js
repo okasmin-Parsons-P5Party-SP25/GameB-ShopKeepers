@@ -1,13 +1,12 @@
-import { me } from "./playScene";
+
 
 // store quiz choices until submit button is clicked
 // TODO update this to array once add multiplayer
 let guessed = undefined;
 let correctAnswer = undefined;
 
-// TODO update this depending on tbd factors
-let winAmount = 5;
 
+// const winAmount = shared.quizCoins * 2;
 /**
  * fetch data
  */
@@ -59,6 +58,7 @@ const onSubmit = () => {
     handleWin();
     text = greatWork + reveal;
   } else {
+    handleLose();
     text = lost + reveal;
   }
 
@@ -89,13 +89,10 @@ const clearQuiz = () => {
 };
 
 const generateQuiz = async () => {
-  // console.log("generate quiz");
   const questions = await getQuestions();
-  console.log(questions);
 
   // TODO keep track of which questions asked
   const currentQuestion = random(questions);
-  // console.log(currentQuestion);
 
   question.textContent = currentQuestion["question"];
 
@@ -125,7 +122,11 @@ const generateQuiz = async () => {
 };
 
 const handleWin = () => {
-  me.inventory += winAmount;
+  // me.coins += winAmount;
+};
+
+const handleLose = () => {
+  // me.coins += winAmount/10;
 };
 
 export const setupQuizUI = () => {

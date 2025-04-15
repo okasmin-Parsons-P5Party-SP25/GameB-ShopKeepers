@@ -1,4 +1,4 @@
-import {me} from "./playScene";
+// import {me} from "./main";
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const closeButton = document.getElementById("close-upgrade-market");
@@ -32,8 +32,4 @@ export const setupUpgradeMarketUI = () => {
 // update other state if needed
 
 
-const currentFunds = me.money;
-
-const drawUpgradeOptions = () => {
-
-};
+// const currentFunds = me.money;

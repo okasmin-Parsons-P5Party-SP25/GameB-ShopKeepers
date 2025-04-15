@@ -1,4 +1,3 @@
-import { me } from "./playScene";
 import { shopTypes } from "./utilities";
 
 /**
@@ -17,7 +16,7 @@ const onClickClose = () => {
   chooseTypeDiv.classList.add("hidden");
 };
 
-export const setupChooseTypeUI = () => {
+export const setupChooseTypeUI = (me) => {
   chooseTypeButton.addEventListener("click", onClickChooseType);
   closeButton.addEventListener("click", onClickClose);
 

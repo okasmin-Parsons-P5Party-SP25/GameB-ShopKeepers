@@ -1,38 +1,10 @@
-import { canvasDims, shopTypes, upgradeTypes } from "./utilities.js";
-
-export let shared;
-export let guests;
-export let me;
+import { canvasDims,  } from "./utilities.js";
 
 let shopImages;
 const groundHeight = 40;
 const topOfGroundY = canvasDims.height - groundHeight;
 
 export function preload() {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers");
-  shared = partyLoadShared("shared", {});
-
-  me = partyLoadMyShared({
-    shopType: undefined, // one of shopTypes,
-    inventory: [], // list of inventoryTypes (increment from questions, decrement when bought)
-    money: 0, // number (increment from sell inventory, decrement when buy upgrades)
-    upgrades: [], // list of upgradeTypes
-  });
-
-
-
-  // example me object with data
-    const me_example = partyLoadMyShared({
-    shopType: shopTypes.bakery,
-    inventory: [{bread: 10}], //this will be saved as inventoryTypes.bakery.bread
-    money: 20,
-    upgrades: [upgradeTypes.light, upgradeTypes.awning],
-  });
-
-
-
-  guests = partyLoadGuestShareds();
-
   shopImages = {
     plant: loadImage("../assets/plant_2.png"),
     bakery: loadImage("../assets/bakery_2.png"),
@@ -41,6 +13,7 @@ export function preload() {
 }
 
 export function enter() {
+  // console.log(guests);
   updateUI();
 }
 
@@ -51,14 +24,14 @@ export function update() {
 export function draw() {
   background("#eceadb");
 
-  drawShops();
+  // drawShops();
 }
 
 export function mousePressed() {
   //   changeScene(scenes.title);
 }
 
-const drawShops = () => {
+export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
@@ -70,8 +43,8 @@ const drawShops = () => {
 
 const updateUI = () => {
   const myInventoryDiv = document.getElementById("my-inventory");
-  myInventoryDiv.textContent = `my inventory:${me.inventory}`;
+  myInventoryDiv.textContent = `my inventory:${"placeholder"}`;
 
   const myMoneyDiv = document.getElementById("my-money");
-  myMoneyDiv.textContent = `my money:${me.money}`;
+  myMoneyDiv.textContent = `my money:${"placeholder"}`;
 };
