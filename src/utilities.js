@@ -86,14 +86,8 @@ export const getUpgradeCost = (idx) => {
   else if (idx === 2) return { buy: 1000 };
 };
 
-// select popup UI elements
-// const chooseTypeDiv = document.getElementById("choose-type");
-// const quizDiv = document.getElementById("quiz");
-// const upgradeMarketDiv = document.getElementById("upgrade-market");
-
-// function to hide all popups
-// export const closeAllPopups = () => {
-//   chooseTypeDiv.classList.add("hidden");
-//   quizDiv.classList.add("hidden");
-//   upgradeMarketDiv.classList.add("hidden");
-// };
+export const closeAllPopups = () => {
+  document.querySelectorAll(".popupItem").forEach((item) => {
+    item.classList.add("hidden");
+  });
+};

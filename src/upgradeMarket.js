@@ -1,4 +1,10 @@
-import { inventoryTypes, getInventoryCost, upgradeTypes, getUpgradeCost } from "./utilities.js";
+import {
+  inventoryTypes,
+  getInventoryCost,
+  upgradeTypes,
+  getUpgradeCost,
+  closeAllPopups,
+} from "./utilities.js";
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const closeButton = document.getElementById("close-upgrade-market");
@@ -8,6 +14,7 @@ const upgradesDiv = document.getElementById("shop-upgrade-choices");
 
 // open
 const onClickUpgradeMarket = () => {
+  closeAllPopups();
   upgradeMarketDiv.classList.remove("hidden");
 };
 // close

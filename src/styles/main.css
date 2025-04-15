@@ -142,3 +142,7 @@ canvas {
   aspect-ratio: 1 / 1; /* height = width */
   border-radius: 8px;
 }
+
+.ui-button {
+  width: 12%;
+}

@@ -1,3 +1,5 @@
+import { closeAllPopups } from "./utilities";
+
 // store quiz choices until submit button is clicked
 // TODO update this to array once add multiplayer
 let guessed = undefined;
@@ -54,7 +56,7 @@ const onSubmit = (me, shared) => {
     me.coins += shared.quizCoins;
     text = greatWork + reveal;
   } else {
-    me.coins += shared.quizCoins/10;
+    me.coins += shared.quizCoins / 10;
     text = lost + reveal;
   }
 
@@ -64,7 +66,9 @@ const onSubmit = (me, shared) => {
   shared.quizCoins = shared.quizCoins * 2;
 };
 
+// open
 const onClickQuiz = async () => {
+  closeAllPopups();
   if (quizDiv.classList.contains("hidden")) {
     clearQuiz();
     await generateQuiz();
@@ -76,6 +80,7 @@ const onClickQuiz = async () => {
   }
 };
 
+// close
 const onClickClose = () => {
   clearQuiz();
   quizDiv.classList.add("hidden");
@@ -97,7 +102,7 @@ const generateQuiz = async () => {
 
   const correct = currentQuestion["correct_answer"];
   correctAnswer = correct;
-  console.log({correctAnswer});
+  console.log({ correctAnswer });
 
   const incorrect = currentQuestion["incorrect_answers"];
   const allAnswers = [correct, ...incorrect];
