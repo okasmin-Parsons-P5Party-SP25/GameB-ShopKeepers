@@ -1,4 +1,4 @@
-import { canvasDims,  } from "./utilities.js";
+import { canvasDims, upgradeTypes } from "./utilities.js";
 // import {me} from "./main.js";
 
 let shopImages;
@@ -43,8 +43,13 @@ export const drawShops = (guests) => {
 };
 
 export const updateUI = (me) => {
-  const myInventoryDiv = document.getElementById("my-inventory");
-  myInventoryDiv.textContent = `my inventory:${"placeholder"}`;
+  const myInventoryDiv = document.getElementById("my-upgrades");
+  myInventoryDiv.textContent = `
+  my upgrade level: ${me.upgradeLevel} | 
+  ${upgradeTypes[0]}: ${me.upgrades[0]} |
+   ${upgradeTypes[1]}: ${me.upgrades[1]} |
+    ${upgradeTypes[2]}: ${me.upgrades[2]}
+  `;
 
   const myMoneyDiv = document.getElementById("my-money");
   myMoneyDiv.textContent = `my coins:${me.coins}`;

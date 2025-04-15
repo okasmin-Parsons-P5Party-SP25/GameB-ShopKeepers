@@ -36,28 +36,55 @@ const bookInventoryTypes = {};
 const bakeryInventoryTypes = {
   bread: "bread",
   croissant: "croissant",
-  pie: "pie"
+  pie: "pie",
 };
 
+// index of item refers to its level
 export const inventoryTypes = {
   plant: plantInventoryTypes,
-  bakery: bakeryInventoryTypes,
-  books: bookInventoryTypes
+  bakery: [bakeryInventoryTypes.bread, bakeryInventoryTypes.croissant, bakeryInventoryTypes.pie],
+  books: bookInventoryTypes,
 };
 
-// constant across each shop type?
-export const upgradeTypes = {
+// inventory items are sold for more as upgrade shop
+const sellMultiplier = [1, 2, 4, 6];
+
+export const getInventoryCost = (idx, me) => {
+  let buy;
+  let sell;
+  const level = me.upgradeLevel;
+
+  if (idx === 0) {
+    buy = 1;
+    sell = 10;
+  } else if (idx === 1) {
+    buy = 5;
+    sell = 30;
+  } else if (idx === 2) {
+    buy = 10;
+    sell = 50;
+  }
+  return {
+    buy,
+    sell: sell * sellMultiplier[level],
+  };
+};
+
+// constant across each shop type
+export const upgradeChoices = {
   light: "light",
-  awning: "awning",
-  secondFloor: "second floor",
+  decor: "decor",
+  sound: "sound",
 };
 
-export const upgradeOptions = {
-  plant: [],
-  bakery: [{type: upgradeTypes.light, cost: 10}, {type: upgradeTypes.awning, cost: 20}],
-  books: [],
-};
+// index of item refers to its level
+export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgradeChoices.sound];
 
+export const getUpgradeCost = (idx) => {
+  if (idx === 0) return { buy: 300 };
+  else if (idx === 1) return { buy: 600 };
+  else if (idx === 2) return { buy: 1000 };
+};
 
 // select popup UI elements
 // const chooseTypeDiv = document.getElementById("choose-type");

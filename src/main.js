@@ -5,7 +5,6 @@ import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 
 import { p5Events, canvasDims } from "./utilities.js";
 
-
 export let shared;
 export let guests;
 export let me;
@@ -17,20 +16,19 @@ export const scenes = {
 
 let currentScene; // the scene being displayed
 
-
 window.preload = function () {
-    partyConnect("wss://demoserver.p5party.org", "shop_keepers");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers");
 
-    shared = partyLoadShared("shared", {
-      quizCoins: 100
-    });
-
+  shared = partyLoadShared("shared", {
+    quizCoins: 100,
+  });
 
   me = partyLoadMyShared({
     shopType: undefined, // one of shopTypes,
-    inventory: [], // list of inventoryTypes (increment from questions, decrement when bought)
-    coins: 0, // number (increment from sell inventory, decrement when buy upgrades)
-    upgrades: [], // list of upgradeTypes
+    inventory: [0, 0, 0], // index refers to inventory level, value is ammount
+    coins: 0, // number,
+    upgrades: [false, false, false], // index refers to inventory level, true if purchased
+    upgradeLevel: 0, // increase to 1, 2, or 3 with each upgrade purchase
   });
 
   guests = partyLoadGuestShareds();

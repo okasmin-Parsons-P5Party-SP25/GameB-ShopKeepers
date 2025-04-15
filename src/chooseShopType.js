@@ -1,4 +1,5 @@
 import { shopTypes } from "./utilities";
+import { setInventory } from "./upgradeMarket";
 
 /**
  *  get relevant HTML elements
@@ -26,6 +27,9 @@ export const setupChooseTypeUI = (me) => {
 
     typeButton.addEventListener("click", () => {
       me.shopType = type;
+
+      // update market to reflect chosen shop type for inventory
+      setInventory(me);
     });
 
     typesDiv.appendChild(typeButton);

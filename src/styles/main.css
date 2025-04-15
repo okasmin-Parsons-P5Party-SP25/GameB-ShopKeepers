@@ -124,8 +124,21 @@ canvas {
 
 #upgrade-market {
   display: flex;
+  flex-direction: column;
 }
 
 #upgrade-market.hidden {
   display: none;
+}
+
+.market-choices {
+  display: flex;
+  justify-content: space-between;
+}
+
+.market-choice-button {
+  background-color: antiquewhite;
+  width: 20%;
+  aspect-ratio: 1 / 1; /* height = width */
+  border-radius: 8px;
 }
