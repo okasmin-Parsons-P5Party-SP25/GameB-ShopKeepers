@@ -1,4 +1,5 @@
 import { canvasDims,  } from "./utilities.js";
+// import {me} from "./main.js";
 
 let shopImages;
 const groundHeight = 40;
@@ -13,12 +14,12 @@ export function preload() {
 }
 
 export function enter() {
-  // console.log(guests);
-  updateUI();
+  // console.log(me);
+  // updateUI();
 }
 
 export function update() {
-  updateUI();
+  // updateUI();
 }
 
 export function draw() {
@@ -41,10 +42,10 @@ export const drawShops = (guests) => {
   }
 };
 
-const updateUI = () => {
+export const updateUI = (me) => {
   const myInventoryDiv = document.getElementById("my-inventory");
   myInventoryDiv.textContent = `my inventory:${"placeholder"}`;
 
   const myMoneyDiv = document.getElementById("my-money");
-  myMoneyDiv.textContent = `my money:${"placeholder"}`;
+  myMoneyDiv.textContent = `my coins:${me.coins}`;
 };

@@ -29,7 +29,7 @@ window.preload = function () {
   me = partyLoadMyShared({
     shopType: undefined, // one of shopTypes,
     inventory: [], // list of inventoryTypes (increment from questions, decrement when bought)
-    money: 0, // number (increment from sell inventory, decrement when buy upgrades)
+    coins: 0, // number (increment from sell inventory, decrement when buy upgrades)
     upgrades: [], // list of upgradeTypes
   });
 
@@ -45,15 +45,18 @@ window.setup = function () {
   Object.values(scenes).forEach((scene) => scene.setup?.());
   changeScene(scenes.play);
 
-  setupQuizUI();
+  setupQuizUI(me, shared);
   setupChooseTypeUI(me);
-  setupUpgradeMarketUI();
+  setupUpgradeMarketUI(me);
 };
 
 window.draw = function () {
   currentScene?.update?.();
   currentScene?.draw?.();
+
+  //TODO ideally just call this from playScene
   playScene.drawShops(guests);
+  playScene.updateUI(me);
 };
 
 for (const event of p5Events) {

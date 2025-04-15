@@ -32,4 +32,4 @@ export const setupUpgradeMarketUI = () => {
 // update other state if needed
 
 
-// const currentFunds = me.money;
+// const currentFunds = me.coins;
