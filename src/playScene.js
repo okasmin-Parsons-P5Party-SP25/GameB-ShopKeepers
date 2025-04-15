@@ -7,7 +7,7 @@ const topOfGroundY = canvasDims.height - groundHeight;
 export function preload() {
   shopImages = {
     plant: loadImage("../assets/plant_2.png"),
-    bakery: loadImage("../assets/bakery_2.png"),
+    bakery: loadImage("../assets/bakery/bakery_2.png"),
     books: loadImage("../assets/books_2.png"),
   };
 }
