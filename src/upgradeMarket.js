@@ -32,8 +32,8 @@ export const setupUpgradeMarketUI = () => {
 // update other state if needed
 
 
-const currentFunds = me.money;
+// const currentFunds = me.money;
 
-const drawUpgradeOptions = () => {
+// const drawUpgradeOptions = () => {
 
-};
+// };

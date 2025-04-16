@@ -59,6 +59,43 @@ export const upgradeOptions = {
 };
 
 
+// drawing shop stuff
+
+export const angle = 40
+export const draw_placement_dot = false
+export const modes = {
+    BOTTOM_MIDDLE:1,
+    BOTTOM_CORNER:2,
+    CENTER:3,
+    TOP_CORNER:4,
+    BACK_CORNER:5,
+}
+export const faceType = {
+    FRONT:1,
+    SIDE:2,
+    TOP:3,
+    BOTTOM_INNER:4,
+    SIDE_INNER:5,
+    BACK_INNER:6,
+    BACK_LIGHT:7
+}
+
+export const wallColors = {
+    front:"#F2EBDC",
+    side:"#ECE1CF",
+    top:"#F5F1E7",
+    inside:"#FAF1E1"
+}
+
+export const shelfColor = {
+    back:"#E8D7BB",
+    side:"#F1E2CA",
+    bottom:"#ECE1CF",
+    bottom_light:"#ECE1CF"
+}
+
+export let item_images = {}; 
+export const bgColor = "#FBF9F4";
 // select popup UI elements
 // const chooseTypeDiv = document.getElementById("choose-type");
 // const quizDiv = document.getElementById("quiz");

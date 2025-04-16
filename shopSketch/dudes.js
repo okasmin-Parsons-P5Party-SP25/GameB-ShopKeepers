@@ -9,7 +9,7 @@ let shopInfo = {
     type:shopTypes.bakery,
     items:Object.values(bakeryInventoryTypes),
 
-    x:500,
+    x:200,
     y:height/3,
 
     dudes:[],
@@ -27,7 +27,7 @@ let shopInfo2 = {
     images:[]
 }
 let dudeImages = []
-let numDudes = 2
+let numDudes = 4
 let shopData  ={
     1:shopInfo,
     2:shopInfo2
@@ -60,7 +60,7 @@ function preload_dudes(){
         }
         
     }
-    for(let i=0;i<numDudes;i++){
+    for(let i=0;i<2;i++){
         dudeImages.push(loadImage(`./images/dudes/${i}.png`))
     }
 }
@@ -68,7 +68,7 @@ function preload_dudes(){
 
 function setup_dudes(){
     for(let [id, shopInfo] of Object.entries(shopData)){   
-        for(i=0;i<2;i++){
+        for(i=0;i<numDudes;i++){
             let speed = random()*2 + .5
             let y = random()*height/2+ height/2
             let dude = new Dude(0,y,id,speed)
