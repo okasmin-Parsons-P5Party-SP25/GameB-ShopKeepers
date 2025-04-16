@@ -26,11 +26,11 @@
       <div id="top-container">
         <h1>Shop Keepers</h1>
         <div id="ui-container">
-          <button id="choose-type-button">choose shop type</button>
-          <button id="quiz-button">play quiz</button>
-          <button id="upgrade-market-button">upgrade market</button>
+          <button id="choose-type-button" class="ui-button">choose shop type</button>
+          <button id="quiz-button" class="ui-button">play quiz</button>
+          <button id="upgrade-market-button" class="ui-button">market</button>
           <div id="my-info">
-            <div id="my-inventory"></div>
+            <div id="my-upgrades"></div>
             <div id="my-money"></div>
           </div>
         </div>
@@ -48,15 +48,18 @@
             <div id="answer-revealed"></div>
           </div>
         </div>
-        <div id="choose-type" class="hidden popupItem">
+        <div id="choose-type" class="popupItem hidden">
           <button class="close-button" id="close-choose-type">X</button>
           <div>Choose what type of shop you want!</div>
           <div id="type-choices"></div>
         </div>
-        <div id="upgrade-market" class="hidden popupItem">
+        <div id="upgrade-market" class="popupItem hidden">
           <button class="close-button" id="close-upgrade-market">X</button>
-          <div>UPGRADE MARKET</div>
-          <div id="upgrade-choices"></div>
+          <h2>market</h2>
+          <h4>inventory</h4>
+          <div id="inventory-choices" class="market-choices"></div>
+          <h4>shop upgrades</h4>
+          <div id="shop-upgrade-choices" class="market-choices"></div>
         </div>
       </div>
     </div>

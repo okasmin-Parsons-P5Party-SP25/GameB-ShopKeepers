@@ -36,65 +36,92 @@ const bookInventoryTypes = {};
 const bakeryInventoryTypes = {
   bread: "bread",
   croissant: "croissant",
-  pie: "pie"
+  pie: "pie",
 };
 
+// index of item refers to its level
 export const inventoryTypes = {
   plant: plantInventoryTypes,
-  bakery: bakeryInventoryTypes,
-  books: bookInventoryTypes
+  bakery: [bakeryInventoryTypes.bread, bakeryInventoryTypes.croissant, bakeryInventoryTypes.pie],
+  books: bookInventoryTypes,
 };
 
-// constant across each shop type?
-export const upgradeTypes = {
+// inventory items are sold for more as upgrade shop
+const sellMultiplier = [1, 2, 4, 6];
+
+export const getInventoryCost = (idx, me) => {
+  let buy;
+  let sell;
+  const level = me.upgradeLevel;
+
+  if (idx === 0) {
+    buy = 1;
+    sell = 10;
+  } else if (idx === 1) {
+    buy = 5;
+    sell = 30;
+  } else if (idx === 2) {
+    buy = 10;
+    sell = 50;
+  }
+  return {
+    buy,
+    sell: sell * sellMultiplier[level],
+  };
+};
+
+// constant across each shop type
+export const upgradeChoices = {
   light: "light",
-  awning: "awning",
-  secondFloor: "second floor",
+  decor: "decor",
+  sound: "sound",
 };
 
-export const upgradeOptions = {
-  plant: [],
-  bakery: [{type: upgradeTypes.light, cost: 10}, {type: upgradeTypes.awning, cost: 20}],
-  books: [],
-};
+// index of item refers to its level
+export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgradeChoices.sound];
 
+export const getUpgradeCost = (idx) => {
+  if (idx === 0) return { buy: 300 };
+  else if (idx === 1) return { buy: 600 };
+  else if (idx === 2) return { buy: 1000 };
+};
 
 // drawing shop stuff
 
-export const angle = 40
-export const draw_placement_dot = false
+export const angle = 40;
+export const draw_placement_dot = false;
 export const modes = {
-    BOTTOM_MIDDLE:1,
-    BOTTOM_CORNER:2,
-    CENTER:3,
-    TOP_CORNER:4,
-    BACK_CORNER:5,
-}
+  BOTTOM_MIDDLE: 1,
+  BOTTOM_CORNER: 2,
+  CENTER: 3,
+  TOP_CORNER: 4,
+  BACK_CORNER: 5,
+};
 export const faceType = {
-    FRONT:1,
-    SIDE:2,
-    TOP:3,
-    BOTTOM_INNER:4,
-    SIDE_INNER:5,
-    BACK_INNER:6,
-    BACK_LIGHT:7
-}
+  FRONT: 1,
+  SIDE: 2,
+  TOP: 3,
+  BOTTOM_INNER: 4,
+  SIDE_INNER: 5,
+  BACK_INNER: 6,
+  BACK_LIGHT: 7,
+};
 
 export const wallColors = {
-    front:"#F2EBDC",
-    side:"#ECE1CF",
-    top:"#F5F1E7",
-    inside:"#FAF1E1"
-}
+  front: "#F2EBDC",
+  side: "#ECE1CF",
+  top: "#F5F1E7",
+  inside: "#FAF1E1",
+};
 
 export const shelfColor = {
-    back:"#E8D7BB",
-    side:"#F1E2CA",
-    bottom:"#ECE1CF",
-    bottom_light:"#ECE1CF"
-}
+  back: "#E8D7BB",
+  side: "#F1E2CA",
+  bottom: "#ECE1CF",
+  bottom_light: "#ECE1CF",
+};
 
-export let item_images = {}; 
+export let item_images = {};
 export const bgColor = "#FBF9F4";
 // select popup UI elements
 // const chooseTypeDiv = document.getElementById("choose-type");
@@ -107,3 +134,8 @@ export const bgColor = "#FBF9F4";
 //   quizDiv.classList.add("hidden");
 //   upgradeMarketDiv.classList.add("hidden");
 // };
+export const closeAllPopups = () => {
+  document.querySelectorAll(".popupItem").forEach((item) => {
+    item.classList.add("hidden");
+  });
+};

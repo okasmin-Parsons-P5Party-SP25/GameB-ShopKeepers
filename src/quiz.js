@@ -1,12 +1,9 @@
-import { me } from "./playScene";
+import { closeAllPopups } from "./utilities";
 
 // store quiz choices until submit button is clicked
 // TODO update this to array once add multiplayer
 let guessed = undefined;
 let correctAnswer = undefined;
-
-// TODO update this depending on tbd factors
-let winAmount = 5;
 
 /**
  * fetch data
@@ -41,7 +38,7 @@ const closeButton = document.getElementById("close-quiz");
  * attach event listeners
  */
 
-const onSubmit = () => {
+const onSubmit = (me, shared) => {
   if (!guessed || !correctAnswer) return;
 
   const correct = guessed === correctAnswer;
@@ -56,16 +53,22 @@ const onSubmit = () => {
   let text = "";
 
   if (correct) {
-    handleWin();
+    me.coins += shared.quizCoins;
     text = greatWork + reveal;
   } else {
+    me.coins += shared.quizCoins / 10;
     text = lost + reveal;
   }
 
   revealedAnswerDiv.textContent = text;
+
+  // increase win amount each time quiz is played
+  shared.quizCoins = shared.quizCoins * 2;
 };
 
+// open
 const onClickQuiz = async () => {
+  closeAllPopups();
   if (quizDiv.classList.contains("hidden")) {
     clearQuiz();
     await generateQuiz();
@@ -77,6 +80,7 @@ const onClickQuiz = async () => {
   }
 };
 
+// close
 const onClickClose = () => {
   clearQuiz();
   quizDiv.classList.add("hidden");
@@ -89,18 +93,16 @@ const clearQuiz = () => {
 };
 
 const generateQuiz = async () => {
-  // console.log("generate quiz");
   const questions = await getQuestions();
-  console.log(questions);
 
   // TODO keep track of which questions asked
   const currentQuestion = random(questions);
-  // console.log(currentQuestion);
 
   question.textContent = currentQuestion["question"];
 
   const correct = currentQuestion["correct_answer"];
   correctAnswer = correct;
+  console.log({ correctAnswer });
 
   const incorrect = currentQuestion["incorrect_answers"];
   const allAnswers = [correct, ...incorrect];
@@ -116,7 +118,6 @@ const generateQuiz = async () => {
       if (guessed) return;
 
       answerButton.classList.toggle("selected-button");
-      console.log(`clicked ${answer}`);
       guessed = answer;
     });
 
@@ -124,14 +125,10 @@ const generateQuiz = async () => {
   });
 };
 
-const handleWin = () => {
-  me.inventory += winAmount;
-};
-
-export const setupQuizUI = () => {
+export const setupQuizUI = (me, shared) => {
   quizButton.addEventListener("click", onClickQuiz);
   closeButton.addEventListener("click", onClickClose);
 
   // submit quiz button
-  submitButton.addEventListener("click", onSubmit);
+  submitButton.addEventListener("click", () => onSubmit(me, shared));
 };
