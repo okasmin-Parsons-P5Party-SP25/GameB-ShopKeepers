@@ -6,12 +6,9 @@
     <link rel="icon" href="favicon.png" />
     <link rel="stylesheet" href="src/styles/main.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 
     <script defer src="https://cdn.jsdelivr.net/npm/p5@1.9.1/lib/p5.js"></script>
     <script
@@ -56,11 +53,24 @@
         <div id="upgrade-market" class="popupItem hidden">
           <button class="close-button" id="close-upgrade-market">X</button>
           <h2>market</h2>
-          <h4>inventory</h4>
-          <div id="inventory-choices" class="market-choices"></div>
-          <h4>shop upgrades</h4>
-          <div id="shop-upgrade-choices" class="market-choices"></div>
+          
+          <!-- Tab Buttons -->
+          <div class="tabs">
+            <button class="tab-button active" data-tab="inventory">Inventory</button>
+            <button class="tab-button" data-tab="shop-upgrades">Shop Upgrades</button>
+          </div>
+        
+          <!-- Tab Content -->
+          <div class="tab-content" id="inventory-tab">
+            <h4>inventory</h4>
+            <div id="inventory-choices" class="market-choices"></div>
+          </div>
+          <div class="tab-content hidden" id="shop-upgrades-tab">
+            <h4>shop upgrades</h4>
+            <div id="shop-upgrade-choices" class="market-choices"></div>
+          </div>
         </div>
+        
       </div>
     </div>
   </body>

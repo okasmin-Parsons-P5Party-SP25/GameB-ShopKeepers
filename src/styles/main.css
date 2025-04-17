@@ -1,22 +1,25 @@
 body {
   overflow: hidden;
-  font-family: "Ubuntu Sans Mono", monospace;
+  font-family: "Caveat", cursive;
   font-optical-sizing: auto;
   /* font-weight: <weight>; */
-  font-style: normal;
+  font-size: 20px;
 }
 
 h1 {
   color: #bed280;
+  margin: 12px;
 }
 
 button {
-  font-family: "Ubuntu Sans Mono", monospace;
+  font-family: "Caveat", cursive;
   z-index: 100;
   margin: 12px;
-  border: 1px solid #152e50;
   min-height: 30px;
-  border-radius: 80px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  text-transform: uppercase;
 }
 
 button:hover {
@@ -32,13 +35,11 @@ button:hover {
 .popupItem {
   width: 75%;
   position: absolute;
-  border: 1px solid #152e50;
-  z-index: 10;
+  z-index: 100;
 
-  border-radius: 20px;
   padding: 50px;
 
-  background-color: #bed280;
+  background-color: #E5D6C0;
   color: black;
 }
 #quiz {
@@ -81,6 +82,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 100;
 }
 
 #choose-type.hidden {
@@ -111,6 +113,7 @@ canvas {
   right: 10px;
   top: 10px;
   position: absolute;
+  font-weight: 700;
 }
 
 #ui-container {
@@ -123,6 +126,7 @@ canvas {
 }
 
 #upgrade-market {
+  z-index: 100;
   display: flex;
   flex-direction: column;
 }
@@ -140,9 +144,70 @@ canvas {
   background-color: antiquewhite;
   width: 20%;
   aspect-ratio: 1 / 1; /* height = width */
-  border-radius: 8px;
+  font-size: 20px;
+  position: relative;
 }
 
 .ui-button {
   width: 12%;
+}
+
+h2 {
+  font-size: 50px;
+  margin: 10px 0 10px 0;
+  font-weight: 600;
+}
+h4 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 30px 0 20px 0;
+}
+
+.market-choice-button .item {
+  position: absolute;
+  top: 0;
+  font-weight: 700;
+}
+
+.market-choice-button .buy {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  text-transform: lowercase;
+}
+
+.market-choice-button .sell {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  text-transform: lowercase;
+}
+
+.market-choice-button .supply {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  text-transform: lowercase;
+}
+
+.tabs {
+  display: flex;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.tab-button {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: antiquewhite;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background-color: #1a553b;
+  color: white;
+}
+
+.tab-content.hidden {
+  display: none;
 }
