@@ -1,11 +1,12 @@
 import { canvasDims, upgradeTypes } from "./utilities.js";
-// import {me} from "./main.js";
+import { me, shared } from "./main.js";
 
 let shopImages;
 const groundHeight = 40;
 const topOfGroundY = canvasDims.height - groundHeight;
 
 export function preload() {
+  console.log("hi from playScene preload");
   shopImages = {
     plant: loadImage("../assets/plant_2.png"),
     bakery: loadImage("../assets/bakery/bakery_2.png"),
@@ -14,7 +15,8 @@ export function preload() {
 }
 
 export function enter() {
-  // console.log(me);
+  console.log("me from playScene", me);
+  console.log("shared form playScene", shared);
   // updateUI();
 }
 

@@ -17,7 +17,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_2");
 
   shared = partyLoadShared("shared", {
     quizCoins: 100,
@@ -36,12 +36,17 @@ window.preload = function () {
 };
 
 window.setup = function () {
+  console.log("window setup");
   createCanvas(canvasDims.width, canvasDims.height);
   noFill();
   noStroke();
 
   Object.values(scenes).forEach((scene) => scene.setup?.());
+
+  console.log("change scene before");
+  console.log({ me, shared });
   changeScene(scenes.play);
+  console.log("change scene after");
 
   setupQuizUI(me, shared);
   setupChooseTypeUI(me);
