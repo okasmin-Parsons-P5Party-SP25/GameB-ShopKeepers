@@ -89,7 +89,7 @@ export const getUpgradeCost = (idx) => {
 // drawing shop stuff
 
 export const angle = 40;
-export const draw_placement_dot = false;
+export const drawPlacementDot = false;
 export const modes = {
   BOTTOM_MIDDLE: 1,
   BOTTOM_CORNER: 2,
@@ -118,10 +118,10 @@ export const shelfColor = {
   back: "#E8D7BB",
   side: "#F1E2CA",
   bottom: "#ECE1CF",
-  bottom_light: "#ECE1CF",
+  bottomLight: "#ECE1CF",
 };
 
-export let item_images = {};
+export const itemImages = {};
 export const bgColor = "#FBF9F4";
 // select popup UI elements
 // const chooseTypeDiv = document.getElementById("choose-type");
