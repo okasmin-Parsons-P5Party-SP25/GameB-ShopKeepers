@@ -11,24 +11,6 @@ let textureImg, speckle_texture;
 //all the images for all the items
 
 export function preload() {
-  // partyConnect("wss://demoserver.p5party.org", "shop_keepers");
-  // shared = partyLoadShared("shared", {});
-
-  // me = partyLoadMyShared({
-  //   shopType: undefined, // one of shopTypes,
-  //   inventory: [], // list of inventoryTypes (increment from questions, decrement when bought)
-  //   money: 0, // number (increment from sell inventory, decrement when buy upgrades)
-  //   upgrades: [], // list of upgradeTypes
-  // });
-
-  // example me object with data
-  const me_example = partyLoadMyShared({
-    shopType: shopTypes.bakery,
-    inventory: [{ bread: 10 }], //this will be saved as inventoryTypes.bakery.bread
-    money: 20,
-    upgrades: [upgradeTypes.light, upgradeTypes.awning],
-  });
-
   shopImages = {
     plant: loadImage("../assets/plant_2.png"),
     bakery: loadImage("../assets/bakery_2.png"),
@@ -86,12 +68,19 @@ export const drawShops = (guests) => {
     if (!guest.shopType) continue;
     const shopType = guest.shopType;
     // console.log(guest.inventory)
-    drawShop(50 + 400 * i, groundHeight, shopType, 2, guest.upgrades, {
-      bread: 3,
-      cookie: 2,
-      croissant: 1,
-      pie: 1,
-    });
+    drawShop(
+      50 + 400 * i,
+      groundHeight,
+      shopType,
+      2,
+      {},
+      {
+        bread: 3,
+        cookie: 2,
+        croissant: 1,
+        pie: 1,
+      }
+    );
     // drawShop(window.innerWidth/2, groundHeight, shopType, 1, guest.upgrades, guest.inventory);
     // const shopImage = shopImages[shopType];
     // image(shopImage, 50 + 400 * i, topOfGroundY - 350, 400, 400);
