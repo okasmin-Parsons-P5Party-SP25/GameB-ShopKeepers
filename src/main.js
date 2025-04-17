@@ -29,6 +29,7 @@ window.preload = function () {
     coins: 0, // number,
     upgrades: [false, false, false], // index refers to inventory level, true if purchased
     upgradeLevel: 0, // increase to 1, 2, or 3 with each upgrade purchase
+    dudes: [],
   });
 
   guests = partyLoadGuestShareds();
@@ -58,7 +59,7 @@ window.draw = function () {
   currentScene?.draw?.();
 
   //TODO ideally just call this from playScene
-  playScene.drawShops(guests);
+  // playScene.drawShops(guests);
   playScene.updateUI(me);
 };
 

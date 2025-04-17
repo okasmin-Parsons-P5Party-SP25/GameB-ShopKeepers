@@ -33,6 +33,7 @@ export const shopTypes = {
 
 const plantInventoryTypes = {};
 const bookInventoryTypes = {};
+
 const bakeryInventoryTypes = {
   bread: "bread",
   baguette: "baguette",
@@ -48,7 +49,7 @@ export const bakeryItems = Object.values(bakeryInventoryTypes);
 // index of item refers to its level
 export const inventoryTypes = {
   plant: plantInventoryTypes,
-  bakery: bakeryItems,
+  bakery: [bakeryInventoryTypes.bread, bakeryInventoryTypes.croissant, bakeryInventoryTypes.cookie],
   books: bookInventoryTypes,
 };
 
@@ -135,3 +136,28 @@ export const shelfColor = {
 
 export const itemImages = {};
 export const bgColor = "#FBF9F4";
+
+const groundHeight = 40;
+const topOfGroundY = canvasDims.height - groundHeight;
+
+// get x and y position of shop based on guest idx
+export const getShopPosition = (idx) => {
+  return {
+    x: idx * 300,
+    y: topOfGroundY,
+  };
+};
+
+const dudeBuyInventory = (guest) => {
+  // choose a nonzero item
+  // decrement inventory item from guest
+  // add money to guest for that item
+  // return inventory string: ex: "bread"
+};
+
+const clearDudes = (guest) => {
+  // call after dudes finished
+  guest.dudes = [];
+};
+
+const triggerDudes = () => {};
