@@ -1,17 +1,22 @@
-import { canvasDims, upgradeTypes } from "./utilities.js";
+import { canvasDims, upgradeTypes, bakeryItems, itemImages, bgColor } from "./utilities.js";
 import { me, shared } from "./main.js";
+import {
+  drawShop,
+  // addTexture
+} from "./game_scene/shop.js";
 
-let shopImages;
 const groundHeight = 40;
 const topOfGroundY = canvasDims.height - groundHeight;
 
 export function preload() {
   console.log("hi from playScene preload");
-  shopImages = {
-    plant: loadImage("../assets/plant_2.png"),
-    bakery: loadImage("../assets/bakery/bakery_2.png"),
-    books: loadImage("../assets/books_2.png"),
-  };
+  // shopImages = {
+  //   // cookie: loadImage("../assets/bakery/items/cookie.png"),
+  // };
+
+  for (const item of bakeryItems) {
+    itemImages[item] = loadImage(`../assets/bakery/items/${item}.png`);
+  }
 }
 
 export function enter() {
@@ -25,7 +30,7 @@ export function update() {
 }
 
 export function draw() {
-  background("#eceadb");
+  background(bgColor);
 
   // drawShops();
 }
@@ -39,8 +44,11 @@ export const drawShops = (guests) => {
     const guest = guests[i];
     if (!guest.shopType) continue;
     const shopType = guest.shopType;
-    const shopImage = shopImages[shopType];
-    image(shopImage, 50 + 400 * i, topOfGroundY - 350, 400, 400);
+    // const shopImage = shopImages[shopType];
+    // const shopImage = itemImages.bread;
+    // image(shopImage, 50 + 400 * i, topOfGroundY - 350, 400, 400);
+
+    drawShop(i * 300, topOfGroundY, shopType, 0, [], { bread: 3, cookie: 2, croissant: 1 });
   }
 };
 

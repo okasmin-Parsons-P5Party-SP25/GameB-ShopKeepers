@@ -35,14 +35,20 @@ const plantInventoryTypes = {};
 const bookInventoryTypes = {};
 const bakeryInventoryTypes = {
   bread: "bread",
+  baguette: "baguette",
   croissant: "croissant",
   pie: "pie",
+  cookie: "cookie",
+  loaf: "loaf",
+  chocoCroissant: "chocolate_croissant",
 };
+
+export const bakeryItems = Object.values(bakeryInventoryTypes);
 
 // index of item refers to its level
 export const inventoryTypes = {
   plant: plantInventoryTypes,
-  bakery: [bakeryInventoryTypes.bread, bakeryInventoryTypes.croissant, bakeryInventoryTypes.pie],
+  bakery: bakeryItems,
   books: bookInventoryTypes,
 };
 
@@ -91,3 +97,41 @@ export const closeAllPopups = () => {
     item.classList.add("hidden");
   });
 };
+
+// drawing shop stuff
+
+export const angle = 40;
+export const drawPlacementDot = false;
+export const modes = {
+  BOTTOM_MIDDLE: 1,
+  BOTTOM_CORNER: 2,
+  CENTER: 3,
+  TOP_CORNER: 4,
+  BACK_CORNER: 5,
+};
+export const faceType = {
+  FRONT: 1,
+  SIDE: 2,
+  TOP: 3,
+  BOTTOM_INNER: 4,
+  SIDE_INNER: 5,
+  BACK_INNER: 6,
+  BACK_LIGHT: 7,
+};
+
+export const wallColors = {
+  front: "#F2EBDC",
+  side: "#ECE1CF",
+  top: "#F5F1E7",
+  inside: "#FAF1E1",
+};
+
+export const shelfColor = {
+  back: "#E8D7BB",
+  side: "#F1E2CA",
+  bottom: "#ECE1CF",
+  bottomLight: "#ECE1CF",
+};
+
+export const itemImages = {};
+export const bgColor = "#FBF9F4";
