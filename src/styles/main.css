@@ -193,19 +193,27 @@ h4 {
 .tabs {
   display: flex;
   gap: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 0;
 }
 
 .tab-button {
   padding: 0.5em 1em;
+  margin: 0;
   border: none;
   background-color: antiquewhite;
   cursor: pointer;
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: lowercase;
 }
 
 .tab-button.active {
   background-color: #1a553b;
   color: white;
+}
+
+.tab-content{
+  background-color: #1a553b;
 }
 
 .tab-content.hidden {
