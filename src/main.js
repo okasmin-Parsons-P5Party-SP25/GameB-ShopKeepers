@@ -2,12 +2,14 @@ import * as playScene from "./playScene.js";
 import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
+import DOMCursors from "./DOMCursors.js";
 
 import { p5Events, canvasDims } from "./utilities.js";
 
 export let shared;
 export let guests;
 export let me;
+let cursors;
 
 // all the available scenes
 export const scenes = {
@@ -41,6 +43,9 @@ window.setup = function () {
   createCanvas(canvasDims.width, canvasDims.height);
   noFill();
   noStroke();
+
+  // Initialize the DOMCursors after canvas creation
+  cursors = new DOMCursors(false);
 
   Object.values(scenes).forEach((scene) => scene.setup?.());
 
