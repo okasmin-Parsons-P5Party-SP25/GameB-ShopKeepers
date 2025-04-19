@@ -1,3 +1,5 @@
+export const godMode = true;
+
 /// forward event handlers to the current scene, if they handle them
 export const p5Events = [
   // keyboard
@@ -148,16 +150,36 @@ export const getShopPosition = (idx) => {
   };
 };
 
-const dudeBuyInventory = (guest) => {
+export const dudeBuyInventory = (guest) => {
+  if (!guest.shopType || !guest.inventory) return;
+
   // choose a nonzero item
-  // decrement inventory item from guest
+  // for now this goes through the inventory items in order
+  let itemIdx = false;
+  for (let i = 0; i < guest.inventory.length; i++) {
+    if (guest.inventory[i]) {
+      itemIdx = i;
+      break;
+    }
+  }
+  if (itemIdx === false) return;
+
+  // decrement inventory for that item
+  guest.inventory[itemIdx] -= 1;
+
   // add money to guest for that item
+  const itemCost = getInventoryCost(itemIdx, guest);
+  guest.coins += itemCost.sell;
+
   // return inventory string: ex: "bread"
+  const itemString = inventoryTypes[guest.shopType][itemIdx];
+
+  return itemString;
 };
 
-const clearDudes = (guest) => {
-  // call after dudes finished
+// call after dudes finished
+export const clearDudes = (guest) => {
   guest.dudes = [];
 };
 
-const triggerDudes = () => {};
+export const triggerDudes = () => {};

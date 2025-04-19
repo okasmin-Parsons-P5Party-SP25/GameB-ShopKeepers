@@ -8,7 +8,7 @@ let speckleTextureImage;
 export function preload() {
   console.log("hi from playScene preload");
   // shopImages = {
-  //   // cookie: loadImage("../assets/bakery/items/cookie.png"),
+  //   cookie: loadImage("../assets/bakery/items/cookie.png"),
   // };
 
   for (const item of bakeryItems) {
@@ -22,11 +22,11 @@ export function preload() {
 export function enter() {
   console.log("me from playScene", me);
   console.log("shared form playScene", shared);
-  // updateUI();
+  updateUI(me);
 }
 
 export function update() {
-  // updateUI();
+  updateUI(me);
 }
 
 export function draw() {
@@ -62,7 +62,8 @@ export const updateUI = (me) => {
   my upgrade level: ${me.upgradeLevel} | 
   ${upgradeTypes[0]}: ${me.upgrades[0]} |
    ${upgradeTypes[1]}: ${me.upgrades[1]} |
-    ${upgradeTypes[2]}: ${me.upgrades[2]}
+    ${upgradeTypes[2]}: ${me.upgrades[2]} |
+    my inventory: ${me.inventory}
   `;
 
   const myMoneyDiv = document.getElementById("my-money");
