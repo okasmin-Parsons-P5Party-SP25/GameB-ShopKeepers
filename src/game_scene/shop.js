@@ -16,7 +16,7 @@ export function addTexture(speckleTexture, textureImg) {
   image(speckleTexture, 0, 0, width, height);
 
   blendMode(SOFT_LIGHT);
-  tint(195, 124, 93, 80); // reddish
+  tint(195, 124, 93, 120); // reddish
   image(textureImg, 0, 0, width, height);
   pop();
 }

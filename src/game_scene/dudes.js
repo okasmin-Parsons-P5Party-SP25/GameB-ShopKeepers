@@ -1,40 +1,32 @@
-import {
-  dudeImages,
-  itemImages,
-  inventoryTypes,
-  dudeBuyInventory,
-  canvasDims,
-} from "../utilities.js";
+import { dudeImages, itemImages, canvasDims, purchaseDetectionRadius } from "../utilities.js";
+import { dudeBuyInventory } from "../playScene.js";
 
-function preloadDudes() {
+export function preloadDudes() {
   for (let i = 0; i < 2; i++) {
-    dudeImages.push(loadImage(`..assets/dudes/${i}.png`));
+    dudeImages.push(loadImage(`../assets/dudes/${i}.png`));
   }
 }
 // shop has this:{shopType, inventory = {}, numDudes =, x,y, dudes = []}
-function setUpDudes(guest, shopX, shopY, numDudes) {
+export function setUpDudes(guest, guestIdx, shopX, shopY, numDudes) {
   for (let i = 0; i < numDudes; i++) {
     const speed = random() * 2 + 0.5;
     //starting y position
     const startX = 0;
     const startY = (random() * height) / 2 + height / 2;
 
-    // guest.inventory = [3,2,0]
-    const inventoryItems = inventoryTypes[guest.shopType];
-
-    const dude = new Dude(startX, startY, shopX, shopY, guest, speed);
+    const dude = new Dude(startX, startY, shopX, shopY, guestIdx, speed);
     guest.dudes.push(dude);
   }
 }
 
-function drawDudes(guest) {
+export function drawDudes(guest) {
   for (const dude of guest.dudes) {
     dude.update();
   }
 }
 
-class Dude {
-  constructor(x, y, xEnd, yEnd, guest, speed) {
+export class Dude {
+  constructor(x, y, xEnd, yEnd, guestIdx, speed) {
     // Positioning
     this.x = x;
     this.y = y;
@@ -50,7 +42,7 @@ class Dude {
     // Shop-specific stuff
     this.xEnd = xEnd;
     this.yEnd = yEnd;
-    this.guest = guest;
+    this.guestIdx = guestIdx;
   }
 
   update() {
@@ -65,10 +57,12 @@ class Dude {
     if (this.x >= canvasDims.width - 10) {
       //he is dead
       this.alive = false;
-    } else if (dist(this.x, this.y, this.xEnd, this.yEnd) < 10) {
+      console.log("dead dude");
+    } else if (dist(this.x, this.y, this.xEnd, this.yEnd) < purchaseDetectionRadius) {
+      console.log("dude trying to buy something");
       //buying the itme
       this.xEnd = canvasDims.width;
-      const purchaseItem = dudeBuyInventory(this.guest);
+      const purchaseItem = dudeBuyInventory(this.guestIdx);
       this.items.push(purchaseItem);
     }
   }
@@ -77,8 +71,8 @@ class Dude {
     const dx = this.xEnd - this.x;
     const dy = this.yEnd - this.y;
     const nZoom = 0.01;
-    const n = (noise(nZoom * this.x, nZoom * this.y) - 0.5) * 2;
-
+    const n = noise(nZoom * this.x, nZoom * this.y) * 2 - 0.5;
+    angleMode(RADIANS);
     const angle = Math.atan2(dy, dx);
 
     this.vx = cos(angle);
@@ -90,8 +84,10 @@ class Dude {
 
   draw() {
     image(dudeImages[this.type], this.x, this.y, 20, 35);
-    for (const item of this.items) {
-      image(itemImages[item], this.x + 4, this.y + 4, 20, 20);
+    if (this.items.length > 0) {
+      for (const item of this.items) {
+        image(itemImages[item], this.x + 4, this.y + 4, 20, 20);
+      }
     }
   }
 }

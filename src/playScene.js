@@ -1,6 +1,17 @@
-import { upgradeTypes, bakeryItems, itemImages, bgColor, getShopPosition } from "./utilities.js";
+import {
+  upgradeTypes,
+  bakeryItems,
+  itemImages,
+  bgColor,
+  getShopPosition,
+  getInventoryCost,
+  inventoryTypes,
+  drawPlacementDot,
+  purchaseDetectionRadius,
+} from "./utilities.js";
 import { me, shared, guests } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
+import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
 
 let textureImage;
 let speckleTextureImage;
@@ -14,6 +25,7 @@ export function preload() {
   for (const item of bakeryItems) {
     itemImages[item] = loadImage(`../assets/bakery/items/${item}.png`);
   }
+  preloadDudes();
 
   textureImage = loadImage("../assets/textures/white-paper-texture.jpg");
   speckleTextureImage = loadImage("../assets/textures/cardboard-texture.jpg");
@@ -38,7 +50,13 @@ export function draw() {
 }
 
 export function mousePressed() {
-  //   changeScene(scenes.title);
+  for (let i = 0; i < guests.length; i++) {
+    const guest = guests[i];
+    if (!guest.shopType) continue;
+    const { x, y } = getShopPosition(i);
+    clearDudes(guest);
+    setUpDudes(guest, i, x + purchaseDetectionRadius, y - purchaseDetectionRadius, 3);
+  }
 }
 
 export const drawShops = (guests) => {
@@ -46,14 +64,65 @@ export const drawShops = (guests) => {
     const guest = guests[i];
     if (!guest.shopType) continue;
     const shopType = guest.shopType;
-    // const shopImage = shopImages[shopType];
-    // const shopImage = itemImages.bread;
-    // image(shopImage, 50 + 400 * i, topOfGroundY - 350, 400, 400);
 
     const { x, y } = getShopPosition(i);
 
     drawShop(x, y, shopType, 0, [], { bread: 3, cookie: 2, croissant: 1 });
+    if (drawPlacementDot) {
+      fill("red");
+      ellipse(x, y, 5, 5);
+      push();
+      ellipseMode(CENTER);
+      noFill();
+      stroke("red");
+      ellipse(
+        x + purchaseDetectionRadius,
+        y - purchaseDetectionRadius,
+        purchaseDetectionRadius * 2,
+        purchaseDetectionRadius * 2
+      );
+      pop();
+    }
   }
+
+  for (let i = 0; i < guests.length; i++) {
+    const guest = guests[i];
+    if (!guest.shopType) continue;
+    drawDudes(guest);
+  }
+};
+
+export const dudeBuyInventory = (guestIdx) => {
+  const guest = guests[guestIdx];
+  if (!guest.shopType || !guest.inventory) return;
+
+  // choose a nonzero item
+  // for now this goes through the inventory items in order
+  let itemIdx = false;
+  for (let i = 0; i < guest.inventory.length; i++) {
+    if (guest.inventory[i]) {
+      itemIdx = i;
+      break;
+    }
+  }
+  if (itemIdx === false) return;
+
+  // decrement inventory for that item
+  guest.inventory[itemIdx] -= 1;
+
+  // add money to guest for that item
+  const itemCost = getInventoryCost(itemIdx, guest);
+  guest.coins += itemCost.sell;
+
+  // return inventory string: ex: "bread"
+  const itemString = inventoryTypes[guest.shopType][itemIdx];
+
+  return itemString;
+};
+
+// call after dudes finished
+export const clearDudes = (guest) => {
+  guest.dudes = [];
 };
 
 export const updateUI = (me) => {

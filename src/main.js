@@ -3,8 +3,8 @@ import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 
-import { p5Events, canvasDims, dudeBuyInventory, godMode, shopTypes } from "./utilities.js";
-
+import { p5Events, canvasDims, godMode, shopTypes } from "./utilities.js";
+import { dudeBuyInventory } from "./playScene.js";
 export let shared;
 export let guests;
 export let me;

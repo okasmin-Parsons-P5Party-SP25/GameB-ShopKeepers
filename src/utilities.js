@@ -137,49 +137,18 @@ export const shelfColor = {
 };
 
 export const itemImages = {};
+export const dudeImages = [];
 export const bgColor = "#FBF9F4";
 
-const groundHeight = 40;
+const groundHeight = 100;
 const topOfGroundY = canvasDims.height - groundHeight;
-
+export const purchaseDetectionRadius = 100;
 // get x and y position of shop based on guest idx
 export const getShopPosition = (idx) => {
   return {
-    x: idx * 300,
+    x: 100 + idx * 300,
     y: topOfGroundY,
   };
-};
-
-export const dudeBuyInventory = (guest) => {
-  if (!guest.shopType || !guest.inventory) return;
-
-  // choose a nonzero item
-  // for now this goes through the inventory items in order
-  let itemIdx = false;
-  for (let i = 0; i < guest.inventory.length; i++) {
-    if (guest.inventory[i]) {
-      itemIdx = i;
-      break;
-    }
-  }
-  if (itemIdx === false) return;
-
-  // decrement inventory for that item
-  guest.inventory[itemIdx] -= 1;
-
-  // add money to guest for that item
-  const itemCost = getInventoryCost(itemIdx, guest);
-  guest.coins += itemCost.sell;
-
-  // return inventory string: ex: "bread"
-  const itemString = inventoryTypes[guest.shopType][itemIdx];
-
-  return itemString;
-};
-
-// call after dudes finished
-export const clearDudes = (guest) => {
-  guest.dudes = [];
 };
 
 export const triggerDudes = () => {};
