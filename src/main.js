@@ -3,7 +3,7 @@ import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 
-import { p5Events, canvasDims } from "./utilities.js";
+import { p5Events, canvasDims, dudeBuyInventory, godMode, shopTypes } from "./utilities.js";
 
 export let shared;
 export let guests;
@@ -37,30 +37,35 @@ window.preload = function () {
 };
 
 window.setup = function () {
-  console.log("window setup");
+  if (godMode === true) {
+    me.coins = 1000;
+    me.shopType = shopTypes.bakery;
+    me.inventory = [5, 5, 5];
+  }
+
+  // console.log("window setup");
   createCanvas(canvasDims.width, canvasDims.height);
   noFill();
   noStroke();
 
   Object.values(scenes).forEach((scene) => scene.setup?.());
 
-  console.log("change scene before");
-  console.log({ me, shared });
+  // console.log("change scene before");
+  // console.log({ me, shared });
   changeScene(scenes.play);
-  console.log("change scene after");
+  // console.log("change scene after");
 
   setupQuizUI(me, shared);
   setupChooseTypeUI(me);
   setupUpgradeMarketUI(me);
+
+  const testDudeButton = document.getElementById("test-dude-button");
+  testDudeButton.addEventListener("click", () => dudeBuyInventory(me));
 };
 
 window.draw = function () {
   currentScene?.update?.();
   currentScene?.draw?.();
-
-  //TODO ideally just call this from playScene
-  // playScene.drawShops(guests);
-  playScene.updateUI(me);
 };
 
 for (const event of p5Events) {
