@@ -1,4 +1,4 @@
-import { modes, shelfColor } from "../utilities.js";
+import { modes, shelfColor, bakeryUpgradeImages } from "../utilities.js";
 import { drawInventory, drawShelves, drawBox, drawWindow } from "./shapes.js";
 
 export function drawBakery(x, y, level, upgrades, inventory) {
@@ -24,6 +24,9 @@ export function drawBakery(x, y, level, upgrades, inventory) {
 
   // Draw inventory
   drawInventory(shelves, inventory);
+
+  //Draw upgrades
+  drawBakeryUpgrades(upgrades, x, y, shopW, shopH, shopL);
 }
 
 function drawBakeryFront(x, y, shopW, shopH) {
@@ -56,4 +59,40 @@ function drawBakeryFront(x, y, shopW, shopH) {
   text("B  A  K  E  R  Y", x + shopW / 2 - 40, y - shopH + 25);
 
   return shelves;
+}
+
+function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
+  const decorImgSize = shopWidth * 1.5;
+  const upgradeY = y - shopHeight - shopLength;
+  if (upgrades.includes("decor")) {
+    for (const [name, img] of Object.entries(bakeryUpgradeImages.decor)) {
+      if (name !== "roof" && name !== "menu") {
+        image(img, x, upgradeY + 20, decorImgSize, decorImgSize);
+      }
+    }
+    image(
+      bakeryUpgradeImages.decor.roof,
+      x,
+      y - shopHeight - shopLength - 10,
+      decorImgSize,
+      decorImgSize
+    );
+    image(
+      bakeryUpgradeImages.decor.menu,
+      x - 20,
+      y - (shopHeight * 3) / 2 + 25,
+      decorImgSize,
+      decorImgSize
+    );
+  }
+
+  if (upgrades.includes("light")) {
+    image(bakeryUpgradeImages.light.sign, x, upgradeY - 30, decorImgSize, decorImgSize);
+    if ((frameCount * 0.1) % 4 < 2) {
+      push();
+      blendMode(DODGE);
+      image(bakeryUpgradeImages.light.signLight, x, upgradeY - 30, decorImgSize, decorImgSize);
+      pop();
+    }
+  }
 }

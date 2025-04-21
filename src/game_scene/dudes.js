@@ -84,6 +84,7 @@ export class Dude {
 
   draw() {
     image(dudeImages[this.type], this.x, this.y, 20, 35);
+    // console.log(this.items);
     if (this.items.length > 0) {
       for (const item of this.items) {
         image(itemImages[item], this.x + 4, this.y + 4, 20, 20);

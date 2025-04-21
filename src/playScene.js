@@ -1,6 +1,8 @@
 import {
   upgradeTypes,
   bakeryItems,
+  plantItems,
+  bookItems,
   itemImages,
   bgColor,
   getShopPosition,
@@ -8,6 +10,7 @@ import {
   inventoryTypes,
   drawPlacementDot,
   purchaseDetectionRadius,
+  bakeryUpgradeImages,
 } from "./utilities.js";
 import { me, shared, guests } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
@@ -21,9 +24,22 @@ export function preload() {
   // shopImages = {
   //   cookie: loadImage("../assets/bakery/items/cookie.png"),
   // };
+  for (const upgradeType of upgradeTypes) {
+    for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
+      bakeryUpgradeImages[upgradeType][imgName] = loadImage(
+        `../assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
+      );
+    }
+  }
 
   for (const item of bakeryItems) {
-    itemImages[item] = loadImage(`../assets/bakery/items/${item}.png`);
+    itemImages[item] = loadImage(`../assets/bakery/items/${item}.PNG`);
+  }
+  for (const item of plantItems) {
+    itemImages[item] = loadImage(`../assets/plant/items/${item}.PNG`);
+  }
+  for (const item of bookItems) {
+    itemImages[item] = loadImage(`../assets/books/items/${item}.PNG`);
   }
   preloadDudes();
 
@@ -67,7 +83,7 @@ export const drawShops = (guests) => {
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, [], { bread: 3, cookie: 2, croissant: 1 });
+    drawShop(x, y, shopType, 0, ["decor"], { bread: 3, cookie: 2, croissant: 1 });
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);
