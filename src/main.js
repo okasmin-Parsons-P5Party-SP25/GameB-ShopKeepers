@@ -40,7 +40,7 @@ window.setup = function () {
   if (godMode === true) {
     me.coins = 1000;
     me.shopType = shopTypes.bakery;
-    me.inventory = [5, 5, 5];
+    me.inventory = [1, 1, 1];
   }
 
   // console.log("window setup");
