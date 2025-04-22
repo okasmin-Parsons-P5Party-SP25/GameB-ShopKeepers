@@ -222,3 +222,8 @@ h4 {
 .tab-content.hidden {
   display: none;
 }
+
+
+.logo-image {
+  width: 500px;
+}
