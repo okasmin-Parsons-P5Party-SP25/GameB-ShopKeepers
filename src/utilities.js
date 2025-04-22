@@ -33,20 +33,28 @@ export const shopTypes = {
   books: "books",
 };
 
-const plantInventoryTypes = {};
-const bookInventoryTypes = {};
+const plantInventoryTypes = {
+  plant1: "plant1",
+  plant2: "plant2",
+  plant3: "plant3",
+};
+const bookInventoryTypes = {
+  textbook: "book1",
+  book: "book2",
+  card: "card",
+};
 
 const bakeryInventoryTypes = {
   bread: "bread",
   baguette: "baguette",
   croissant: "croissant",
-  pie: "pie",
+  bwcookie: "bwcookie",
   cookie: "cookie",
-  loaf: "loaf",
-  chocoCroissant: "chocolate_croissant",
 };
 
 export const bakeryItems = Object.values(bakeryInventoryTypes);
+export const bookItems = Object.values(bookInventoryTypes);
+export const plantItems = Object.values(plantInventoryTypes);
 
 // index of item refers to its level
 export const inventoryTypes = {
@@ -88,6 +96,11 @@ export const upgradeChoices = {
 
 // index of item refers to its level
 export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgradeChoices.sound];
+export const bakeryUpgradeImages = {
+  decor: { barrels: "", menu: "", sideshelf: "", roof: "" },
+  light: { sign: "", signLight: "" },
+  sound: {},
+};
 
 export const getUpgradeCost = (idx) => {
   if (idx === 0) return { buy: 300 };
@@ -137,15 +150,16 @@ export const shelfColor = {
 };
 
 export const itemImages = {};
+export const dudeImages = [];
 export const bgColor = "#FBF9F4";
 
-const groundHeight = 40;
+const groundHeight = 150;
 const topOfGroundY = canvasDims.height - groundHeight;
-
+export const purchaseDetectionRadius = 100;
 // get x and y position of shop based on guest idx
 export const getShopPosition = (idx) => {
   return {
-    x: idx * 300,
+    x: 100 + idx * 300,
     y: topOfGroundY,
   };
 };

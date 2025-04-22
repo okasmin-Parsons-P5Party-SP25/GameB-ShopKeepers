@@ -4,12 +4,10 @@ import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 import DOMCursors from "./DOMCursors.js";
 
-import { p5Events, canvasDims, dudeBuyInventory, godMode, shopTypes } from "./utilities.js";
-
+import { p5Events, canvasDims, godMode, shopTypes } from "./utilities.js";
 export let shared;
 export let guests;
 export let me;
-let cursors;
 
 // all the available scenes
 export const scenes = {
@@ -19,7 +17,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_3");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_4");
 
   shared = partyLoadShared("shared", {
     quizCoins: 100,
@@ -51,7 +49,7 @@ window.setup = function () {
   noStroke();
 
   // Initialize the DOMCursors after canvas creation
-  cursors = new DOMCursors(false);
+  new DOMCursors(false);
 
   Object.values(scenes).forEach((scene) => scene.setup?.());
 
@@ -63,9 +61,6 @@ window.setup = function () {
   setupQuizUI(me, shared);
   setupChooseTypeUI(me);
   setupUpgradeMarketUI(me);
-
-  const testDudeButton = document.getElementById("test-dude-button");
-  testDudeButton.addEventListener("click", () => dudeBuyInventory(me));
 };
 
 window.draw = function () {

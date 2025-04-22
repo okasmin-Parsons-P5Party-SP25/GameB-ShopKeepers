@@ -54,7 +54,7 @@ export function drawShelves(x, y, nRows, nCols, gap, shelfW, shelfH, shelfL) {
     for (let j = 0; j < nCols; j++) {
       const shelfInfo = {
         x: x + j * (w + gap) + shelfL / 2,
-        y: y + i * (h + gap) - shelfH / 2 - shelfL - 10,
+        y: y + i * (h + gap) - shelfH / 2 - shelfL - 5,
         w: w - shelfL * 2,
         h: h - shelfL,
         item: "",

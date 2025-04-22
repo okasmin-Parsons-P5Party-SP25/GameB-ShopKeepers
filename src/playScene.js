@@ -1,19 +1,47 @@
-import { upgradeTypes, bakeryItems, itemImages, bgColor, getShopPosition } from "./utilities.js";
+import {
+  upgradeTypes,
+  bakeryItems,
+  plantItems,
+  bookItems,
+  itemImages,
+  bgColor,
+  getShopPosition,
+  drawPlacementDot,
+  purchaseDetectionRadius,
+  bakeryUpgradeImages,
+  clearDudes,
+} from "./utilities.js";
 import { me, shared, guests } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
+import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
 
 let textureImage;
 let speckleTextureImage;
 
 export function preload() {
   console.log("hi from playScene preload");
-  // shopImages = {
-  //   cookie: loadImage("../assets/bakery/items/cookie.png"),
-  // };
+  for (const upgradeType of upgradeTypes) {
+    for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
+      bakeryUpgradeImages[upgradeType][imgName] = loadImage(
+        `../assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
+      );
+    }
+  }
 
   for (const item of bakeryItems) {
-    itemImages[item] = loadImage(`../assets/bakery/items/${item}.png`);
+    let png = "png";
+    if (item === "bwcookie") {
+      png = "PNG";
+    }
+    itemImages[item] = loadImage(`../assets/bakery/items/${item}.${png}`);
   }
+  for (const item of plantItems) {
+    itemImages[item] = loadImage(`../assets/plant/items/${item}.PNG`);
+  }
+  for (const item of bookItems) {
+    itemImages[item] = loadImage(`../assets/books/items/${item}.PNG`);
+  }
+  preloadDudes();
 
   textureImage = loadImage("../assets/textures/white-paper-texture.jpg");
   speckleTextureImage = loadImage("../assets/textures/cardboard-texture.jpg");
@@ -23,6 +51,9 @@ export function enter() {
   console.log("me from playScene", me);
   console.log("shared form playScene", shared);
   updateUI(me);
+
+  const testDudeButton = document.getElementById("test-dude-button");
+  testDudeButton.addEventListener("click", handleDudes);
 }
 
 export function update() {
@@ -37,22 +68,49 @@ export function draw() {
   addTexture(speckleTextureImage, textureImage);
 }
 
-export function mousePressed() {
-  //   changeScene(scenes.title);
-}
+const handleDudes = () => {
+  for (let i = 0; i < guests.length; i++) {
+    const guest = guests[i];
+    if (!guest.shopType) continue;
+    const { x, y } = getShopPosition(i);
+    console.log({ x, y });
+    clearDudes(guest);
+    setUpDudes(guest, i, x + purchaseDetectionRadius, y - purchaseDetectionRadius, 3);
+  }
+};
+
+export function mousePressed() {}
 
 export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
     const shopType = guest.shopType;
-    // const shopImage = shopImages[shopType];
-    // const shopImage = itemImages.bread;
-    // image(shopImage, 50 + 400 * i, topOfGroundY - 350, 400, 400);
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, [], { bread: 3, cookie: 2, croissant: 1 });
+    drawShop(x, y, shopType, 0, ["decor"], { bread: 3, cookie: 2, croissant: 1 });
+    if (drawPlacementDot) {
+      fill("red");
+      ellipse(x, y, 5, 5);
+      push();
+      ellipseMode(CENTER);
+      noFill();
+      stroke("red");
+      ellipse(
+        x + purchaseDetectionRadius,
+        y - purchaseDetectionRadius,
+        purchaseDetectionRadius * 2,
+        purchaseDetectionRadius * 2
+      );
+      pop();
+    }
+  }
+
+  for (let i = 0; i < guests.length; i++) {
+    const guest = guests[i];
+    if (!guest.shopType) continue;
+    drawDudes(guest);
   }
 };
 
