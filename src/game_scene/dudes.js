@@ -8,7 +8,7 @@ import {
 
 export function preloadDudes() {
   for (let i = 0; i < 2; i++) {
-    dudeImages.push(loadImage(`../assets/dudes/${i}.png`));
+    dudeImages.push(loadImage(`./assets/dudes/${i}.png`));
   }
 }
 export function setUpDudes(guest, guestIdx, shopX, shopY, numDudes) {
@@ -91,7 +91,9 @@ export class Dude {
     image(dudeImages[this.type], this.x, this.y, 20, 35);
     if (this.items.length > 0) {
       for (const item of this.items) {
-        image(itemImages[item], this.x + 4, this.y + 4, 20, 20);
+        if (itemImages[item]) {
+          image(itemImages[item], this.x + 4, this.y + 4, 20, 20);
+        }
       }
     }
   }

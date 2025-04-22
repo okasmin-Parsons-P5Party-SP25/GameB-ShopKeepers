@@ -1,4 +1,5 @@
-import { closeAllPopups } from "./utilities";
+import { closeAllPopups } from "./utilities.js";
+import { questions } from "./data/questions.js";
 
 // store quiz choices until submit button is clicked
 // TODO update this to array once add multiplayer
@@ -9,15 +10,15 @@ let correctAnswer = undefined;
  * fetch data
  */
 
-const getQuestions = async () => {
-  try {
-    const res = await fetch("../data/questions.json");
-    const data = await res.json();
-    return data.results;
-  } catch (err) {
-    console.error(err);
-  }
-};
+// const getQuestions = async () => {
+//   try {
+//     const res = await fetch("../data/questions.json");
+//     const data = await res.json();
+//     return data.results;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 /**
  *  get relevant HTML elements
@@ -93,8 +94,6 @@ const clearQuiz = () => {
 };
 
 const generateQuiz = async () => {
-  const questions = await getQuestions();
-
   // TODO keep track of which questions asked
   const currentQuestion = random(questions);
 

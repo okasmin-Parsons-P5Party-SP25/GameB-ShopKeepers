@@ -19,11 +19,11 @@ let textureImage;
 let speckleTextureImage;
 
 export function preload() {
-  console.log("hi from playScene preload");
+  // console.log("hi from playScene preload");
   for (const upgradeType of upgradeTypes) {
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
       bakeryUpgradeImages[upgradeType][imgName] = loadImage(
-        `../assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
+        `./assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
       );
     }
   }
@@ -33,18 +33,18 @@ export function preload() {
     if (item === "bwcookie") {
       png = "PNG";
     }
-    itemImages[item] = loadImage(`../assets/bakery/items/${item}.${png}`);
+    itemImages[item] = loadImage(`./assets/bakery/items/${item}.${png}`);
   }
   for (const item of plantItems) {
-    itemImages[item] = loadImage(`../assets/plant/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/plant/items/${item}.PNG`);
   }
   for (const item of bookItems) {
-    itemImages[item] = loadImage(`../assets/books/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/books/items/${item}.PNG`);
   }
   preloadDudes();
 
-  textureImage = loadImage("../assets/textures/white-paper-texture.jpg");
-  speckleTextureImage = loadImage("../assets/textures/cardboard-texture.jpg");
+  textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
+  speckleTextureImage = loadImage("./assets/textures/cardboard-texture.jpg");
 }
 
 export function enter() {

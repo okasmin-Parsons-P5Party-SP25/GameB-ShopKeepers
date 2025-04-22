@@ -1,5 +1,5 @@
-import { shopTypes, closeAllPopups } from "./utilities";
-import { setInventory } from "./upgradeMarket";
+import { shopTypes, closeAllPopups } from "./utilities.js";
+import { setInventory } from "./upgradeMarket.js";
 
 /**
  *  get relevant HTML elements
