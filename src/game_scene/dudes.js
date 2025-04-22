@@ -8,7 +8,7 @@ import {
 
 export function preloadDudes() {
   for (let i = 0; i < 2; i++) {
-    dudeImages.push(loadImage(`../assets/dudes/${i}.png`));
+    dudeImages.push(loadImage(`./assets/dudes/${i}.png`));
   }
 }
 export function setUpDudes(guest, guestIdx, shopX, shopY, numDudes) {
