@@ -22,19 +22,18 @@ export function preload() {
   console.log("hi from playScene preload");
   for (const upgradeType of upgradeTypes) {
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
-      let png = "PNG";
-      if (imgName === "barrels" || imgName === "decor") {
-        png = "png";
-      }
-
       bakeryUpgradeImages[upgradeType][imgName] = loadImage(
-        `../assets/bakery/upgrades/${upgradeType}/${imgName}.${png}`
+        `../assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
       );
     }
   }
 
   for (const item of bakeryItems) {
-    itemImages[item] = loadImage(`../assets/bakery/items/${item}.png`);
+    let png = "png";
+    if (item === "bwcookie") {
+      png = "PNG";
+    }
+    itemImages[item] = loadImage(`../assets/bakery/items/${item}.${png}`);
   }
   for (const item of plantItems) {
     itemImages[item] = loadImage(`../assets/plant/items/${item}.PNG`);
