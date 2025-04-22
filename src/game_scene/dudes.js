@@ -3,7 +3,7 @@ import {
   itemImages,
   canvasDims,
   purchaseDetectionRadius,
-  dudeBuyInventory,
+  dudeGetAllInventory,
 } from "../utilities.js";
 
 export function preloadDudes() {
@@ -11,16 +11,13 @@ export function preloadDudes() {
     dudeImages.push(loadImage(`./assets/dudes/${i}.png`));
   }
 }
-export function setUpDudes(guest, guestIdx, shopX, shopY, numDudes) {
-  for (let i = 0; i < numDudes; i++) {
-    const speed = random() * 2.5 + 0.5;
+export function setUpDudes(guest, shopX, shopY) {
+  const itemStrings = dudeGetAllInventory(guest);
+  for (let i = 0; i < itemStrings.length; i++) {
+    const speed = random() * 3 + 0.5;
     const startX = 0;
     const startY = (random() * height) / 2 + height / 2;
-
-    // TODO this updates the guest's inventory and coins when the dudes are first initiated
-    // so it doesn't line up with the time that they actually grab the item
-    const purchaseItem = dudeBuyInventory(guest);
-    const dude = new Dude(startX, startY, shopX, shopY, purchaseItem, speed);
+    const dude = new Dude(startX, startY, shopX, shopY, itemStrings[i], speed);
     guest.dudes.push(dude);
   }
 }

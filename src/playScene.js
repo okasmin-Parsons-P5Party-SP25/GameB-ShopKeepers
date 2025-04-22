@@ -10,6 +10,8 @@ import {
   purchaseDetectionRadius,
   bakeryUpgradeImages,
   clearDudes,
+  getInventoryStrings,
+  dudesBuyAllInventory,
 } from "./utilities.js";
 import { me, shared, guests } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
@@ -75,7 +77,12 @@ const handleDudes = () => {
     const { x, y } = getShopPosition(i);
     console.log({ x, y });
     clearDudes(guest);
-    setUpDudes(guest, i, x + purchaseDetectionRadius, y - purchaseDetectionRadius, 3);
+    setUpDudes(guest, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
+
+    // TODO this is arbitrarily set to 5 seconds
+    setTimeout(() => {
+      dudesBuyAllInventory(guest);
+    }, 5000);
   }
 };
 
@@ -85,11 +92,14 @@ export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
+
+    const inventory = getInventoryStrings(guest);
+
     const shopType = guest.shopType;
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, ["decor"], { bread: 3, cookie: 2, croissant: 1 });
+    drawShop(x, y, shopType, 0, ["decor"], inventory);
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);
