@@ -12,6 +12,7 @@ import {
   clearDudes,
   getInventoryStrings,
   dudesBuyAllInventory,
+  closeAllPopups,
 } from "./utilities.js";
 import { me, shared, guests } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
@@ -19,6 +20,8 @@ import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
 
 let textureImage;
 let speckleTextureImage;
+
+const upgradeMarketButton = document.getElementById("upgrade-market-button");
 
 export function preload() {
   // console.log("hi from playScene preload");
@@ -50,6 +53,8 @@ export function preload() {
 }
 
 export function enter() {
+  closeAllPopups();
+  upgradeMarketButton.style.display = "block";
   console.log("me from playScene", me);
   console.log("shared form playScene", shared);
   updateUI(me);
@@ -60,6 +65,10 @@ export function enter() {
 
 export function update() {
   updateUI(me);
+}
+
+export function leave() {
+  upgradeMarketButton.style.display = "none";
 }
 
 export function draw() {

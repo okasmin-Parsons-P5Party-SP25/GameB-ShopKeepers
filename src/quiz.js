@@ -1,5 +1,6 @@
 import { closeAllPopups } from "./utilities.js";
 import { questions } from "./data/questions.js";
+import { changeScene, scenes } from "./main.js";
 
 // store quiz choices until submit button is clicked
 // TODO update this to array once add multiplayer
@@ -34,10 +35,7 @@ const answerScreenDiv = document.getElementById("answers-screen");
 
 const revealedAnswerDiv = document.getElementById("answer-revealed");
 const closeButton = document.getElementById("close-quiz");
-
-/**
- * attach event listeners
- */
+const nextButton = document.getElementById("next-exit-quiz-button");
 
 const onSubmit = (me, shared) => {
   if (!guessed || !correctAnswer) return;
@@ -68,7 +66,7 @@ const onSubmit = (me, shared) => {
 };
 
 // open
-const onClickQuiz = async () => {
+export const onOpenQuiz = async () => {
   closeAllPopups();
   if (quizDiv.classList.contains("hidden")) {
     clearQuiz();
@@ -85,6 +83,12 @@ const onClickQuiz = async () => {
 const onClickClose = () => {
   clearQuiz();
   quizDiv.classList.add("hidden");
+};
+
+// next button to change scene
+const onClickNext = () => {
+  onClickClose();
+  changeScene(scenes.play);
 };
 
 const clearQuiz = () => {
@@ -124,9 +128,14 @@ const generateQuiz = async () => {
   });
 };
 
+/**
+ * attach event listeners
+ */
+
 export const setupQuizUI = (me, shared) => {
-  quizButton.addEventListener("click", onClickQuiz);
+  quizButton.addEventListener("click", onOpenQuiz);
   closeButton.addEventListener("click", onClickClose);
+  nextButton.addEventListener("click", onClickNext);
 
   // submit quiz button
   submitButton.addEventListener("click", () => onSubmit(me, shared));

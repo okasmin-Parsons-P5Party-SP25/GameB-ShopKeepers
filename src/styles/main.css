@@ -5,6 +5,11 @@ body {
   font-family: "Helvetica Neue", sans-serif;
 }
 
+#js-elements-container {
+  display: flex;
+  flex-direction: column;
+}
+
 h1 {
   color: #bed280;
   font-size: 70px;
@@ -25,7 +30,7 @@ button {
 }
 
 button:hover {
-  background-color: #E5E1D5;
+  background-color: #e5e1d5;
   color: black;
 }
 
@@ -41,10 +46,11 @@ button:hover {
 
   padding: 50px;
 
-  background-color: #E5D6C0;
+  background-color: #e5d6c0;
   color: black;
 
-  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-paper-texture.jpg');
+  background-image: url("../assets/textures/cardboard-texture.jpg"),
+    url("../assets/textures/white-paper-texture.jpg");
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
@@ -98,8 +104,11 @@ button:hover {
 }
 
 #top-container {
-  height: 100px;
+  height: 200px;
   width: 100%;
+  background: transparent;
+  position: relative;
+  z-index: 2;
 }
 
 #popup-container {
@@ -111,7 +120,7 @@ button:hover {
 
 canvas {
   position: absolute;
-  top: 160px;
+  top: 0px;
   left: 0;
   z-index: 0;
 }
@@ -148,7 +157,7 @@ canvas {
 }
 
 .market-choice-button {
-  background-color: #F6F4E7;
+  background-color: #f6f4e7;
   width: 20%;
   aspect-ratio: 1 / 1; /* height = width */
   font-size: 20px;
@@ -177,9 +186,10 @@ export const shelfColor = {
 
 .ui-button {
   width: 12%;
-  background-color: #E8D7BB;
-  background-color: #F5F1E7;
-  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-paper-texture.jpg');
+  background-color: #e8d7bb;
+  background-color: #f5f1e7;
+  background-image: url("../assets/textures/cardboard-texture.jpg"),
+    url("../assets/textures/white-paper-texture.jpg");
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
@@ -242,7 +252,7 @@ h4 {
   padding: 0.5em 1em;
   margin: 0;
   border: none;
-  background-color: #F6F4E7;
+  background-color: #f6f4e7;
   cursor: pointer;
   font-size: 24px;
   font-weight: 500;
@@ -251,17 +261,19 @@ h4 {
 
 .tab-button.active {
   color: white;
-  background-color: #000000BF;
-  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-gypsum-wall.jpg');
+  background-color: #000000bf;
+  background-image: url("../assets/textures/cardboard-texture.jpg"),
+    url("../assets/textures/white-gypsum-wall.jpg");
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
   background-blend-mode: color-burn, color-burn;
 }
 
-.tab-content{
-  background-color: #000000BF;
-  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-gypsum-wall.jpg');
+.tab-content {
+  background-color: #000000bf;
+  background-image: url("../assets/textures/cardboard-texture.jpg"),
+    url("../assets/textures/white-gypsum-wall.jpg");
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
@@ -272,7 +284,6 @@ h4 {
   display: none;
 }
 
-
 .logo-image {
   width: 500px;
 }
@@ -281,4 +292,20 @@ h4 {
   display: flex;
   align-items: center; /* vertically aligns items */
   gap: 1rem; /* optional spacing between items */
+}
+
+#god-mode-container.hidden {
+  display: none;
+}
+#god-mode-container {
+  display: flex;
+}
+
+.close-button-god-mode {
+  display: none;
+}
+
+/* this becomes visible in playScene */
+#upgrade-market-button {
+  display: none;
 }

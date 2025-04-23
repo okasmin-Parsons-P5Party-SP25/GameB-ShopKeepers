@@ -24,7 +24,7 @@ export const p5Events = [
 
 export const canvasDims = {
   width: window.innerWidth,
-  height: 600,
+  height: window.innerHeight,
 };
 
 export const shopTypes = {

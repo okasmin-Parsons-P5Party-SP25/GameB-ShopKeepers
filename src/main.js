@@ -73,6 +73,12 @@ window.setup = function () {
   setupQuizUI(me, shared);
   setupChooseTypeUI(me);
   setupUpgradeMarketUI(me);
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "g") {
+      toggleGodMode();
+    }
+  });
 };
 
 window.draw = function () {
@@ -102,3 +108,14 @@ export function changeScene(newScene) {
   currentScene = newScene;
   currentScene.enter?.();
 }
+
+const godModeUIContainer = document.getElementById("god-mode-container");
+
+const godModeCloseButtons = document.querySelectorAll(".close-button-god-mode");
+
+const toggleGodMode = () => {
+  godModeUIContainer.classList.toggle("hidden");
+
+  const godModeOn = !godModeUIContainer.classList.contains("hidden");
+  godModeCloseButtons.style.display = godModeOn ? "block" : "none";
+};

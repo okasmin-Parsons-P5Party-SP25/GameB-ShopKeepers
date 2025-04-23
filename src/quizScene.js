@@ -1,6 +1,7 @@
-import { bgColor, canvasDims } from "./utilities.js";
+import { bgColor, canvasDims, closeAllPopups } from "./utilities.js";
 import { addTexture } from "./game_scene/shop.js";
-import { changeScene, scenes } from "./main.js";
+// import { changeScene, scenes } from "./main.js";
+import { onOpenQuiz } from "./quiz.js";
 
 let speckleTextureImage;
 let textureImage;
@@ -43,7 +44,10 @@ export function setup() {}
 // enter
 // called from changeScene() when this scene is entered
 // code that SHOULD rerun every time the scene is entered
-export function enter() {}
+export function enter() {
+  closeAllPopups();
+  onOpenQuiz();
+}
 
 // update
 // called from the main draw() loop
@@ -62,7 +66,7 @@ export function draw() {
   push();
   stroke("blue");
   textSize(30);
-  text("quiz screen", canvasDims.width / 2, canvasDims.height / 2);
+  // text("quiz screen", canvasDims.width / 2, canvasDims.height / 2);
   pop();
 }
 
@@ -70,7 +74,7 @@ export function draw() {
 // called from the main mousePressed() function
 // code that handles mousePressed events
 export function mousePressed() {
-  changeScene(scenes.play);
+  // changeScene(scenes.play);
 }
 
 // leave
