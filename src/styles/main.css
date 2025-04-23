@@ -242,12 +242,22 @@ h4 {
 }
 
 .tab-button.active {
-  background-color: #000000;
   color: white;
+  background-color: #000000BF;
+  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-gypsum-wall.jpg');
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-blend-mode: color-burn, color-burn;
 }
 
 .tab-content{
-  background-color: #000000;
+  background-color: #000000BF;
+  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-gypsum-wall.jpg');
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-blend-mode: color-burn, color-burn;
 }
 
 .tab-content.hidden {
@@ -259,3 +269,8 @@ h4 {
   width: 500px;
 }
 
+.market-header {
+  display: flex;
+  align-items: center; /* vertically aligns items */
+  gap: 1rem; /* optional spacing between items */
+}
