@@ -70,7 +70,7 @@ export function draw() {
 // called from the main mousePressed() function
 // code that handles mousePressed events
 export function mousePressed() {
-  changeScene(scenes.play);
+  changeScene(scenes.chooseType);
 }
 
 // leave

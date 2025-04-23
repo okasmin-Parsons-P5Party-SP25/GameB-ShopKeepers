@@ -1,11 +1,19 @@
 import * as playScene from "./playScene.js";
-import * as startScene from "./startScreen.js";
+import * as startScene from "./startScene.js";
+import * as quizScene from "./quizScene.js";
+import * as chooseTypeScene from "./chooseTypeScene.js";
 import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 import DOMCursors from "./DOMCursors.js";
+import {
+  p5Events,
+  canvasDims,
+  godMode,
+  shopTypes,
+  //  closeAllPopups
+} from "./utilities.js";
 
-import { p5Events, canvasDims, godMode, shopTypes } from "./utilities.js";
 export let shared;
 export let guests;
 export let me;
@@ -14,6 +22,8 @@ export let me;
 export const scenes = {
   play: playScene,
   start: startScene,
+  quiz: quizScene,
+  chooseType: chooseTypeScene,
 };
 
 let currentScene; // the scene being displayed
@@ -85,6 +95,9 @@ export function changeScene(newScene) {
     console.error("newScene is already currentScene");
     return;
   }
+  //ensure all popups are closed when change scene
+  // closeAllPopups();
+
   currentScene?.leave?.();
   currentScene = newScene;
   currentScene.enter?.();
