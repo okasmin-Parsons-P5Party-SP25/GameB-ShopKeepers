@@ -98,11 +98,36 @@ export const setInventory = (me) => {
 
     const itemDiv = document.createElement("div");
 
+    const itemImageContainer = document.createElement("div");
+    itemImageContainer.classList.add("item");
+    
+    // Image
+    const img = document.createElement("img");
+    img.src = `assets/bakery/items/${inventory.toLowerCase()}.png`; // normalize
+    img.alt = inventory;
+    img.classList.add("item-image");
+    img.onerror = () => {
+      img.src = "assets/bakery/default.png"; // fallback if image not found
+    };
+    
+    // Label
+    const label = document.createElement("span");
+    label.textContent = inventory;
+    label.classList.add("item-label");
+    
+    itemImageContainer.appendChild(img);
+    itemImageContainer.appendChild(label);
+    itemDiv.append(itemImageContainer);
+    
+
+
+/* 
     // TODO render image here instead of text
     const itemImageContainer = document.createElement("div");
     itemImageContainer.textContent = inventory;
     itemImageContainer.classList.add("item");
     itemDiv.append(itemImageContainer);
+     */
 
     const { buy, sell } = getInventoryCost(idx, me);
 
