@@ -43,6 +43,12 @@ button:hover {
 
   background-color: #E5D6C0;
   color: black;
+
+  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-paper-texture.jpg');
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-blend-mode: multiply, color-burn;
 }
 #quiz {
   #answers-container {
@@ -100,7 +106,6 @@ button:hover {
   width: 100vw;
   height: 100vh;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }
 
@@ -150,9 +155,35 @@ canvas {
   position: relative;
 }
 
+/* 
+for Lisa's use
+
+export const wallColors = {
+  front: "#F2EBDC",
+  side: "#ECE1CF",
+  top: "#F5F1E7",
+  inside: "#FAF1E1",
+};
+
+export const shelfColor = {
+  back: "#E8D7BB",
+  side: "#F1E2CA",
+  bottom: "#ECE1CF",
+  bottomLight: "#ECE1CF",
+};
+
+
+*/
+
 .ui-button {
   width: 12%;
-  background-color: #F6F4E7;
+  background-color: #E8D7BB;
+  background-color: #F5F1E7;
+  background-image: url('../assets/textures/cardboard-texture.jpg'), url('../assets/textures/white-paper-texture.jpg');
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-blend-mode: multiply, color-burn;
 }
 
 h2 {
@@ -227,3 +258,4 @@ h4 {
 .logo-image {
   width: 500px;
 }
+
