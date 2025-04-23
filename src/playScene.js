@@ -134,6 +134,13 @@ export const updateUI = (me) => {
     my inventory: ${me.inventory}
   `;
 
+  const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
+  if (myMoneyGodModeDiv) {
+    myMoneyGodModeDiv.textContent = `${me.coins} 🪙`;
+  }
+
   const myMoneyDiv = document.getElementById("my-money");
-  myMoneyDiv.textContent = `my coins:${me.coins}`;
+  if (myMoneyDiv) {
+    myMoneyDiv.textContent = `${me.coins} 🪙`;
+  }
 };

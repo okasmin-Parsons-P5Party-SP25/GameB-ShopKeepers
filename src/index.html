@@ -2,16 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Shop Keepers</title>
-    <!-- <link rel="icon" href="favicon.png" /> -->
+    <title>Little Dudes</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="stylesheet" href="styles/main.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
 
     <script defer src="https://cdn.jsdelivr.net/npm/p5@1.9.1/lib/p5.js"></script>
     <script
@@ -24,7 +21,7 @@
   <body>
     <div>
       <div id="top-container">
-        <h1>Shop Keepers</h1>
+        <img src="assets/Little-Dudes-Logo.png" alt="Little Dudes Logo" class="logo-image" id="logo" />
         <div id="ui-container">
           <button id="choose-type-button" class="ui-button">choose shop type</button>
           <button id="quiz-button" class="ui-button">play quiz</button>
@@ -32,7 +29,7 @@
           <button id="test-dude-button">test dude button</button>
           <div id="my-info">
             <div id="my-upgrades"></div>
-            <div id="my-money"></div>
+            <div id="my-money-godMode"></div>
           </div>
         </div>
       </div>
@@ -57,12 +54,28 @@
         </div>
         <div id="upgrade-market" class="popupItem hidden">
           <button class="close-button" id="close-upgrade-market">X</button>
-          <h2>market</h2>
-          <h4>inventory</h4>
-          <div id="inventory-choices" class="market-choices"></div>
-          <h4>shop upgrades</h4>
-          <div id="shop-upgrade-choices" class="market-choices"></div>
+          <div class="market-header">
+            <h2>market</h2>
+            <div id="my-money"></div>
+          </div>
+          
+          <!-- Tab Buttons -->
+          <div class="tabs">
+            <button class="tab-button active" data-tab="inventory">Inventory</button>
+            <button class="tab-button" data-tab="shop-upgrades">Shop Upgrades</button>
+          </div>
+        
+          <!-- Tab Content -->
+          <div class="tab-content" id="inventory-tab">
+            <!-- <h4>inventory</h4> -->
+            <div id="inventory-choices" class="market-choices"></div>
+          </div>
+          <div class="tab-content hidden" id="shop-upgrades-tab">
+            <!-- <h4>shop upgrades</h4> -->
+            <div id="shop-upgrade-choices" class="market-choices"></div>
+          </div>
         </div>
+        
       </div>
     </div>
   </body>
