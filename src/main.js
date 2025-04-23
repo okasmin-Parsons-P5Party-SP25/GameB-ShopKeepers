@@ -1,4 +1,5 @@
 import * as playScene from "./playScene.js";
+import * as startScene from "./startScreen.js";
 import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
@@ -12,6 +13,7 @@ export let me;
 // all the available scenes
 export const scenes = {
   play: playScene,
+  start: startScene,
 };
 
 let currentScene; // the scene being displayed
@@ -55,7 +57,7 @@ window.setup = function () {
 
   // console.log("change scene before");
   // console.log({ me, shared });
-  changeScene(scenes.play);
+  changeScene(scenes.start);
   // console.log("change scene after");
 
   setupQuizUI(me, shared);
