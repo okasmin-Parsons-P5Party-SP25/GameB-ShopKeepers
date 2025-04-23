@@ -1,4 +1,5 @@
 import * as playScene from "./playScene.js";
+import * as splashScene from "./splashScene.js";
 import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
@@ -12,9 +13,20 @@ export let me;
 // all the available scenes
 export const scenes = {
   play: playScene,
+  splash: splashScene,
 };
 
+// URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const startScene = urlParams.get("scene");
+
 let currentScene; // the scene being displayed
+
+// Add to URL to show splash by itself instead of play scene
+// Example: index.html?scene=splash
+// To go to play scene: index.html?scene=play
+
+// If no scene parameter is provided, we'll show the splash first and then transition to play
 
 window.preload = function () {
   partyConnect("wss://demoserver.p5party.org", "shop_keepers_4");
@@ -53,10 +65,20 @@ window.setup = function () {
 
   Object.values(scenes).forEach((scene) => scene.setup?.());
 
-  // console.log("change scene before");
-  // console.log({ me, shared });
-  changeScene(scenes.play);
-  // console.log("change scene after");
+  // Determine which scene to show first based on URL parameter
+  if (startScene === "splash") {
+    changeScene(scenes.splash);
+  } else if (startScene === "play") {
+    changeScene(scenes.play);
+  } else {
+    // If no parameter, default to splash and transition to play after a delay
+    changeScene(scenes.splash);
+
+    // Auto-transition to play scene after 5 seconds
+    setTimeout(() => {
+      changeScene(scenes.play);
+    }, 5000);
+  }
 
   setupQuizUI(me, shared);
   setupChooseTypeUI(me);
