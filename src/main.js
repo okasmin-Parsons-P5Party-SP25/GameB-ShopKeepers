@@ -17,7 +17,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_4");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main");
 
   shared = partyLoadShared("shared", {
     quizCoins: 100,
@@ -40,7 +40,7 @@ window.setup = function () {
   if (godMode === true) {
     me.coins = 1000;
     me.shopType = shopTypes.bakery;
-    me.inventory = [5, 5, 5];
+    me.inventory = [1, 1, 1];
   }
 
   // console.log("window setup");

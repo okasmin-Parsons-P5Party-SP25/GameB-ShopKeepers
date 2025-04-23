@@ -1,4 +1,4 @@
-export const godMode = true;
+export const godMode = false;
 
 /// forward event handlers to the current scene, if they handle them
 export const p5Events = [
@@ -164,19 +164,32 @@ export const getShopPosition = (idx) => {
   };
 };
 
-export const dudeBuyInventory = (guest) => {
+export const dudeGetAllInventory = (guest) => {
   if (!guest.shopType || !guest.inventory) return;
 
-  // choose a nonzero item
-  // for now this goes through the inventory items in order
-  let itemIdx = false;
+  const itemStrings = guest.inventory.flatMap((num, idx) =>
+    Array(num).fill(inventoryTypes[guest.shopType][idx])
+  );
+
+  return itemStrings;
+};
+
+export const dudesBuyAllInventory = (guest) => {
+  if (!guest.shopType || !guest.inventory) return;
+  let totalCoins = 0;
   for (let i = 0; i < guest.inventory.length; i++) {
-    if (guest.inventory[i]) {
-      itemIdx = i;
-      break;
-    }
+    const numItems = guest.inventory[i];
+    const itemCost = getInventoryCost(i, guest).sell;
+    totalCoins += numItems * itemCost;
   }
-  if (itemIdx === false) return;
+
+  guest.inventory = [0, 0, 0];
+  guest.coins += totalCoins;
+};
+
+// TODO may use in future if want to buy items one by one
+export const dudeBuySingleItem = (guest, itemIdx) => {
+  if (!guest.shopType || !guest.inventory) return;
 
   // decrement inventory for that item
   guest.inventory[itemIdx] -= 1;
@@ -184,11 +197,6 @@ export const dudeBuyInventory = (guest) => {
   // add money to guest for that item
   const itemCost = getInventoryCost(itemIdx, guest);
   guest.coins += itemCost.sell;
-
-  // return inventory string: ex: "bread"
-  const itemString = inventoryTypes[guest.shopType][itemIdx];
-
-  return itemString;
 };
 
 // call after dudes finished
@@ -197,3 +205,20 @@ export const clearDudes = (guest) => {
 };
 
 export const triggerDudes = () => {};
+
+// for shop drawing inventory
+export const getInventoryStrings = (guest) => {
+  if (!guest.shopType) return;
+  const { shopType, inventory } = guest;
+
+  // format like this:
+  // { bread: 3, cookie: 2, croissant: 1 }
+
+  const inventoryObj = {};
+
+  for (let i = 0; i < inventory.length; i++) {
+    const itemString = inventoryTypes[shopType][i];
+    inventoryObj[itemString] = inventory[i];
+  }
+  return inventoryObj;
+};

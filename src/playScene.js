@@ -10,6 +10,8 @@ import {
   purchaseDetectionRadius,
   bakeryUpgradeImages,
   clearDudes,
+  getInventoryStrings,
+  dudesBuyAllInventory,
 } from "./utilities.js";
 import { me, shared, guests } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
@@ -19,11 +21,11 @@ let textureImage;
 let speckleTextureImage;
 
 export function preload() {
-  console.log("hi from playScene preload");
+  // console.log("hi from playScene preload");
   for (const upgradeType of upgradeTypes) {
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
       bakeryUpgradeImages[upgradeType][imgName] = loadImage(
-        `../assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
+        `./assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
       );
     }
   }
@@ -33,18 +35,18 @@ export function preload() {
     if (item === "bwcookie") {
       png = "PNG";
     }
-    itemImages[item] = loadImage(`../assets/bakery/items/${item}.${png}`);
+    itemImages[item] = loadImage(`./assets/bakery/items/${item}.${png}`);
   }
   for (const item of plantItems) {
-    itemImages[item] = loadImage(`../assets/plant/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/plant/items/${item}.PNG`);
   }
   for (const item of bookItems) {
-    itemImages[item] = loadImage(`../assets/books/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/books/items/${item}.PNG`);
   }
   preloadDudes();
 
-  textureImage = loadImage("../assets/textures/white-paper-texture.jpg");
-  speckleTextureImage = loadImage("../assets/textures/cardboard-texture.jpg");
+  textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
+  speckleTextureImage = loadImage("./assets/textures/cardboard-texture.jpg");
 }
 
 export function enter() {
@@ -75,7 +77,12 @@ const handleDudes = () => {
     const { x, y } = getShopPosition(i);
     console.log({ x, y });
     clearDudes(guest);
-    setUpDudes(guest, i, x + purchaseDetectionRadius, y - purchaseDetectionRadius, 3);
+    setUpDudes(guest, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
+
+    // TODO this is arbitrarily set to 5 seconds
+    setTimeout(() => {
+      dudesBuyAllInventory(guest);
+    }, 5000);
   }
 };
 
@@ -85,11 +92,14 @@ export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
+
+    const inventory = getInventoryStrings(guest);
+
     const shopType = guest.shopType;
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, ["decor"], { bread: 3, cookie: 2, croissant: 1 });
+    drawShop(x, y, shopType, 0, ["decor"], inventory);
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);

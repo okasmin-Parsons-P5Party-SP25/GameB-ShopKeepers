@@ -6,12 +6,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "rm -rf dist && mkdir dist && cp -r src/* dist/",
+    "deploy": "npm run build"
   },
   "devDependencies": {
-    "vite": "^5.4.1",
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.21.0",
     "copyfiles": "^2.4.1",
@@ -19,6 +17,5 @@
     "eslint-config-p5js": "^1.1.0",
     "globals": "^16.0.0"
   },
-  "main": "vite.config.js",
   "keywords": []
 }
