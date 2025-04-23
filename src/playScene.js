@@ -135,5 +135,5 @@ export const updateUI = (me) => {
   `;
 
   const myMoneyDiv = document.getElementById("my-money");
-  myMoneyDiv.textContent = `my coins:${me.coins}`;
+  myMoneyDiv.textContent = `${me.coins} 🪙`;
 };
