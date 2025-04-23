@@ -26,8 +26,29 @@ export const setupUpgradeMarketUI = (me) => {
   upgradeMarketButton.addEventListener("click", onClickUpgradeMarket);
   closeButton.addEventListener("click", onClickClose);
 
+  // Setup tab switching
+  const tabButtons = upgradeMarketDiv.querySelectorAll(".tab-button");
+  const inventoryTab = document.getElementById("inventory-tab");
+  const upgradesTab = document.getElementById("shop-upgrades-tab");
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      if (btn.dataset.tab === "inventory") {
+        inventoryTab.classList.remove("hidden");
+        upgradesTab.classList.add("hidden");
+      } else {
+        inventoryTab.classList.add("hidden");
+        upgradesTab.classList.remove("hidden");
+      }
+    });
+  });
+
   generateUpgradeMarket(me);
 };
+
 
 const handleBuyInventory = (me, idx, cost, ammountDiv) => {
   // check if can afford
@@ -46,7 +67,7 @@ const handleBuyInventory = (me, idx, cost, ammountDiv) => {
 };
 
 const updateAmountText = (me, el, idx) => {
-  el.textContent = `currently have: ${me.inventory[idx]} of this item`;
+  el.textContent = `supply: ${me.inventory[idx]}`;
 };
 
 const updateSellText = (me, idx, el = undefined, sell = undefined) => {
@@ -59,7 +80,7 @@ const updateSellText = (me, idx, el = undefined, sell = undefined) => {
     ammount = getInventoryCost(idx, me).sell;
   }
 
-  div.textContent = `sell for: ${ammount} coins`;
+  div.textContent = `sell: ${ammount} 🪙`;
 };
 
 export const setInventory = (me) => {
@@ -77,23 +98,42 @@ export const setInventory = (me) => {
 
     const itemDiv = document.createElement("div");
 
-    // TODO render image here instead of text
     const itemImageContainer = document.createElement("div");
-    itemImageContainer.textContent = inventory;
+    itemImageContainer.classList.add("item");
+    
+    // Image
+    const img = document.createElement("img");
+    img.src = `assets/bakery/items/${inventory.toLowerCase()}.png`; // normalize
+    img.alt = inventory;
+    img.classList.add("item-image");
+    img.onerror = () => {
+      img.src = "assets/bakery/default.png"; // fallback if image not found
+    };
+    
+    // Label
+    const label = document.createElement("span");
+    label.textContent = inventory;
+    label.classList.add("item-label");
+    
+    itemImageContainer.appendChild(img);
+    itemImageContainer.appendChild(label);
     itemDiv.append(itemImageContainer);
 
     const { buy, sell } = getInventoryCost(idx, me);
 
     const buyDiv = document.createElement("div");
-    buyDiv.textContent = `buy for: ${buy} coins`;
+    buyDiv.classList.add("buy");
+    buyDiv.textContent = `buy: ${buy} 🪙`;
     itemDiv.append(buyDiv);
 
     const sellDiv = document.createElement("div");
+    sellDiv.classList.add("sell");
     sellDiv.id = `inventory-item-sell-${idx}`;
     updateSellText(me, idx, sellDiv, sell);
     itemDiv.append(sellDiv);
 
     const ammountDiv = document.createElement("div");
+    ammountDiv.classList.add("supply");
     updateAmountText(me, ammountDiv, idx);
     itemDiv.append(ammountDiv);
 
@@ -152,7 +192,8 @@ const setUpgrades = (me) => {
     const { buy } = getUpgradeCost(idx);
 
     const buyDiv = document.createElement("div");
-    buyDiv.textContent = `buy for: ${buy} coins`;
+    buyDiv.classList.add("buy");
+    buyDiv.textContent = `buy: ${buy} 🪙`;
     itemDiv.append(buyDiv);
 
     const purchasedDiv = document.createElement("div");
