@@ -1,5 +1,7 @@
 import * as playScene from "./playScene.js";
-import * as startScene from "./startScreen.js";
+import * as startScene from "./startScene.js";
+import * as quizScene from "./quizScene.js";
+import * as chooseTypeScene from "./chooseTypeScene.js";
 import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
@@ -14,12 +16,14 @@ export let me;
 export const scenes = {
   play: playScene,
   start: startScene,
+  quiz: quizScene,
+  chooseType: chooseTypeScene,
 };
 
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_olivia");
 
   shared = partyLoadShared("shared", {
     quizCoins: 100,
