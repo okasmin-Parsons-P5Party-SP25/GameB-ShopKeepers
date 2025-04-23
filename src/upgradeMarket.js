@@ -118,16 +118,6 @@ export const setInventory = (me) => {
     itemImageContainer.appendChild(img);
     itemImageContainer.appendChild(label);
     itemDiv.append(itemImageContainer);
-    
-
-
-/* 
-    // TODO render image here instead of text
-    const itemImageContainer = document.createElement("div");
-    itemImageContainer.textContent = inventory;
-    itemImageContainer.classList.add("item");
-    itemDiv.append(itemImageContainer);
-     */
 
     const { buy, sell } = getInventoryCost(idx, me);
 
@@ -202,6 +192,7 @@ const setUpgrades = (me) => {
     const { buy } = getUpgradeCost(idx);
 
     const buyDiv = document.createElement("div");
+    buyDiv.classList.add("buy");
     buyDiv.textContent = `buy: ${buy} 🪙`;
     itemDiv.append(buyDiv);
 
