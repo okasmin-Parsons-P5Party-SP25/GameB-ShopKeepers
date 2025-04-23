@@ -6,8 +6,14 @@ import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 import DOMCursors from "./DOMCursors.js";
+import {
+  p5Events,
+  canvasDims,
+  godMode,
+  shopTypes,
+  //  closeAllPopups
+} from "./utilities.js";
 
-import { p5Events, canvasDims, godMode, shopTypes } from "./utilities.js";
 export let shared;
 export let guests;
 export let me;
@@ -23,7 +29,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_olivia");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main");
 
   shared = partyLoadShared("shared", {
     quizCoins: 100,
@@ -89,6 +95,9 @@ export function changeScene(newScene) {
     console.error("newScene is already currentScene");
     return;
   }
+  //ensure all popups are closed when change scene
+  // closeAllPopups();
+
   currentScene?.leave?.();
   currentScene = newScene;
   currentScene.enter?.();
