@@ -9,8 +9,8 @@ import DOMCursors from "./DOMCursors.js";
 import {
   p5Events,
   canvasDims,
-  godMode,
-  shopTypes,
+  // godMode,
+  // shopTypes,
   //  closeAllPopups
 } from "./utilities.js";
 
@@ -37,9 +37,9 @@ window.preload = function () {
 
   me = partyLoadMyShared({
     shopType: undefined, // one of shopTypes,
-    inventory: [0, 0, 0], // index refers to inventory level, value is ammount
+    inventory: [0, 0, 0], // index refers to inventory level, value is ammount; see inventoryTypes
     coins: 0, // number,
-    upgrades: [false, false, false], // index refers to inventory level, true if purchased
+    upgrades: [false, false, false], // index refers to upgrade level, true if purchased
     upgradeLevel: 0, // increase to 1, 2, or 3 with each upgrade purchase
     dudes: [],
   });
@@ -49,11 +49,11 @@ window.preload = function () {
 };
 
 window.setup = function () {
-  if (godMode === true) {
-    me.coins = 1000;
-    me.shopType = shopTypes.bakery;
-    me.inventory = [1, 1, 1];
-  }
+  // if (godMode === true) {
+  //   me.coins += 1000;
+  //   me.shopType = me.shopType ? me.shopType : shopTypes.bakery;
+  //   me.inventory = me.inventory[0] === 0 ? [(2, 2, 2)] : me.inventory;
+  // }
 
   // console.log("window setup");
   createCanvas(canvasDims.width, canvasDims.height);
@@ -110,7 +110,6 @@ export function changeScene(newScene) {
 }
 
 const godModeUIContainer = document.getElementById("god-mode-container");
-
 const godModeCloseButtons = document.querySelectorAll(".close-button-god-mode");
 
 const toggleGodMode = () => {

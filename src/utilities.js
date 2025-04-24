@@ -1,4 +1,4 @@
-export const godMode = false;
+// export const godMode = false;
 
 /// forward event handlers to the current scene, if they handle them
 export const p5Events = [
@@ -52,11 +52,14 @@ const bakeryInventoryTypes = {
   cookie: "cookie",
 };
 
+// all values are used for image loading
 export const bakeryItems = Object.values(bakeryInventoryTypes);
 export const bookItems = Object.values(bookInventoryTypes);
 export const plantItems = Object.values(plantInventoryTypes);
 
-// index of item refers to its level
+// max 3 inventory item types per shop
+// index of item refers to its level (this determine cost)
+// and stores specific inventory type for that store
 export const inventoryTypes = {
   plant: plantInventoryTypes,
   bakery: [bakeryInventoryTypes.bread, bakeryInventoryTypes.croissant, bakeryInventoryTypes.cookie],
