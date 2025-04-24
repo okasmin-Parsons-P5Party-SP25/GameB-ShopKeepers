@@ -1,6 +1,10 @@
-# Editor directories and files
+# Ignore all .vscode files
 .vscode/*
 !.vscode/extensions.json
+# But not settings.json
+!.vscode/settings.json
+
+# Editor directories and files
 .idea
 .DS_Store
 *.suo
