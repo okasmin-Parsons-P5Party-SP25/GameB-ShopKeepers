@@ -1,6 +1,12 @@
-import { bgColor, canvasDims } from "./utilities.js";
+import {
+  bgColor,
+  // canvasDims,
+  closeAllPopups,
+} from "./utilities.js";
 import { addTexture } from "./game_scene/shop.js";
-import { changeScene, scenes } from "./main.js";
+// import { changeScene, scenes } from "./main.js";
+import { onOpenChooseType } from "./chooseShopType.js";
+// import { me } from "./main.js";
 
 let speckleTextureImage;
 let textureImage;
@@ -43,7 +49,11 @@ export function setup() {}
 // enter
 // called from changeScene() when this scene is entered
 // code that SHOULD rerun every time the scene is entered
-export function enter() {}
+export function enter() {
+  closeAllPopups();
+  // console.log("should open choose shop type popup");
+  onOpenChooseType();
+}
 
 // update
 // called from the main draw() loop
@@ -62,7 +72,7 @@ export function draw() {
   push();
   stroke("green");
   textSize(30);
-  text("choose shop type screen", canvasDims.width / 2, canvasDims.height / 2);
+  // text("choose shop type screen", canvasDims.width / 2, canvasDims.height / 2);
   pop();
 }
 
@@ -70,7 +80,7 @@ export function draw() {
 // called from the main mousePressed() function
 // code that handles mousePressed events
 export function mousePressed() {
-  changeScene(scenes.quiz);
+  // changeScene(scenes.quiz);
 }
 
 // leave

@@ -1,5 +1,6 @@
 import { shopTypes, closeAllPopups } from "./utilities.js";
 import { setInventory } from "./upgradeMarket.js";
+import { changeScene, scenes } from "./main.js";
 
 /**
  *  get relevant HTML elements
@@ -8,10 +9,11 @@ const chooseTypeButton = document.getElementById("choose-type-button");
 const chooseTypeDiv = document.getElementById("choose-type");
 const typesDiv = document.getElementById("type-choices");
 const closeButton = document.getElementById("close-choose-type");
+const nextButton = document.getElementById("next-exit-choose-shop-button");
 
 // open
-const onClickChooseType = (me) => {
-  if (me.shopType) return;
+export const onOpenChooseType = () => {
+  // if (me.shopType) return;
 
   closeAllPopups();
   chooseTypeDiv.classList.remove("hidden");
@@ -34,9 +36,17 @@ const onChooseShop = (me, type) => {
   chooseTypeButton.textContent = `my shop type: ${type}`;
 };
 
+// next button to change scene
+const onClickNext = (me) => {
+  if (!me.shopType) return;
+  onClickClose();
+  changeScene(scenes.quiz);
+};
+
 export const setupChooseTypeUI = (me) => {
-  chooseTypeButton.addEventListener("click", () => onClickChooseType(me));
+  chooseTypeButton.addEventListener("click", () => onOpenChooseType(me));
   closeButton.addEventListener("click", onClickClose);
+  nextButton.addEventListener("click", () => onClickNext(me));
 
   Object.values(shopTypes).forEach((type) => {
     const typeButton = document.createElement("button");

@@ -1,4 +1,8 @@
-import { bgColor, canvasDims } from "./utilities.js";
+import {
+  bgColor,
+  canvasDims,
+  // closeAllPopups
+} from "./utilities.js";
 import { addTexture } from "./game_scene/shop.js";
 import { changeScene, scenes } from "./main.js";
 
@@ -43,7 +47,9 @@ export function setup() {}
 // enter
 // called from changeScene() when this scene is entered
 // code that SHOULD rerun every time the scene is entered
-export function enter() {}
+export function enter() {
+  // closeAllPopups();
+}
 
 // update
 // called from the main draw() loop
@@ -63,6 +69,8 @@ export function draw() {
   stroke("black");
   textSize(30);
   text("start screen", canvasDims.width / 2, canvasDims.height / 2);
+  stroke("blue");
+  text("click to start", canvasDims.width / 2, canvasDims.height / 2 + 30);
   pop();
 }
 

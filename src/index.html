@@ -6,9 +6,12 @@
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="stylesheet" href="styles/main.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap"
+      rel="stylesheet"
+    />
 
     <script defer src="https://cdn.jsdelivr.net/npm/p5@1.9.1/lib/p5.js"></script>
     <script
@@ -19,23 +22,30 @@
     <script defer type="module" src="main.js"></script>
   </head>
   <body>
-    <div>
+    <div id="js-elements-container">
       <div id="top-container">
-        <img src="assets/Little-Dudes-Logo.png" alt="Little Dudes Logo" class="logo-image" id="logo" />
+        <img
+          src="assets/Little-Dudes-Logo.png"
+          alt="Little Dudes Logo"
+          class="logo-image"
+          id="logo"
+        />
         <div id="ui-container">
-          <button id="choose-type-button" class="ui-button">choose shop type</button>
-          <button id="quiz-button" class="ui-button">play quiz</button>
           <button id="upgrade-market-button" class="ui-button">market</button>
-          <button id="test-dude-button">test dude button</button>
-          <div id="my-info">
-            <div id="my-upgrades"></div>
-            <div id="my-money-godMode"></div>
+          <div id="god-mode-container" class="hidden">
+            <button id="choose-type-button">choose shop type</button>
+            <button id="quiz-button">play quiz</button>
+            <button id="test-dude-button">test dude button</button>
+            <div id="my-info">
+              <div id="my-upgrades"></div>
+              <div id="my-money-godMode"></div>
+            </div>
           </div>
         </div>
       </div>
       <div id="popup-container">
         <div id="quiz" class="hidden popupItem">
-          <button class="close-button" id="close-quiz">X</button>
+          <button class="close-button close-button-god-mode hidden" id="close-quiz">X</button>
           <div id="questions-screen">
             <h4 id="question"></h4>
             <div id="answers-container"></div>
@@ -44,13 +54,17 @@
           <div id="answers-screen" class="hidden">
             <h4>the answer...</h4>
             <div id="answer-revealed"></div>
+            <button id="next-exit-quiz-button">next</button>
           </div>
         </div>
         <div id="choose-type" class="hidden popupItem">
-          <button class="close-button" id="close-choose-type">X</button>
+          <button class="close-button close-button-god-mode hidden" id="close-choose-type">
+            X
+          </button>
           <div>Choose what type of shop you want!</div>
           <div>(please choose bakery)</div>
           <div id="type-choices"></div>
+          <button id="next-exit-choose-shop-button">next (can click after choose type)</button>
         </div>
         <div id="upgrade-market" class="popupItem hidden">
           <button class="close-button" id="close-upgrade-market">X</button>
@@ -58,13 +72,13 @@
             <h2>market</h2>
             <div id="my-money"></div>
           </div>
-          
+
           <!-- Tab Buttons -->
           <div class="tabs">
             <button class="tab-button active" data-tab="inventory">Inventory</button>
             <button class="tab-button" data-tab="shop-upgrades">Shop Upgrades</button>
           </div>
-        
+
           <!-- Tab Content -->
           <div class="tab-content" id="inventory-tab">
             <!-- <h4>inventory</h4> -->
@@ -75,7 +89,6 @@
             <div id="shop-upgrade-choices" class="market-choices"></div>
           </div>
         </div>
-        
       </div>
     </div>
   </body>

@@ -49,7 +49,6 @@ export const setupUpgradeMarketUI = (me) => {
   generateUpgradeMarket(me);
 };
 
-
 const handleBuyInventory = (me, idx, cost, ammountDiv) => {
   // check if can afford
   if (cost > me.coins) {
@@ -100,7 +99,7 @@ export const setInventory = (me) => {
 
     const itemImageContainer = document.createElement("div");
     itemImageContainer.classList.add("item");
-    
+
     // Image
     const img = document.createElement("img");
     img.src = `assets/bakery/items/${inventory.toLowerCase()}.png`; // normalize
@@ -109,12 +108,12 @@ export const setInventory = (me) => {
     img.onerror = () => {
       img.src = "assets/bakery/default.png"; // fallback if image not found
     };
-    
+
     // Label
     const label = document.createElement("span");
     label.textContent = inventory;
     label.classList.add("item-label");
-    
+
     itemImageContainer.appendChild(img);
     itemImageContainer.appendChild(label);
     itemDiv.append(itemImageContainer);
