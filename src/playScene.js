@@ -34,11 +34,7 @@ export function preload() {
   }
 
   for (const item of bakeryItems) {
-    let png = "png";
-    if (item === "bwcookie") {
-      png = "PNG";
-    }
-    itemImages[item] = loadImage(`./assets/bakery/items/${item}.${png}`);
+    itemImages[item] = loadImage(`./assets/bakery/items/${item}.PNG`);
   }
   for (const item of plantItems) {
     itemImages[item] = loadImage(`./assets/plant/items/${item}.PNG`);

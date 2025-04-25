@@ -102,7 +102,7 @@ export const setInventory = (me) => {
 
     // Image
     const img = document.createElement("img");
-    img.src = `assets/bakery/items/${inventory.toLowerCase()}.png`; // normalize
+    img.src = `assets/bakery/items/${inventory.toLowerCase()}.PNG`; // normalize
     img.alt = inventory;
     img.classList.add("item-image");
     img.onerror = () => {
