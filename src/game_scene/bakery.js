@@ -1,4 +1,4 @@
-import { modes, shelfColor, bakeryUpgradeImages } from "../utilities.js";
+import { modes, bakeryUpgradeImages } from "../utilities.js";
 import { drawInventory, drawShelves, drawBox, drawWindow } from "./shapes.js";
 
 export function drawBakery(x, y, level, upgrades, inventory) {
@@ -16,7 +16,7 @@ export function drawBakery(x, y, level, upgrades, inventory) {
   drawBox(x, y, shopW, shopH, shopL);
 
   // Draw middle elements
-  fill("red");
+  fill("tan");
   // rect(x + 50, y - 120, 20, 20);
 
   // Draw the front
@@ -55,7 +55,7 @@ function drawBakeryFront(x, y, shopW, shopH) {
   shelves = [...shelves, ...shelves2];
 
   // Text
-  fill(shelfColor.back);
+  fill("brown");
   text("B  A  K  E  R  Y", x + shopW / 2 - 40, y - shopH + 25);
 
   return shelves;

@@ -1,4 +1,4 @@
-import { modes, shelfColors } from "../utilities.js";
+import { modes, shelfColor } from "../utilities.js";
 import { drawInventory, drawShelves, drawBox, drawBoxInset } from "./shapes.js";
 
 export function drawBookShop(x, y, level, upgrades, inventory) {
@@ -31,21 +31,21 @@ function drawBookShopFront(x, y, shopWidth, shopHeight, shopLength) {
     shopWidth - sideWidth - 30,
     sideHeight + stairHeight / 2,
     10,
-    modes.bottomCorner
+    modes.BOTTOM_CORNER
   );
 
-  drawBoxInset(x + 10, y - stairHeight, sideWidth, sideHeight, sideDepth, modes.bottomCorner);
-  drawBox(x + 10 + sideWidth, y, sideWidth, stairHeight / 2, stairDepth, modes.backCorner);
+  drawBoxInset(x + 10, y - stairHeight, sideWidth, sideHeight, sideDepth, modes.BOTTOM_CORNER);
+  drawBox(x + 10 + sideWidth, y, sideWidth, stairHeight / 2, stairDepth, modes.BACK_CORNER);
   drawBox(
     x + 10 + sideWidth,
     y - stairHeight / 2,
     sideWidth,
     stairHeight / 2,
     stairDepth / 2,
-    modes.backCorner
+    modes.BACK_CORNER
   );
 
-  fill(shelfColors.back);
+  fill(shelfColor.back);
   text("B  O  O  K  S", x + shopWidth / 2 - 30, y - shopHeight + 25);
   return shelves;
 }

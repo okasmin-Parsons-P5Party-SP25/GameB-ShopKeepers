@@ -9,6 +9,7 @@ import {
   drawPlacementDot,
   purchaseDetectionRadius,
   bakeryUpgradeImages,
+  plantUpgradeImages,
   clearDudes,
   getInventoryStrings,
   dudesBuyAllInventory,
@@ -26,21 +27,26 @@ const upgradeMarketButton = document.getElementById("upgrade-market-button");
 export function preload() {
   // console.log("hi from playScene preload");
   for (const upgradeType of upgradeTypes) {
+    for (const imgName of Object.keys(plantUpgradeImages[upgradeType])) {
+      plantUpgradeImages[upgradeType][imgName] = loadImage(
+        `./assets/plant/upgrades/${upgradeType}/${imgName}.png`
+      );
+    }
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
       bakeryUpgradeImages[upgradeType][imgName] = loadImage(
-        `./assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
+        `./assets/bakery/upgrades/${upgradeType}/${imgName}.png`
       );
     }
   }
 
   for (const item of bakeryItems) {
-    itemImages[item] = loadImage(`./assets/bakery/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/bakery/items/${item}.png`);
   }
   for (const item of plantItems) {
-    itemImages[item] = loadImage(`./assets/plant/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/plant/items/${item}.png`);
   }
   for (const item of bookItems) {
-    itemImages[item] = loadImage(`./assets/books/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/books/items/${item}.png`);
   }
   preloadDudes();
 
@@ -104,7 +110,7 @@ export const drawShops = (guests) => {
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, ["decor"], inventory);
+    drawShop(x, y, shopType, 0, ["decor", "light"], { plant1: 3, plant2: 2, plant3: 3 });
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);

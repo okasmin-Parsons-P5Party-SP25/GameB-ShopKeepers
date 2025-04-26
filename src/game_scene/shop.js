@@ -1,9 +1,17 @@
 //     drawShop(i * 300, groundHeight, shopType, 0, [], { bread: 3, cookie: 2, croissant: 1 });
 
 import { drawBakery } from "./bakery.js";
-
+import { drawBookShop } from "./books.js";
+import { drawPlantShop } from "./plants.js";
+import { shopTypes } from "../utilities.js";
 export function drawShop(x, y, type, level, upgrades, inventory) {
-  drawBakery(x, y, level, upgrades, inventory);
+  if (type === shopTypes.plant) {
+    drawPlantShop(x, y, level, upgrades, inventory);
+  } else if (type === shopTypes.books) {
+    drawBookShop(x, y, level, upgrades, inventory);
+  } else {
+    drawBakery(x, y, level, upgrades, inventory);
+  }
 }
 
 export function addTexture(speckleTexture, textureImg) {
