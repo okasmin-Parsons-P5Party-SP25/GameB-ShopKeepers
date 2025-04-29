@@ -12,17 +12,19 @@ import {
   plantUpgradeImages,
   clearDudes,
   getInventoryStrings,
-  dudesBuyAllInventory,
   closeAllPopups,
+  checkDudesDone,
 } from "./utilities.js";
-import { me, shared, guests } from "./main.js";
+import { me, shared, guests, changeScene, scenes } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
 import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
+import { drawBigCreature } from "./game_scene/bigCreature.js";
 
 let textureImage;
 let speckleTextureImage;
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
+const littleDudesButton = document.getElementById("test-dude-button");
 
 export function preload() {
   // console.log("hi from playScene preload");
@@ -55,10 +57,13 @@ export function preload() {
 }
 
 export function enter() {
+  shared.dudesDone = false;
+
   closeAllPopups();
   upgradeMarketButton.style.display = "block";
-  console.log("me from playScene", me);
-  console.log("shared form playScene", shared);
+  littleDudesButton.style.display = "block";
+  // console.log("me from playScene", me);
+  // console.log("shared form playScene", shared);
   updateUI(me);
 
   const testDudeButton = document.getElementById("test-dude-button");
@@ -67,10 +72,20 @@ export function enter() {
 
 export function update() {
   updateUI(me);
+  if (frameCount % 20 === 0 && !shared.dudesDone) {
+    shared.dudesDone = checkDudesDone(guests);
+    if (shared.dudesDone === true) {
+      for (const guest of guests) {
+        clearDudes(guest);
+      }
+    }
+  }
 }
 
 export function leave() {
   upgradeMarketButton.style.display = "none";
+  littleDudesButton.style.display = "none";
+  closeAllPopups();
 }
 
 export function draw() {
@@ -79,25 +94,29 @@ export function draw() {
   drawShops(guests);
 
   addTexture(speckleTextureImage, textureImage);
+
+  if (shared.dudesDone === true) {
+    drawBigCreature();
+  }
 }
 
 const handleDudes = () => {
+  shared.dudesDone = false;
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
     const { x, y } = getShopPosition(i);
-    console.log({ x, y });
     clearDudes(guest);
     setUpDudes(guest, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
-    console.log(guest.dudes.length);
-    // TODO this is arbitrarily set to 5 seconds
-    setTimeout(() => {
-      dudesBuyAllInventory(guest);
-    }, 5000);
   }
 };
 
-export function mousePressed() {}
+export function mousePressed() {
+  if (shared.dudesDone === true) {
+    changeScene(scenes.quiz);
+    shared.dudesDone = false;
+  }
+}
 
 export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {
@@ -107,10 +126,12 @@ export const drawShops = (guests) => {
     const inventory = getInventoryStrings(guest);
 
     const shopType = guest.shopType;
+    const upgrades = guest.upgrades;
+    const level = guest.upgradeLevel;
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, ["decor", "light"], inventory);
+    drawShop(x, y, shopType, level, upgrades, inventory);
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);

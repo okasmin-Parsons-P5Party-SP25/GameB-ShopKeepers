@@ -64,7 +64,8 @@ function drawBakeryFront(x, y, shopW, shopH) {
 function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
   const decorImgSize = shopWidth * 1.5;
   const upgradeY = y - shopHeight - shopLength;
-  if (upgrades.includes("decor")) {
+  // decor
+  if (upgrades[1] === true) {
     for (const [name, img] of Object.entries(bakeryUpgradeImages.decor)) {
       if (name !== "roof" && name !== "menu") {
         image(img, x, upgradeY + 20, decorImgSize, decorImgSize);
@@ -85,8 +86,8 @@ function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
       decorImgSize
     );
   }
-
-  if (upgrades.includes("light")) {
+  // light
+  if (upgrades[0] === true) {
     blendMode(BLEND);
     image(bakeryUpgradeImages.light.signLight, x, upgradeY - 30, decorImgSize, decorImgSize);
     if ((frameCount * 0.1) % 4 < 2) {

@@ -6,9 +6,9 @@ const bottomheight = 60;
 export function drawPlantShop(x, y, level, upgrades, inventory) {
   let shopWidth, shopHeight, shopLength;
   let textShift = 0;
-  if (upgrades.length === 0) {
+  if (level === 0) {
     [shopWidth, shopHeight, shopLength] = [150, 180, 40];
-  } else if (upgrades.length === 1) {
+  } else if (level === 1) {
     [shopWidth, shopHeight, shopLength] = [180, 200, 60];
   } else {
     [shopWidth, shopHeight, shopLength] = [220, 220, 80];
@@ -44,7 +44,8 @@ export function drawPlantShop(x, y, level, upgrades, inventory) {
   let upgradeH;
   const upgradeW = shopWidth * 2.5;
   let upgradex, upgradey;
-  if (upgrades.includes("decor")) {
+  //decor
+  if (upgrades[1] === true) {
     for (const [name, img] of Object.entries(plantUpgradeImages.decor)) {
       upgradeH = (upgradeW * img.height) / img.width;
       upgradex = x - shopWidth / 2 - 20;
@@ -53,8 +54,9 @@ export function drawPlantShop(x, y, level, upgrades, inventory) {
     }
   }
   // console.log(upgradeH, upgradeW, upgradex, upgradey);
-  if (upgrades.includes("light")) {
-    let img = plantUpgradeImages.light.lightnormal;
+  //light
+  if (upgrades[0] === true) {
+    const img = plantUpgradeImages.light.lightnormal;
     upgradeH = (upgradeW * img.height) / img.width;
     upgradex = x - shopWidth / 2 - 20;
     upgradey = y - upgradeH + 20;
