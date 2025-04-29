@@ -18,6 +18,7 @@ export function setUpDudes(guest, shopX, shopY) {
     const startX = 0;
     const startY = (random() * height) / 2 + height / 2;
     const dude = new Dude(startX, startY, shopX, shopY, itemStrings[i], speed);
+    console.log(dude);
     guest.dudes.push(dude);
   }
 }

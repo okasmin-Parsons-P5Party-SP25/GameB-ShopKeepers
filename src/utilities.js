@@ -162,7 +162,7 @@ export const itemImages = {};
 export const dudeImages = [];
 export const bgColor = "#FBF9F4";
 
-const groundHeight = 150;
+const groundHeight = 250;
 const topOfGroundY = canvasDims.height - groundHeight;
 export const purchaseDetectionRadius = 100;
 // get x and y position of shop based on guest idx

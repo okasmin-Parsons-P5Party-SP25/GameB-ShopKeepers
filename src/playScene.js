@@ -89,7 +89,7 @@ const handleDudes = () => {
     console.log({ x, y });
     clearDudes(guest);
     setUpDudes(guest, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
-
+    console.log(guest.dudes.length);
     // TODO this is arbitrarily set to 5 seconds
     setTimeout(() => {
       dudesBuyAllInventory(guest);
@@ -110,7 +110,7 @@ export const drawShops = (guests) => {
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, ["decor", "light"], { plant1: 3, plant2: 2, plant3: 3 });
+    drawShop(x, y, shopType, 0, ["decor", "light"], inventory);
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);
@@ -131,6 +131,7 @@ export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
+    // console.log("drawing dudes", guest.dudes.length);
     drawDudes(guest);
   }
 };
