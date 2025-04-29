@@ -83,6 +83,7 @@ export function update() {
 export function leave() {
   upgradeMarketButton.style.display = "none";
   littleDudesButton.style.display = "none";
+  closeAllPopups();
 }
 
 export function draw() {
@@ -123,10 +124,11 @@ export const drawShops = (guests) => {
     const inventory = getInventoryStrings(guest);
 
     const shopType = guest.shopType;
+    const upgrades = guest.upgrades;
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, ["decor"], inventory);
+    drawShop(x, y, shopType, 0, upgrades, inventory);
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);

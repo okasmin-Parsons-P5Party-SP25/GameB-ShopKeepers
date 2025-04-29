@@ -175,7 +175,7 @@ const handleBuyUpgrade = (me, idx, cost, purchasedDiv) => {
 };
 
 const updatePurchasedText = (me, el, idx) => {
-  el.textContent = el.textContent + me.upgrades[idx] ? ": purchased" : " ";
+  el.textContent = el.textContent + (me.upgrades[idx] === true ? " purchased" : "");
 };
 
 const setUpgrades = (me) => {

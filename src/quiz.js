@@ -62,7 +62,7 @@ const onSubmit = (me, shared) => {
   revealedAnswerDiv.textContent = text;
 
   // increase win amount each time quiz is played
-  shared.quizCoins = shared.quizCoins * 1.2;
+  shared.quizCoins = shared.quizCoins * 2;
 };
 
 // open
