@@ -15,7 +15,7 @@ export function preloadDudes() {
 export function setUpDudes(guest, shopX, shopY) {
   const itemStrings = dudeGetAllInventory(guest);
   for (let i = 0; i < itemStrings.length; i++) {
-    const speed = random() * 3 + 0.5;
+    const speed = random() * 2 + 1.5;
     const startX = 0;
     const startY = (random() * height) / 2 + height / 2;
 

@@ -225,8 +225,8 @@ export const getInventoryStrings = (guest) => {
 // check if every dude is dead for each guest
 export const checkDudesDone = (guests) => {
   for (const guest of guests) {
-    // console.log(guest);
     const dudes = guest.dudes;
+    if (!dudes.length) return false;
     for (const dude of dudes) {
       if (dude.alive) return false;
     }

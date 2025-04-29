@@ -14,14 +14,16 @@ import {
   closeAllPopups,
   checkDudesDone,
 } from "./utilities.js";
-import { me, shared, guests } from "./main.js";
+import { me, shared, guests, changeScene, scenes } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
 import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
+import { drawBigCreature } from "./game_scene/bigCreature.js";
 
 let textureImage;
 let speckleTextureImage;
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
+const littleDudesButton = document.getElementById("test-dude-button");
 
 export function preload() {
   // console.log("hi from playScene preload");
@@ -53,8 +55,11 @@ export function preload() {
 }
 
 export function enter() {
+  shared.dudesDone = false;
+
   closeAllPopups();
   upgradeMarketButton.style.display = "block";
+  littleDudesButton.style.display = "block";
   // console.log("me from playScene", me);
   // console.log("shared form playScene", shared);
   updateUI(me);
@@ -68,13 +73,16 @@ export function update() {
   if (frameCount % 20 === 0 && !shared.dudesDone) {
     shared.dudesDone = checkDudesDone(guests);
     if (shared.dudesDone === true) {
-      console.log({ done: shared.dudesDone });
+      for (const guest of guests) {
+        clearDudes(guest);
+      }
     }
   }
 }
 
 export function leave() {
   upgradeMarketButton.style.display = "none";
+  littleDudesButton.style.display = "none";
 }
 
 export function draw() {
@@ -83,6 +91,10 @@ export function draw() {
   drawShops(guests);
 
   addTexture(speckleTextureImage, textureImage);
+
+  if (shared.dudesDone === true) {
+    drawBigCreature();
+  }
 }
 
 const handleDudes = () => {
@@ -96,7 +108,12 @@ const handleDudes = () => {
   }
 };
 
-export function mousePressed() {}
+export function mousePressed() {
+  if (shared.dudesDone === true) {
+    changeScene(scenes.quiz);
+    shared.dudesDone = false;
+  }
+}
 
 export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {

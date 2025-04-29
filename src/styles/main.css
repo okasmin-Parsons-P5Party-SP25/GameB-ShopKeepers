@@ -309,3 +309,8 @@ h4 {
 #upgrade-market-button {
   display: none;
 }
+
+/* this becomes visible in playScene */
+#test-dude-button {
+  display: none;
+}
