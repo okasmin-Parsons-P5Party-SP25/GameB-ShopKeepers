@@ -1,4 +1,5 @@
 // export const godMode = false;
+import { updateAmountText } from "./upgradeMarket.js";
 
 /// forward event handlers to the current scene, if they handle them
 export const p5Events = [
@@ -199,6 +200,9 @@ export const dudeBuySingleItem = (guest, itemIdx) => {
   // add money to guest for that item
   const itemCost = getInventoryCost(itemIdx, guest);
   guest.coins += itemCost.sell;
+
+  // update text in upgrade market
+  updateAmountText(guest, itemIdx);
 };
 
 // call after dudes finished

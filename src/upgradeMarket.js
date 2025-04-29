@@ -49,7 +49,7 @@ export const setupUpgradeMarketUI = (me) => {
   generateUpgradeMarket(me);
 };
 
-const handleBuyInventory = (me, idx, cost, ammountDiv) => {
+const handleBuyInventory = (me, idx, cost) => {
   // check if can afford
   if (cost > me.coins) {
     // TODO make this visible in UI somehow
@@ -61,12 +61,15 @@ const handleBuyInventory = (me, idx, cost, ammountDiv) => {
   // deduct coins
   me.coins -= cost;
 
-  // make sure UI reflects new ammount
-  updateAmountText(me, ammountDiv, idx);
+  // make sure market UI reflects new ammount
+  updateAmountText(me, idx);
 };
 
-const updateAmountText = (me, el, idx) => {
-  el.textContent = `supply: ${me.inventory[idx]}`;
+export const updateAmountText = (me, idx) => {
+  const el = document.getElementById(`market-supply-${idx}`);
+  if (el) {
+    el.textContent = `supply: ${me.inventory[idx]}`;
+  }
 };
 
 const updateSellText = (me, idx, el = undefined, sell = undefined) => {
@@ -132,8 +135,9 @@ export const setInventory = (me) => {
     itemDiv.append(sellDiv);
 
     const ammountDiv = document.createElement("div");
+    ammountDiv.id = `market-supply-${idx}`;
     ammountDiv.classList.add("supply");
-    updateAmountText(me, ammountDiv, idx);
+    ammountDiv.textContent = `supply: ${me.inventory[idx]}`;
     itemDiv.append(ammountDiv);
 
     button.append(itemDiv);
@@ -171,7 +175,7 @@ const handleBuyUpgrade = (me, idx, cost, purchasedDiv) => {
 };
 
 const updatePurchasedText = (me, el, idx) => {
-  el.textContent = me.upgrades[idx] ? "already got this" : " ";
+  el.textContent = el.textContent + me.upgrades[idx] ? ": purchased" : " ";
 };
 
 const setUpgrades = (me) => {
