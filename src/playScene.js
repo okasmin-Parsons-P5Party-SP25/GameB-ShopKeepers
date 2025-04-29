@@ -11,8 +11,8 @@ import {
   bakeryUpgradeImages,
   clearDudes,
   getInventoryStrings,
-  dudesBuyAllInventory,
   closeAllPopups,
+  checkDudesDone,
 } from "./utilities.js";
 import { me, shared, guests } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
@@ -55,8 +55,8 @@ export function preload() {
 export function enter() {
   closeAllPopups();
   upgradeMarketButton.style.display = "block";
-  console.log("me from playScene", me);
-  console.log("shared form playScene", shared);
+  // console.log("me from playScene", me);
+  // console.log("shared form playScene", shared);
   updateUI(me);
 
   const testDudeButton = document.getElementById("test-dude-button");
@@ -65,6 +65,12 @@ export function enter() {
 
 export function update() {
   updateUI(me);
+  if (frameCount % 20 === 0 && !shared.dudesDone) {
+    shared.dudesDone = checkDudesDone(guests);
+    if (shared.dudesDone === true) {
+      console.log({ done: shared.dudesDone });
+    }
+  }
 }
 
 export function leave() {
@@ -80,18 +86,13 @@ export function draw() {
 }
 
 const handleDudes = () => {
+  shared.dudesDone = false;
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
     const { x, y } = getShopPosition(i);
-    console.log({ x, y });
     clearDudes(guest);
     setUpDudes(guest, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
-
-    // TODO this is arbitrarily set to 5 seconds
-    setTimeout(() => {
-      dudesBuyAllInventory(guest);
-    }, 5000);
   }
 };
 
