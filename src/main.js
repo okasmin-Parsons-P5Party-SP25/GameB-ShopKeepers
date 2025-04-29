@@ -13,6 +13,7 @@ import {
   // shopTypes,
   //  closeAllPopups
 } from "./utilities.js";
+import { drawPlantShop } from "./game_scene/plants.js";
 
 export let shared;
 export let guests;

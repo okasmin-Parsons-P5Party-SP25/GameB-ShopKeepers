@@ -56,6 +56,7 @@ function preload() {
   itemImages["croissant"] = loadImage("./images/bakery_items/croissant.png");
   itemImages["pie"] = loadImage("./images/bakery_items/pie.png");
   itemImages["loaf"] = loadImage("./images/bakery_items/loaf.png");
+  itemImages["book"] = loadImage("./images/books_items/book.png");
 
   for (const upgradeType of Object.keys(bakeryUpgradeImages)) {
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
@@ -80,16 +81,17 @@ function draw() {
   noStroke();
   const y = canvasHeight / 2 + 100;
 
-  drawBakery(20, y, 1, [], { cookie: 5, cake: 2, croissant: 3 });
-  drawBakery(230, y, 2, ["light"], { bread: 4, pie: 2 });
-  drawBakery(500, y, 3, ["light", "decor"], {
-    cookie: 5,
-    cake: 5,
-    croissant: 3,
-    loaf: 5,
-    pie: 1,
-    bread: 3,
-  });
+  drawBookShop(20, y, 2, ["light"], {});
+  drawBookShop(300, y, 2, ["light", "decor"], { book: 5 });
+
+  // drawBakery(500, y, 3, ["light", "decor"], {
+  //   cookie: 5,
+  //   cake: 5,
+  //   croissant: 3,
+  //   loaf: 5,
+  //   pie: 1,
+  //   bread: 3,
+  // });
   push();
 
   addTexture();
@@ -142,7 +144,19 @@ function addFlecks() {
   pop();
 }
 
-function drawBookShop(x, y, shopWidth, shopHeight, shopLength) {
+function drawBookShop(x, y, level, upgrades, inventory) {
+  let shopWidth, shopHeight, shopLength;
+  if (upgrades.length === 0) {
+    [shopWidth, shopHeight, shopLength] = [150, 180, 40];
+  } else if (upgrades.length === 1) {
+    [shopWidth, shopHeight, shopLength] = [180, 200, 60];
+  } else {
+    [shopWidth, shopHeight, shopLength] = [220, 220, 80];
+  }
+  const shelves = bookShop(x, y, shopWidth, shopHeight, shopLength);
+  drawInventory(shelves, inventory);
+}
+function bookShop(x, y, shopWidth, shopHeight, shopLength) {
   const stairHeight = 40;
   const stairDepth = 20;
   const sideWidth = shopWidth / 2;
@@ -151,9 +165,9 @@ function drawBookShop(x, y, shopWidth, shopHeight, shopLength) {
 
   drawBox(x, y, shopWidth, shopHeight, shopLength);
 
-  drawShelves(
+  const shelves = drawShelves(
     x + sideWidth + 20,
-    y - sideHeight / 2,
+    y - sideHeight / 2 - 10,
     6,
     1,
     5,
@@ -176,6 +190,7 @@ function drawBookShop(x, y, shopWidth, shopHeight, shopLength) {
 
   fill(shelfColors.back);
   text("B  O  O  K  S", x + shopWidth / 2 - 30, y - shopHeight + 25);
+  return shelves;
 }
 
 function drawBakery(x, y, level, upgrades, inventory) {

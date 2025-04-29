@@ -9,6 +9,7 @@ import {
   drawPlacementDot,
   purchaseDetectionRadius,
   bakeryUpgradeImages,
+  plantUpgradeImages,
   clearDudes,
   getInventoryStrings,
   closeAllPopups,
@@ -28,25 +29,26 @@ const littleDudesButton = document.getElementById("test-dude-button");
 export function preload() {
   // console.log("hi from playScene preload");
   for (const upgradeType of upgradeTypes) {
+    for (const imgName of Object.keys(plantUpgradeImages[upgradeType])) {
+      plantUpgradeImages[upgradeType][imgName] = loadImage(
+        `./assets/plant/upgrades/${upgradeType}/${imgName}.png`
+      );
+    }
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
       bakeryUpgradeImages[upgradeType][imgName] = loadImage(
-        `./assets/bakery/upgrades/${upgradeType}/${imgName}.PNG`
+        `./assets/bakery/upgrades/${upgradeType}/${imgName}.png`
       );
     }
   }
 
   for (const item of bakeryItems) {
-    let png = "png";
-    if (item === "bwcookie") {
-      png = "PNG";
-    }
-    itemImages[item] = loadImage(`./assets/bakery/items/${item}.${png}`);
+    itemImages[item] = loadImage(`./assets/bakery/items/${item}.png`);
   }
   for (const item of plantItems) {
-    itemImages[item] = loadImage(`./assets/plant/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/plant/items/${item}.png`);
   }
   for (const item of bookItems) {
-    itemImages[item] = loadImage(`./assets/books/items/${item}.PNG`);
+    itemImages[item] = loadImage(`./assets/books/items/${item}.png`);
   }
   preloadDudes();
 
@@ -125,10 +127,11 @@ export const drawShops = (guests) => {
 
     const shopType = guest.shopType;
     const upgrades = guest.upgrades;
+    const level = guest.upgradeLevel;
 
     const { x, y } = getShopPosition(i);
 
-    drawShop(x, y, shopType, 0, upgrades, inventory);
+    drawShop(x, y, shopType, level, upgrades, inventory);
     if (drawPlacementDot) {
       fill("red");
       ellipse(x, y, 5, 5);
@@ -149,6 +152,7 @@ export const drawShops = (guests) => {
   for (let i = 0; i < guests.length; i++) {
     const guest = guests[i];
     if (!guest.shopType) continue;
+    // console.log("drawing dudes", guest.dudes.length);
     drawDudes(guest);
   }
 };

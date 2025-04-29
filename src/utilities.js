@@ -62,9 +62,9 @@ export const plantItems = Object.values(plantInventoryTypes);
 // index of item refers to its level (this determine cost)
 // and stores specific inventory type for that store
 export const inventoryTypes = {
-  plant: plantInventoryTypes,
+  plant: [...plantItems],
   bakery: [bakeryInventoryTypes.bread, bakeryInventoryTypes.croissant, bakeryInventoryTypes.cookie],
-  books: bookInventoryTypes,
+  books: [...bookItems],
 };
 
 // inventory items are sold for more as upgrade shop
@@ -103,6 +103,12 @@ export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgrade
 export const bakeryUpgradeImages = {
   decor: { barrels: "", menu: "", sideshelf: "", roof: "" },
   light: { sign: "", signLight: "" },
+  sound: {},
+};
+
+export const plantUpgradeImages = {
+  decor: { backwall: "", decor: "", roof: "" },
+  light: { lightadd: "", lightnormal: "", lightshadow: "" },
   sound: {},
 };
 
@@ -157,7 +163,7 @@ export const itemImages = {};
 export const dudeImages = [];
 export const bgColor = "#FBF9F4";
 
-const groundHeight = 150;
+const groundHeight = 250;
 const topOfGroundY = canvasDims.height - groundHeight;
 export const purchaseDetectionRadius = 100;
 // get x and y position of shop based on guest idx
