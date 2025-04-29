@@ -49,7 +49,7 @@ window.preload = function () {
 };
 
 window.setup = function () {
-  if (godMode === true) {
+  if (godMode === false) {
     me.coins = 1000;
     me.shopType = shopTypes.bakery;
     me.inventory = [5, 5, 5];

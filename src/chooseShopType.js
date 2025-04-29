@@ -39,11 +39,31 @@ export const setupChooseTypeUI = (me) => {
   closeButton.addEventListener("click", onClickClose);
 
   Object.values(shopTypes).forEach((type) => {
+    // Create container for each shop type option
+    const optionContainer = document.createElement("div");
+    optionContainer.className = "shop-type-option";
+
+    // Create and add the label
+    const label = document.createElement("div");
+    label.className = "shop-type-label";
+    label.textContent = type.toUpperCase();
+    optionContainer.appendChild(label);
+
+    // Create and add the button
     const typeButton = document.createElement("button");
-    typeButton.textContent = type.toUpperCase();
+    typeButton.setAttribute("data-type", type);
+
+    // Special handling for bakery button
+    if (type === "bakery") {
+      const bakeryImage = document.createElement("img");
+      bakeryImage.src = "/assets/bakery/items/bwcookie.PNG";
+      bakeryImage.alt = "BAKERY";
+      typeButton.appendChild(bakeryImage);
+    }
 
     typeButton.addEventListener("click", () => onChooseShop(me, type));
 
-    typesDiv.appendChild(typeButton);
+    optionContainer.appendChild(typeButton);
+    typesDiv.appendChild(optionContainer);
   });
 };
