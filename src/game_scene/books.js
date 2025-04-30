@@ -3,9 +3,9 @@ import { drawInventory, drawShelves, drawBox, drawBoxInset } from "./shapes.js";
 
 export function drawBookShop(x, y, level, upgrades, inventory) {
   let shopWidth, shopHeight, shopLength;
-  if (upgrades.length === 0) {
+  if (level === 0) {
     [shopWidth, shopHeight, shopLength] = [150, 180, 40];
-  } else if (upgrades.length === 1) {
+  } else if (level === 1) {
     [shopWidth, shopHeight, shopLength] = [180, 200, 60];
   } else {
     [shopWidth, shopHeight, shopLength] = [220, 220, 80];

@@ -1,4 +1,5 @@
 // export const godMode = false;
+import { updateAmountText } from "./upgradeMarket.js";
 
 /// forward event handlers to the current scene, if they handle them
 export const p5Events = [
@@ -177,26 +178,25 @@ export const dudeGetAllInventory = (guest) => {
   if (!guest.shopType || !guest.inventory) return;
 
   const itemStrings = guest.inventory.flatMap((num, idx) =>
-    Array(num).fill(inventoryTypes[guest.shopType][idx])
+    Array(num).fill({ itemString: inventoryTypes[guest.shopType][idx], itemIdx: idx })
   );
 
   return itemStrings;
 };
 
-export const dudesBuyAllInventory = (guest) => {
-  if (!guest.shopType || !guest.inventory) return;
-  let totalCoins = 0;
-  for (let i = 0; i < guest.inventory.length; i++) {
-    const numItems = guest.inventory[i];
-    const itemCost = getInventoryCost(i, guest).sell;
-    totalCoins += numItems * itemCost;
-  }
+// export const dudesBuyAllInventory = (guest) => {
+//   if (!guest.shopType || !guest.inventory) return;
+//   let totalCoins = 0;
+//   for (let i = 0; i < guest.inventory.length; i++) {
+//     const numItems = guest.inventory[i];
+//     const itemCost = getInventoryCost(i, guest).sell;
+//     totalCoins += numItems * itemCost;
+//   }
 
-  guest.inventory = [0, 0, 0];
-  guest.coins += totalCoins;
-};
+//   guest.inventory = [0, 0, 0];
+//   guest.coins += totalCoins;
+// };
 
-// TODO may use in future if want to buy items one by one
 export const dudeBuySingleItem = (guest, itemIdx) => {
   if (!guest.shopType || !guest.inventory) return;
 
@@ -206,6 +206,9 @@ export const dudeBuySingleItem = (guest, itemIdx) => {
   // add money to guest for that item
   const itemCost = getInventoryCost(itemIdx, guest);
   guest.coins += itemCost.sell;
+
+  // update text in upgrade market
+  updateAmountText(guest, itemIdx);
 };
 
 // call after dudes finished
@@ -220,9 +223,6 @@ export const getInventoryStrings = (guest) => {
   if (!guest.shopType) return;
   const { shopType, inventory } = guest;
 
-  // format like this:
-  // { bread: 3, cookie: 2, croissant: 1 }
-
   const inventoryObj = {};
 
   for (let i = 0; i < inventory.length; i++) {
@@ -230,4 +230,16 @@ export const getInventoryStrings = (guest) => {
     inventoryObj[itemString] = inventory[i];
   }
   return inventoryObj;
+};
+
+// check if every dude is dead for each guest
+export const checkDudesDone = (guests) => {
+  for (const guest of guests) {
+    const dudes = guest.dudes;
+    if (!dudes.length) return false;
+    for (const dude of dudes) {
+      if (dude.alive) return false;
+    }
+  }
+  return true;
 };

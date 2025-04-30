@@ -33,7 +33,8 @@ window.preload = function () {
   partyConnect("wss://demoserver.p5party.org", "shop_keepers_main");
 
   shared = partyLoadShared("shared", {
-    quizCoins: 100,
+    quizCoins: 50,
+    dudesDone: false, //true when dudes have bought everything from every guest
   });
 
   me = partyLoadMyShared({
@@ -117,5 +118,7 @@ const toggleGodMode = () => {
   godModeUIContainer.classList.toggle("hidden");
 
   const godModeOn = !godModeUIContainer.classList.contains("hidden");
-  godModeCloseButtons.style.display = godModeOn ? "block" : "none";
+  if (godModeCloseButtons.style) {
+    godModeCloseButtons.style.display = godModeOn ? "block" : "none";
+  }
 };
