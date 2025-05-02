@@ -14,8 +14,10 @@ import {
   getInventoryStrings,
   closeAllPopups,
   checkDudesDone,
+  myDudeStates,
+  updateUI,
 } from "./utilities.js";
-import { me, shared, guests, changeScene, scenes } from "./main.js";
+import { me, guests, changeScene, scenes } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
 import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
 import { drawBigCreature } from "./game_scene/bigCreature.js";
@@ -28,7 +30,6 @@ const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const littleDudesButton = document.getElementById("test-dude-button");
 
 export function preload() {
-  // console.log("hi from playScene preload");
   for (const upgradeType of upgradeTypes) {
     for (const imgName of Object.keys(plantUpgradeImages[upgradeType])) {
       plantUpgradeImages[upgradeType][imgName] = loadImage(
@@ -60,32 +61,28 @@ export function preload() {
 export function enter() {
   logoImage.style.display = "block";
 
-  shared.dudesDone = false;
-
+  me.dudesState = myDudeStates.none;
   closeAllPopups();
   upgradeMarketButton.style.display = "block";
   littleDudesButton.style.display = "block";
-  // console.log("me from playScene", me);
-  // console.log("shared form playScene", shared);
   updateUI(me);
 
-  const testDudeButton = document.getElementById("test-dude-button");
-  testDudeButton.addEventListener("click", handleDudes);
+  littleDudesButton.addEventListener("click", startDudes);
 }
 
 export function update() {
   updateUI(me);
-  if (frameCount % 20 === 0 && !shared.dudesDone) {
-    shared.dudesDone = checkDudesDone(guests);
-    if (shared.dudesDone === true) {
-      for (const guest of guests) {
-        clearDudes(guest);
-      }
+
+  if (me.dudesState === myDudeStates.started) {
+    if (checkDudesDone(me)) {
+      me.dudesState = myDudeStates.finished;
+      clearDudes(me);
     }
   }
 }
 
 export function leave() {
+  me.dudesState = myDudeStates.none;
   upgradeMarketButton.style.display = "none";
   littleDudesButton.style.display = "none";
   closeAllPopups();
@@ -95,29 +92,45 @@ export function draw() {
   background(bgColor);
 
   drawShops(guests);
+  drawDudes(me);
 
   addTexture(speckleTextureImage, textureImage);
 
-  if (shared.dudesDone === true) {
+  if (me.dudesState === myDudeStates.finished) {
     drawBigCreature();
   }
 }
 
-const handleDudes = () => {
-  shared.dudesDone = false;
+const startDudes = () => {
+  //set me dudes state to started
+  me.dudesState = myDudeStates.started;
+
+  //get my index in guests list
+  let myidx = undefined;
+
   for (let i = 0; i < guests.length; i++) {
-    const guest = guests[i];
-    if (!guest.shopType) continue;
-    const { x, y } = getShopPosition(i);
-    clearDudes(guest);
-    setUpDudes(guest, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
+    if (guests[i] === me) {
+      myidx = i;
+      break;
+    }
   }
+
+  if (myidx === undefined) return;
+
+  //get my shop position
+  const { x, y } = getShopPosition(myidx);
+
+  // make sure I don't have any dudes from last time
+  clearDudes(me);
+
+  // setup new dudes
+  setUpDudes(me, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
 };
 
 export function mousePressed() {
-  if (shared.dudesDone === true) {
+  if (me.dudesState === myDudeStates.finished) {
+    me.dudesState = myDudeStates.none;
     changeScene(scenes.quiz);
-    shared.dudesDone = false;
   }
 }
 
@@ -150,33 +163,5 @@ export const drawShops = (guests) => {
       );
       pop();
     }
-  }
-
-  for (let i = 0; i < guests.length; i++) {
-    const guest = guests[i];
-    if (!guest.shopType) continue;
-    // console.log("drawing dudes", guest.dudes.length);
-    drawDudes(guest);
-  }
-};
-
-export const updateUI = (me) => {
-  const myInventoryDiv = document.getElementById("my-upgrades");
-  myInventoryDiv.textContent = `
-  my upgrade level: ${me.upgradeLevel} | 
-  ${upgradeTypes[0]}: ${me.upgrades[0]} |
-   ${upgradeTypes[1]}: ${me.upgrades[1]} |
-    ${upgradeTypes[2]}: ${me.upgrades[2]} |
-    my inventory: ${me.inventory}
-  `;
-
-  const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
-  if (myMoneyGodModeDiv) {
-    myMoneyGodModeDiv.textContent = `${me.coins} 🪙`;
-  }
-
-  const myMoneyDiv = document.getElementById("my-money");
-  if (myMoneyDiv) {
-    myMoneyDiv.textContent = `${me.coins} 🪙`;
   }
 };
