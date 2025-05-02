@@ -19,19 +19,23 @@ h1 {
 }
 
 button {
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Courier New", Courier, monospace;
   font-weight: medium;
   z-index: 100;
   margin: 12px;
   min-height: 30px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   outline: none;
   box-shadow: none;
-  text-transform: uppercase;
 }
 
 button:hover {
-  background-color: #e5e1d5;
+  /* background-color: #e5e1d5; */
+  font-weight: bold;
   color: black;
 }
 
@@ -61,7 +65,7 @@ button:hover {
   #answers-container {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 75;
     align-items: center;
   }
 
@@ -294,6 +298,7 @@ canvas {
 
 .market-choice-button {
   background-color: #f6f4e7;
+
   width: 20%;
   aspect-ratio: 1 / 1; /* height = width */
   font-size: 20px;
@@ -321,11 +326,15 @@ export const shelfColor = {
 */
 
 .ui-button {
-  width: 12%;
-  background-color: #e8d7bb;
+  width: fit-content;
+  min-width: 80px;
+  display: flex;
+  min-height: 80px;
+  justify-content: flex-end;
+  align-items: center;
   background-color: #f5f1e7;
-  background-image: url("../assets/textures/cardboard-texture.jpg"),
-    url("../assets/textures/white-paper-texture.jpg");
+  /* background-image: url("../assets/textures/cardboard-texture.jpg"),
+    url("../assets/textures/white-paper-texture.jpg"); */
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
@@ -444,62 +453,36 @@ h4 {
 
 /* this becomes visible in playScene */
 #upgrade-market-button {
+  background-color: inherit;
   display: none;
+}
+.ui-button-icon {
+  width: 100%;
+  height: 80%;
+
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#upgrade-market-button .ui-button-icon {
+  background-image: url("../assets/icons/market_icon.png");
+}
+#upgrade-market-button:hover .ui-button-icon {
+  background-image: url("../assets/icons/market_icon_hover.png");
 }
 
 /* this becomes visible in playScene */
 #test-dude-button {
+  background-color: inherit;
+  width: 40px;
+  height: 100px;
   display: none;
 }
 
-/* Splash screen container */
-#splash-animation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw; /* same as 100% here, but more explicit */
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  /* background-color: #000; */
-  overflow: hidden;
+#test-dude-button .ui-button-icon {
+  background-image: url("../assets/icons/unleash_dudes_icon.png");
 }
-
-/* Optional SVG fallback scaling */
-#splash-animation svg {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-/* Start button styling */
-.start-button {
-  position: absolute;
-  bottom: 50px;
-  z-index: 1001;
-  padding: 15px 30px;
-  font-size: 1rem;
-  background-color: white;
-  color: black;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: sans-serif;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease;
-  display: none; /* show once lottie loaded */
-}
-
-.start-button:hover {
-  background-color: #eee;
-}
-
-/* Applied after Lottie animation is loaded */
-.splash-animation-svg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: scale(1.2);
-  transform-origin: center center;
+#test-dude-button:hover .ui-button-icon {
+  background-image: url("../assets/icons/unleash_dudes_icon_hover.png");
 }

@@ -95,21 +95,27 @@ export const getInventoryCost = (idx, me) => {
 export const upgradeChoices = {
   light: "light",
   decor: "decor",
-  sound: "sound",
+  pet: "pet",
 };
 
 // index of item refers to its level
-export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgradeChoices.sound];
+export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgradeChoices.pet];
 export const bakeryUpgradeImages = {
   decor: { barrels: "", menu: "", sideshelf: "", roof: "" },
   light: { sign: "", signLight: "" },
-  sound: {},
+  pet: { cat1: "", cat2: "", cat3: "" },
 };
 
 export const plantUpgradeImages = {
   decor: { backwall: "", decor: "", roof: "" },
   light: { lightadd: "", lightnormal: "", lightshadow: "" },
-  sound: {},
+  pet: { bee1: "", bee2: "" },
+};
+
+export const bookUpgradeImages = {
+  decor: { outdoor: "", door: "", roof: "", sidetree: "", window: "" },
+  light: { lightadd: "", lightnormal: "" },
+  pet: { bird1: "", bird2: "", bird3: "" },
 };
 
 export const getUpgradeCost = (idx) => {

@@ -64,6 +64,25 @@ function drawBakeryFront(x, y, shopW, shopH) {
 function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
   const decorImgSize = shopWidth * 1.5;
   const upgradeY = y - shopHeight - shopLength;
+  if (upgrades[2]) {
+    let imgNum = 1;
+    if (frameCount % 40 > 30) {
+      imgNum = 2;
+    } else if (frameCount % 40 > 20) {
+      imgNum = 3;
+    } else if (frameCount % 40 > 10) {
+      imgNum = 2;
+    }
+
+    imageMode(CENTER);
+    image(
+      bakeryUpgradeImages.pet[`cat${imgNum}`],
+      x + shopWidth,
+      y - 10,
+      decorImgSize / 2,
+      decorImgSize / 2
+    );
+  }
   // decor
   if (upgrades[1] === true) {
     for (const [name, img] of Object.entries(bakeryUpgradeImages.decor)) {

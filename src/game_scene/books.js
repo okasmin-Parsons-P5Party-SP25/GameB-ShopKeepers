@@ -1,4 +1,4 @@
-import { modes, shelfColor } from "../utilities.js";
+import { modes, bookUpgradeImages, angle } from "../utilities.js";
 import { drawInventory, drawShelves, drawBox, drawBoxInset } from "./shapes.js";
 
 export function drawBookShop(x, y, level, upgrades, inventory) {
@@ -11,11 +11,57 @@ export function drawBookShop(x, y, level, upgrades, inventory) {
     [shopWidth, shopHeight, shopLength] = [220, 220, 80];
   }
   //draw back
+  const scaleVal = 1.7;
+  const decorX = x + cos(angle) * scaleVal * shopLength + 50;
+  const decorY = y - cos(angle) * scaleVal * shopLength - 50;
+  const decorW = shopWidth * scaleVal;
+  push();
+  imageMode(CENTER);
   drawBox(x, y, shopWidth, shopHeight, shopLength);
-  const shelves = drawBookShopFront(x, y, shopWidth, shopHeight, shopLength);
+  if (upgrades[0]) {
+    //decor
+    image(bookUpgradeImages.decor.sidetree, decorX - 20, decorY, decorW, decorW);
+  }
+  const shelves = drawBookShopFront(x, y, shopWidth, shopHeight);
+  push();
+  translate(0, -10);
   drawInventory(shelves, inventory);
+  pop();
+
+  if (upgrades[0]) {
+    //decor
+    image(bookUpgradeImages.decor.door, decorX, decorY, decorW, decorW);
+    image(bookUpgradeImages.decor.outdoor, decorX, decorY, decorW, decorW);
+    image(bookUpgradeImages.decor.window, decorX, decorY, decorW, decorW);
+    image(bookUpgradeImages.decor.roof, decorX, decorY, decorW, decorW);
+  }
+  if (upgrades[1]) {
+    //lights
+    blendMode(BLEND);
+
+    image(bookUpgradeImages.light.lightnormal, decorX, decorY, decorW, decorW);
+    if (frameCount % 100 > 50) {
+      push();
+      blendMode(ADD);
+      image(bookUpgradeImages.light.lightadd, decorX, decorY, decorW, decorW);
+      pop();
+    }
+  }
+  if (upgrades[2]) {
+    //pet
+    let imgNum = 1;
+    if (frameCount % 50 > 40) {
+      imgNum = 2;
+    } else if (frameCount % 50 > 30) {
+      imgNum = 3;
+    } else if (frameCount % 50 > 20) {
+      imgNum = 2;
+    }
+    image(bookUpgradeImages.pet[`bird${imgNum}`], x + 50, y - shopHeight, 100, 100);
+    pop();
+  }
 }
-function drawBookShopFront(x, y, shopWidth, shopHeight, shopLength) {
+function drawBookShopFront(x, y, shopWidth, shopHeight) {
   const stairHeight = 40;
   const stairDepth = 20;
   const sideWidth = shopWidth / 2;
@@ -25,7 +71,7 @@ function drawBookShopFront(x, y, shopWidth, shopHeight, shopLength) {
   const shelves = drawShelves(
     x + sideWidth + 20,
     y - sideHeight / 2 - 10,
-    6,
+    4,
     1,
     5,
     shopWidth - sideWidth - 30,
@@ -45,7 +91,7 @@ function drawBookShopFront(x, y, shopWidth, shopHeight, shopLength) {
     modes.BACK_CORNER
   );
 
-  fill(shelfColor.back);
+  fill("tan");
   text("B  O  O  K  S", x + shopWidth / 2 - 30, y - shopHeight + 25);
   return shelves;
 }

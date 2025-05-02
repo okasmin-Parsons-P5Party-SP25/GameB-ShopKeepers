@@ -10,6 +10,7 @@ import {
   purchaseDetectionRadius,
   bakeryUpgradeImages,
   plantUpgradeImages,
+  bookUpgradeImages,
   clearDudes,
   getInventoryStrings,
   closeAllPopups,
@@ -33,6 +34,11 @@ export function preload() {
     for (const imgName of Object.keys(plantUpgradeImages[upgradeType])) {
       plantUpgradeImages[upgradeType][imgName] = loadImage(
         `./assets/plant/upgrades/${upgradeType}/${imgName}.png`
+      );
+    }
+    for (const imgName of Object.keys(bookUpgradeImages[upgradeType])) {
+      bookUpgradeImages[upgradeType][imgName] = loadImage(
+        `./assets/books/upgrades/${upgradeType}/${imgName}.png`
       );
     }
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {

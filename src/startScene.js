@@ -2,7 +2,7 @@
 import { bgColor } from "./utilities.js";
 import { addTexture } from "./game_scene/shop.js";
 import { changeScene, scenes } from "./main.js";
-
+import { drawPlantShop } from "./game_scene/plants.js";
 let speckleTextureImage;
 let textureImage;
 let animation;
@@ -56,6 +56,7 @@ export function update() {}
 
 export function draw() {
   background(bgColor);
+  // drawPlantShop(200, 700, 2, [true, true, true], {});
   addTexture(speckleTextureImage, textureImage);
 }
 
