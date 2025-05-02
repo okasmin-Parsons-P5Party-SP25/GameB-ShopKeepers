@@ -133,7 +133,7 @@ const generateQuiz = async () => {
  */
 
 export const setupQuizUI = (me, shared) => {
-  quizButton.addEventListener("click", onOpenQuiz);
+  quizButton.addEventListener("click", () => changeScene(scenes.quiz));
   closeButton.addEventListener("click", onClickClose);
   nextButton.addEventListener("click", onClickNext);
 

@@ -1,88 +1,72 @@
-import {
-  bgColor,
-  canvasDims,
-  // closeAllPopups
-} from "./utilities.js";
+/* global lottie */
+import { bgColor } from "./utilities.js";
 import { addTexture } from "./game_scene/shop.js";
 import { changeScene, scenes } from "./main.js";
 import { drawPlantShop } from "./game_scene/plants.js";
 let speckleTextureImage;
 let textureImage;
+let animation;
+let animationContainer;
+let startButton;
+let isInitialized = false;
+const logoImage = document.getElementById("logo");
 
-/**
- * sceneTemplate.js
- *
- * this is an example of a scene module
- *
- * scene modules split a p5 sketch up into different scenes. each scene
- * is like a partial p5 sketch with its own preload(), setup(), draw(), etc
- *
- * scenes help organize complex code by encapsulating related state and code
- * into isolated modules.
- *
- * since scenes are in modules, they don't share variables unless explicitedly
- * exported and imported.
- *
- * scene modules provide several "lifecycle" functions that are called
- * by main.js at important times.
- *
- * only one scene is "active" at a time. the active scene receives
- * update() and draw() calls and event calls like mousePressed()
- *
- */
-
-// preload
-// called once from the main preload()
-// use this to load any assets you need for the scene
 export function preload() {
   textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
   speckleTextureImage = loadImage("./assets/textures/cardboard-texture.jpg");
 }
 
-// setup
-// called once from the main setup()
-// *one time* code that SHOULD NOT rerun every time the scene is entered
-export function setup() {}
+export function setup() {
+  if (isInitialized) return;
 
-// enter
-// called from changeScene() when this scene is entered
-// code that SHOULD rerun every time the scene is entered
-export function enter() {
-  // closeAllPopups();
+  animationContainer = document.getElementById("splash-animation");
+  startButton = document.getElementById("start-button");
+
+  if (!animationContainer || !startButton) {
+    return;
+  }
+
+  // Load the animation
+  animation = lottie.loadAnimation({
+    container: animationContainer,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "./assets/intro-lottie.json",
+  });
+
+  // need DOM to be loaded first so don't update svg until lottie is loaded
+  animation.addEventListener("DOMLoaded", () => {
+    startButton.style.display = "block";
+    const svg = animationContainer.querySelector("svg");
+    if (svg) {
+      svg.classList.add("splash-animation-svg");
+    }
+  });
+
+  isInitialized = true;
 }
 
-// update
-// called from the main draw() loop
-// code that updates the state of the scene (changes variables)
-// should NOT have draw code in it
+export function enter() {
+  if (animationContainer) {
+    animationContainer.style.display = "flex";
+  }
+}
 export function update() {}
 
-// draw
-// called from the main draw() loop
-// code that draws the scene
-// should NOT have update code in it
 export function draw() {
   background(bgColor);
-  drawPlantShop(200, 700, 2, [true, true, true], {});
+  // drawPlantShop(200, 700, 2, [true, true, true], {});
   addTexture(speckleTextureImage, textureImage);
-
-  push();
-  stroke("black");
-  textSize(30);
-  text("start screen", canvasDims.width / 2, canvasDims.height / 2);
-  stroke("blue");
-  text("click to start", canvasDims.width / 2, canvasDims.height / 2 + 30);
-  pop();
 }
 
-// mousePressed
-// called from the main mousePressed() function
-// code that handles mousePressed events
 export function mousePressed() {
   changeScene(scenes.chooseType);
 }
 
-// leave
-// called from changeScene() when this scene is exited
-// code that SHOULD run every time the scene is exited
-export function leave() {}
+export function leave() {
+  logoImage.style.display = "block";
+  if (animationContainer) {
+    animationContainer.style.display = "none";
+  }
+}

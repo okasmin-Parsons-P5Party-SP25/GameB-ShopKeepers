@@ -19,6 +19,7 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"
     ></script>
     <script defer src="https://cdn.jsdelivr.net/npm/p5.party@latest/dist/p5.party.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script defer type="module" src="main.js"></script>
   </head>
   <body>
@@ -50,6 +51,9 @@
           </div>
         </div>
       </div>
+      <div id="splash-animation" class="splash-animation">
+        <button id="start-button" class="start-button">START</button>
+      </div>
       <div id="popup-container">
         <div id="quiz" class="hidden popupItem">
           <button class="close-button close-button-god-mode hidden" id="close-quiz">X</button>
@@ -68,10 +72,11 @@
           <button class="close-button close-button-god-mode hidden" id="close-choose-type">
             X
           </button>
-          <div>Choose what type of shop you want!</div>
-          <div>(please choose bakery)</div>
+          <h1>CHOOSE YOUR SHOP</h1>
           <div id="type-choices"></div>
-          <button id="next-exit-choose-shop-button">next (can click after choose type)</button>
+          <button id="next-exit-choose-shop-button" class="continue-button inactive">
+            CONTINUE
+          </button>
         </div>
         <div id="upgrade-market" class="popupItem hidden">
           <button class="close-button" id="close-upgrade-market">X</button>
