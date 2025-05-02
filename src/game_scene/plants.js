@@ -39,7 +39,7 @@ export function drawPlantShop(x, y, level, upgrades, inventory) {
   fill("tan");
   // textAlign(CENTER);
   text("P L A N T S", x + shopWidth / 2 - 40, y - shopHeight + 15 - textShift);
-
+  imageMode(CORNER);
   //draw upgrades
   let upgradeH;
   const upgradeW = shopWidth * 2.5;
@@ -71,6 +71,30 @@ export function drawPlantShop(x, y, level, upgrades, inventory) {
       blendMode(BLEND);
     }
   }
+  push();
+  if (upgrades[2]) {
+    let imgNum = 1;
+    let yShift = sin(frameCount * 3) * 15;
+    if (frameCount % 20 > 10) {
+      imgNum = 2;
+    }
+    imageMode(CENTER);
+    image(
+      plantUpgradeImages.pet[`bee${imgNum}`],
+      x + shopWidth,
+      y - 100 - yShift,
+      shopWidth / 3,
+      shopWidth / 3
+    );
+
+    translate(
+      x + shopWidth - 50 + (sin(frameCount) * shopWidth) / 2,
+      y - shopHeight - 100 - sin(frameCount * 2) * 10
+    );
+    scale(-1, 1);
+    image(plantUpgradeImages.pet[`bee${imgNum}`], 0, 0, 50, 50);
+  }
+  pop();
 }
 function drawPlantShopFront(x, y, shopWidth, shopHeight, shopLength) {
   //side boxex

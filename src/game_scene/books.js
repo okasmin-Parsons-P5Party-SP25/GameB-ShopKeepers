@@ -13,7 +13,10 @@ export function drawBookShop(x, y, level, upgrades, inventory) {
   //draw back
   drawBox(x, y, shopWidth, shopHeight, shopLength);
   const shelves = drawBookShopFront(x, y, shopWidth, shopHeight, shopLength);
+  push();
+  translate(0, -10);
   drawInventory(shelves, inventory);
+  pop();
 }
 function drawBookShopFront(x, y, shopWidth, shopHeight, shopLength) {
   const stairHeight = 40;
@@ -25,7 +28,7 @@ function drawBookShopFront(x, y, shopWidth, shopHeight, shopLength) {
   const shelves = drawShelves(
     x + sideWidth + 20,
     y - sideHeight / 2 - 10,
-    6,
+    4,
     1,
     5,
     shopWidth - sideWidth - 30,
@@ -45,7 +48,7 @@ function drawBookShopFront(x, y, shopWidth, shopHeight, shopLength) {
     modes.BACK_CORNER
   );
 
-  fill(shelfColor.back);
+  fill("tan");
   text("B  O  O  K  S", x + shopWidth / 2 - 30, y - shopHeight + 25);
   return shelves;
 }
