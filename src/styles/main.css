@@ -3,6 +3,7 @@ body {
   font-optical-sizing: auto;
   margin: 0 12px 0 12px;
   font-family: "Helvetica Neue", sans-serif;
+  background-color: #f6f2eb;
 }
 
 #js-elements-container {
@@ -421,6 +422,7 @@ h4 {
 
 .logo-image {
   width: 500px;
+  display: none; /* don't show for start screen */
 }
 
 .market-header {
@@ -486,6 +488,7 @@ h4 {
   font-family: sans-serif;
   letter-spacing: 1px;
   transition: background-color 0.3s ease;
+  display: none; /* show once lottie loaded */
 }
 
 .start-button:hover {

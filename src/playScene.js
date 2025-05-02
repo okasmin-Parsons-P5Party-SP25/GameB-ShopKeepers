@@ -22,6 +22,7 @@ import { drawBigCreature } from "./game_scene/bigCreature.js";
 
 let textureImage;
 let speckleTextureImage;
+const logoImage = document.getElementById("logo");
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const littleDudesButton = document.getElementById("test-dude-button");
@@ -57,6 +58,8 @@ export function preload() {
 }
 
 export function enter() {
+  logoImage.style.display = "block";
+
   shared.dudesDone = false;
 
   closeAllPopups();

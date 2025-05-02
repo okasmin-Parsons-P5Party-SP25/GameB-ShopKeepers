@@ -37,6 +37,7 @@ export function setup() {
 
   // need DOM to be loaded first so don't update svg until lottie is loaded
   animation.addEventListener("DOMLoaded", () => {
+    startButton.style.display = "block";
     const svg = animationContainer.querySelector("svg");
     if (svg) {
       svg.classList.add("splash-animation-svg");
@@ -47,7 +48,6 @@ export function setup() {
 }
 
 export function enter() {
-  logoImage.style.display = "none";
   if (animationContainer) {
     animationContainer.style.display = "flex";
   }
