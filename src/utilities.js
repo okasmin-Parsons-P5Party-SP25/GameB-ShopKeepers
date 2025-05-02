@@ -112,6 +112,12 @@ export const plantUpgradeImages = {
   pet: { bee1: "", bee2: "" },
 };
 
+export const bookUpgradeImages = {
+  decor: { outdoor: "", door: "", roof: "", sidetree: "", window: "" },
+  light: { lightadd: "", lightnormal: "" },
+  pet: { bird1: "", bird2: "", bird3: "" },
+};
+
 export const getUpgradeCost = (idx) => {
   if (idx === 0) return { buy: 300 };
   else if (idx === 1) return { buy: 600 };
