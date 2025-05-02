@@ -22,6 +22,7 @@ import { drawBigCreature } from "./game_scene/bigCreature.js";
 
 let textureImage;
 let speckleTextureImage;
+let coinImg;
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const littleDudesButton = document.getElementById("test-dude-button");
@@ -51,9 +52,10 @@ export function preload() {
     itemImages[item] = loadImage(`./assets/books/items/${item}.png`);
   }
   preloadDudes();
-
   textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
   speckleTextureImage = loadImage("./assets/textures/cardboard-texture.jpg");
+  coinImg = loadImage("./assets/coin.png");
+
 }
 
 export function enter() {
@@ -97,6 +99,9 @@ export function draw() {
 
   if (shared.dudesDone === true) {
     drawBigCreature();
+  }
+  if (coinImg) {
+    image(coinImg); // adjust position and size as needed
   }
 }
 
@@ -167,13 +172,15 @@ export const updateUI = (me) => {
     my inventory: ${me.inventory}
   `;
 
+  const coinHTML = `<span>${me.coins} <img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
+
   const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
   if (myMoneyGodModeDiv) {
-    myMoneyGodModeDiv.textContent = `${me.coins} 🪙`;
+    myMoneyGodModeDiv.innerHTML = coinHTML;
   }
 
   const myMoneyDiv = document.getElementById("my-money");
   if (myMoneyDiv) {
-    myMoneyDiv.textContent = `${me.coins} 🪙`;
+    myMoneyDiv.innerHTML = coinHTML;
   }
 };

@@ -12,6 +12,10 @@ const upgradeMarketDiv = document.getElementById("upgrade-market");
 const inventoryDiv = document.getElementById("inventory-choices");
 const upgradesDiv = document.getElementById("shop-upgrade-choices");
 
+const getCoinHTML = (amount) => {
+  return `<span>${amount} <img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
+};
+
 // open
 const onClickUpgradeMarket = () => {
   closeAllPopups();
@@ -68,7 +72,7 @@ const handleBuyInventory = (me, idx, cost) => {
 export const updateAmountText = (me, idx) => {
   const el = document.getElementById(`market-supply-${idx}`);
   if (el) {
-    el.textContent = `supply: ${me.inventory[idx]}`;
+    el.textContent = `${me.inventory[idx]}`;
   }
 };
 
@@ -82,7 +86,7 @@ const updateSellText = (me, idx, el = undefined, sell = undefined) => {
     ammount = getInventoryCost(idx, me).sell;
   }
 
-  div.textContent = `sell: ${ammount} 🪙`;
+  div.innerHTML = `sell<br>${getCoinHTML(ammount)}`;
 };
 
 export const setInventory = (me) => {
@@ -125,7 +129,7 @@ export const setInventory = (me) => {
 
     const buyDiv = document.createElement("div");
     buyDiv.classList.add("buy");
-    buyDiv.textContent = `buy: ${buy} 🪙`;
+    buyDiv.innerHTML = `buy<br>${getCoinHTML(buy)}`;
     itemDiv.append(buyDiv);
 
     const sellDiv = document.createElement("div");
@@ -137,7 +141,7 @@ export const setInventory = (me) => {
     const ammountDiv = document.createElement("div");
     ammountDiv.id = `market-supply-${idx}`;
     ammountDiv.classList.add("supply");
-    ammountDiv.textContent = `supply: ${me.inventory[idx]}`;
+    ammountDiv.textContent = `${me.inventory[idx]}`;
     itemDiv.append(ammountDiv);
 
     button.append(itemDiv);
@@ -196,7 +200,7 @@ const setUpgrades = (me) => {
 
     const buyDiv = document.createElement("div");
     buyDiv.classList.add("buy");
-    buyDiv.textContent = `buy: ${buy} 🪙`;
+    buyDiv.innerHTML = `buy<br>${getCoinHTML(buy)}`;
     itemDiv.append(buyDiv);
 
     const purchasedDiv = document.createElement("div");

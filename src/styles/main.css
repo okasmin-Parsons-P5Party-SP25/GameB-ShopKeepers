@@ -2,7 +2,7 @@ body {
   overflow: hidden;
   font-optical-sizing: auto;
   margin: 0 12px 0 12px;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Ubuntu Sans Mono", monospace;
 }
 
 #js-elements-container {
@@ -11,14 +11,14 @@ body {
 }
 
 h1 {
-  color: #bed280;
-  font-size: 70px;
+  color: black;
+  font-size: 60px;
   font-family: "Darumadrop One", sans-serif;
-  margin: 0 12px 0 12px;
+  line-height: 1;
 }
 
 button {
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Ubuntu Sans Mono", monospace;
   font-weight: medium;
   z-index: 100;
   margin: 12px;
@@ -30,7 +30,7 @@ button {
 }
 
 button:hover {
-  background-color: #e5e1d5;
+  background-color: #e8d7bb;
   color: black;
 }
 
@@ -40,27 +40,23 @@ button:hover {
 }
 
 .popupItem {
-  width: 75%;
+  width: 40%;
   position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
   z-index: 100;
-
   padding: 50px;
-
-  background-color: #e5d6c0;
+  background-color: snow;
   color: black;
-
-  background-image: url("../assets/textures/cardboard-texture.jpg"),
-    url("../assets/textures/white-paper-texture.jpg");
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-position: center, center;
-  background-blend-mode: multiply, color-burn;
+  border-left: black 1px solid;
 }
+
 #quiz {
   #answers-container {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 100%;
     align-items: center;
   }
 
@@ -78,13 +74,21 @@ button:hover {
   }
 
   #questions-screen {
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 
   .answer-button {
-    width: 75%;
+    width: 100%;
+    font-size: 20px;
+    padding: 20px 0;
+    border-radius: 10px;
+  }
+
+  .answer-button:hover {
+    background-color: snow;
+    border: 1px solid black;
   }
 }
 
@@ -102,12 +106,6 @@ button:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #f8f2da;
-  /* background-image: url("/assets/textures/white-paper-texture.jpg"); */
-  background-size: cover;
-  /* background-repeat: no-repeat; */
-  background-position: center;
-  background-blend-mode: overlay;
   /* opacity: 1; */
   z-index: 100;
   /* gap: 4rem; */
@@ -261,10 +259,17 @@ canvas {
 }
 
 .close-button {
-  right: 10px;
-  top: 10px;
+  left: -62px;
+  top: -12px;
+  padding: 23.5px 15px;
+  font-size: 30px;
   position: absolute;
-  font-weight: 700;
+  font-weight: 300;
+  border: 1px solid black;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 #ui-container {
@@ -282,99 +287,102 @@ canvas {
   flex-direction: column;
 }
 
+#upgrade-market p {
+  margin: 0;
+  padding-left: 12px;
+}
+
+#my-money {
+  text-align: left;
+}
+
 #upgrade-market.hidden {
   display: none;
 }
 
 .market-choices {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
 }
 
 .market-choice-button {
-  background-color: #f6f4e7;
-  width: 20%;
-  aspect-ratio: 1 / 1; /* height = width */
+  background-color: #F8F2DA;
+  padding: 20px 20px 70px 20px;
+  width: 90%;
   font-size: 20px;
   position: relative;
+  border-radius: 10px;
 }
-
-/* 
-for Lisa's use
-
-export const wallColors = {
-  front: "#F2EBDC",
-  side: "#ECE1CF",
-  top: "#F5F1E7",
-  inside: "#FAF1E1",
-};
-
-export const shelfColor = {
-  back: "#E8D7BB",
-  side: "#F1E2CA",
-  bottom: "#ECE1CF",
-  bottomLight: "#ECE1CF",
-};
-
-
-*/
 
 .ui-button {
   width: 12%;
   background-color: #e8d7bb;
-  background-color: #f5f1e7;
-  background-image: url("../assets/textures/cardboard-texture.jpg"),
-    url("../assets/textures/white-paper-texture.jpg");
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-position: center, center;
-  background-blend-mode: multiply, color-burn;
 }
 
 h2 {
-  font-size: 40px;
+  font-family: "Darumadrop One", sans-serif;
+  font-size: 60px;
   margin: 10px 0 30px 0;
   font-weight: 600;
 }
+
+h3 {
+  padding-top: 20px;
+  margin-bottom: 0;
+}
+
 h4 {
   font-size: 24px;
-  font-weight: 500;
-  margin: 30px 0 20px 0;
+  font-weight: 300;
+  line-height: 2;
+  padding-bottom: 10px;
 }
 
 .market-choice-button .item-label {
   position: absolute;
-  top: 0;
-  left: 5px;
-  font-weight: 700;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 400;
+  font-size: 25px;
+  letter-spacing: 0.5ch;
 }
 
 .market-choice-button .item-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  padding-top: 30px;
+  width: 80%;
+  height: 80%;
   border-radius: 10px;
 }
 
 .market-choice-button .buy {
   position: absolute;
-  bottom: 0;
-  left: 5px;
+  bottom: 40px;
+  left: 55px;
   text-transform: lowercase;
 }
 
 .market-choice-button .sell {
   position: absolute;
-  bottom: 0;
-  right: 5px;
+  bottom: 40px;
+  right: 55px;
   text-transform: lowercase;
 }
 
 .market-choice-button .supply {
+  background-color: black;
   position: absolute;
-  top: 0;
-  right: 5px;
+  top: -10px;
+  right: -10px;
   text-transform: lowercase;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px; /* Match height for vertical centering */
 }
 
 .tabs {
@@ -383,36 +391,47 @@ h4 {
   margin-bottom: 0;
 }
 
+.inv-tab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.upg-tab {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .tab-button {
   padding: 0.5em 1em;
+  width: 50%;
   margin: 0;
   border: none;
-  background-color: #f6f4e7;
+  background-color: snow;
   cursor: pointer;
-  font-size: 24px;
-  font-weight: 500;
-  text-transform: lowercase;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  padding: 30px 0 30px 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  letter-spacing: 0.5ch;
 }
 
 .tab-button.active {
   color: white;
-  background-color: #000000bf;
-  background-image: url("../assets/textures/cardboard-texture.jpg"),
-    url("../assets/textures/white-gypsum-wall.jpg");
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-position: center, center;
-  background-blend-mode: color-burn, color-burn;
+  background-color: black;
 }
 
 .tab-content {
-  background-color: #000000bf;
-  background-image: url("../assets/textures/cardboard-texture.jpg"),
-    url("../assets/textures/white-gypsum-wall.jpg");
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-position: center, center;
-  background-blend-mode: color-burn, color-burn;
+  background-color: snow;
 }
 
 .tab-content.hidden {
@@ -423,10 +442,21 @@ h4 {
   width: 500px;
 }
 
-.market-header {
+.market-header-column {
   display: flex;
-  align-items: center; /* vertically aligns items */
-  gap: 1rem; /* optional spacing between items */
+  flex-direction: column;
+  width: 100%;
+}
+
+.market-header-row {
+  margin-top: 65px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.market-header-row :last-child {
+  margin-left: 36px;
 }
 
 #god-mode-container.hidden {
