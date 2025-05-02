@@ -10,6 +10,7 @@ import {
   purchaseDetectionRadius,
   bakeryUpgradeImages,
   plantUpgradeImages,
+  bookUpgradeImages,
   clearDudes,
   getInventoryStrings,
   closeAllPopups,
@@ -22,6 +23,7 @@ import { drawBigCreature } from "./game_scene/bigCreature.js";
 
 let textureImage;
 let speckleTextureImage;
+const logoImage = document.getElementById("logo");
 let coinImg;
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
@@ -33,6 +35,11 @@ export function preload() {
     for (const imgName of Object.keys(plantUpgradeImages[upgradeType])) {
       plantUpgradeImages[upgradeType][imgName] = loadImage(
         `./assets/plant/upgrades/${upgradeType}/${imgName}.png`
+      );
+    }
+    for (const imgName of Object.keys(bookUpgradeImages[upgradeType])) {
+      bookUpgradeImages[upgradeType][imgName] = loadImage(
+        `./assets/books/upgrades/${upgradeType}/${imgName}.png`
       );
     }
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
@@ -59,6 +66,8 @@ export function preload() {
 }
 
 export function enter() {
+  logoImage.style.display = "block";
+
   shared.dudesDone = false;
 
   closeAllPopups();
