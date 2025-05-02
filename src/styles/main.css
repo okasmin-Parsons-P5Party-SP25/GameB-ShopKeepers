@@ -110,8 +110,8 @@ button:hover {
   background-blend-mode: overlay;
   /* opacity: 1; */
   z-index: 100;
-  gap: 4rem;
-  padding-bottom: 4rem;
+  /* gap: 4rem; */
+  /* padding-bottom: 4rem; */
 }
 
 #choose-type h1 {
