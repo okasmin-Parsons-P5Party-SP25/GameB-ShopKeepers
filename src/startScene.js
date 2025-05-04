@@ -54,11 +54,7 @@ export function enter() {
 }
 export function update() {}
 
-export function draw() {
-  background(bgColor);
-  // drawPlantShop(200, 700, 2, [true, true, true], {});
-  addTexture(speckleTextureImage, textureImage);
-}
+export function draw() {}
 
 export function mousePressed() {
   changeScene(scenes.chooseType);
