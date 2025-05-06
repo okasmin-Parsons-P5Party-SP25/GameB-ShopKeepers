@@ -65,9 +65,29 @@ button:hover {
     align-items: center;
   }
 
-  #submit-quiz {
-    background-color: #c4d6bc;
-    width: 96px;
+  .correct-answer {
+    background-color: #d4edda;
+    color: #155724;
+    margin: 20px 0;
+    pointer-events: none;
+  }
+  .wrong-answer {
+    background-color: #f8d7da;
+    color: #721c24;
+    margin: 20px 0;
+    pointer-events: none;
+  }
+
+  #submit-quiz, #next-exit-quiz-button {
+    background-color: black;
+    color: white;
+    width: 30%;
+    font-family: "Helvetica Neue", sans-serif;
+    text-transform: uppercase;
+    margin: 20px 0;
+    font-size: 14px;
+    letter-spacing: 0.75ch;
+    padding: 20px 0;
   }
 
   #answers-screen.hidden {
@@ -85,6 +105,13 @@ button:hover {
   }
 
   .answer-button {
+    width: 100%;
+    font-size: 20px;
+    padding: 20px 0;
+    border-radius: 10px;
+  }
+
+  .correct-answer, .wrong-answer {
     width: 100%;
     font-size: 20px;
     padding: 20px 0;
@@ -218,7 +245,7 @@ button:hover {
 }
 
 .continue-button {
-  font-family: "Ubuntu Sans Mono", monospace;
+  font-family: "Courier New", Courier, monospace;
   padding: 0.75rem 2rem;
   border: 1px solid #152e50;
   border-radius: 80px;
@@ -346,13 +373,17 @@ h2 {
 h3 {
   padding-top: 20px;
   margin-bottom: 0;
+  font-family: "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  margin: 10px 0;
+  letter-spacing: 0.25ch;
 }
 
 h4 {
   font-size: 24px;
   font-weight: 300;
-  line-height: 2;
-  padding-bottom: 10px;
+  line-height: 1.5;
+  padding-bottom: 20px;
 }
 
 .market-choice-button .item-label {

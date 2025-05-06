@@ -45,6 +45,59 @@ const onSubmit = (me, shared) => {
   questionsScreenDiv.classList.toggle("hidden");
   answerScreenDiv.classList.toggle("hidden");
 
+  const lost = "Better luck next time!";
+  const greatWork = "Great work!";
+  const reveal = `The correct answer was: ${correctAnswer}`;
+
+  let message = correct ? `${greatWork} ${reveal}` : `${lost} ${reveal}`;
+  if (correct) {
+    me.coins += shared.quizCoins;
+  } else {
+    me.coins += shared.quizCoins / 10;
+  }
+
+  // Create styled answer buttons for the revealedAnswerDiv
+  revealedAnswerDiv.innerHTML = ""; // clear previous content
+
+  const messageDiv = document.createElement("div");
+  messageDiv.textContent = message;
+  messageDiv.classList.add("answer-message");
+  revealedAnswerDiv.appendChild(messageDiv);
+
+  // Render all answer choices again with correct/selected classes
+//  const currentQuestion = question.textContent;
+  const allAnswers = Array.from(answersDiv.children).map(btn => btn.textContent);
+
+  allAnswers.forEach(answer => {
+    const button = document.createElement("button");
+    button.textContent = answer;
+    button.classList.add("answer-button");
+    if (answer === correctAnswer) {
+      button.classList.add("correct-answer");
+    } else {
+      button.classList.add("wrong-answer");
+    }
+    if (answer === guessed) {
+      button.classList.add(
+        answer === correctAnswer ? "correct-select" : "incorrect-select"
+      );
+    }
+    button.disabled = true;
+    revealedAnswerDiv.appendChild(button);
+  });
+  shared.quizCoins *= 2; // Double for next round
+};
+
+
+/* 
+const onSubmit = (me, shared) => {
+  if (!guessed || !correctAnswer) return;
+
+  const correct = guessed === correctAnswer;
+
+  questionsScreenDiv.classList.toggle("hidden");
+  answerScreenDiv.classList.toggle("hidden");
+
   const lost = "better luck next time! ";
   const greatWork = "great work! ";
   const reveal = `the correct answer was: ${correctAnswer}`;
@@ -64,6 +117,7 @@ const onSubmit = (me, shared) => {
   // increase win amount each time quiz is played
   shared.quizCoins = shared.quizCoins * 2;
 };
+ */
 
 // open
 export const onOpenQuiz = async () => {
