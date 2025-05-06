@@ -9,6 +9,7 @@ import DOMCursors from "./DOMCursors.js";
 import {
   p5Events,
   canvasDims,
+  myDudeStates,
   // godMode,
   // shopTypes,
   //  closeAllPopups
@@ -32,8 +33,7 @@ window.preload = function () {
   partyConnect("wss://demoserver.p5party.org", "shop_keepers_main_start");
 
   shared = partyLoadShared("shared", {
-    quizCoins: 50,
-    dudesDone: false, //true when dudes have bought everything from every guest
+    quizCoins: 50, // amount of coins to be won during quiz - updates each round - see quiz.js
   });
 
   me = partyLoadMyShared({
@@ -43,6 +43,7 @@ window.preload = function () {
     upgrades: [false, false, false], // index refers to upgrade level, true if purchased
     upgradeLevel: 0, // increase to 1, 2, or 3 with each upgrade purchase
     dudes: [],
+    dudesState: myDudeStates.none,
   });
 
   guests = partyLoadGuestShareds();
@@ -50,13 +51,6 @@ window.preload = function () {
 };
 
 window.setup = function () {
-  // if (godMode === true) {
-  //   me.coins += 1000;
-  //   me.shopType = me.shopType ? me.shopType : shopTypes.bakery;
-  //   me.inventory = me.inventory[0] === 0 ? [(2, 2, 2)] : me.inventory;
-  // }
-
-  // console.log("window setup");
   createCanvas(canvasDims.width, canvasDims.height);
   noFill();
   noStroke();

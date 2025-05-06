@@ -355,7 +355,7 @@ canvas {
   background-color: #e8d7bb;
   width: fit-content;
   min-width: 80px;
-  display: flex;
+  display: none;
   min-height: 80px;
   justify-content: flex-end;
   align-items: center;
@@ -544,6 +544,26 @@ h4 {
   background-image: url("../assets/icons/market_icon_hover.png");
 }
 
+#quiz-button {
+  width: 40px;
+  height: 100px;
+  background-color: inherit;
+  .ui-button-icon {
+    display: flex;
+    /* justify-content: start; */
+    flex-direction: column;
+    color: black;
+    font-size: 50px;
+    font-family: "Darumadrop One", sans-serif;
+    height: 100%;
+  }
+}
+
+#quiz-button:hover {
+  transform: scale(1.2) rotate(20deg);
+  transition: transform 0.3s ease;
+}
+
 /* this becomes visible in playScene */
 #test-dude-button {
   background-color: inherit;
@@ -635,5 +655,22 @@ h4 {
   }
   50% {
     transform: scale(1.05); /* Grows to 120% */
+  }
+}
+
+#big-creature-quiz {
+  display: none;
+  z-index: 2;
+  /* align-items: center; */
+  justify-content: center;
+  font-size: 20px;
+  height: 80%;
+  img {
+    height: 800px;
+  }
+
+  p {
+    border: black 1px solid;
+    padding: 40px;
   }
 }

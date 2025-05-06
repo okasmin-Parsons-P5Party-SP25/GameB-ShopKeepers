@@ -238,14 +238,48 @@ export const getInventoryStrings = (guest) => {
   return inventoryObj;
 };
 
-// check if every dude is dead for each guest
-export const checkDudesDone = (guests) => {
-  for (const guest of guests) {
-    const dudes = guest.dudes;
-    if (!dudes.length) return false;
-    for (const dude of dudes) {
-      if (dude.alive) return false;
-    }
+// check if every dude is dead
+export const checkDudesDone = (me) => {
+  // dudes haven't started or already finished
+  if (me.dudesState !== myDudeStates.started) return false;
+
+  for (const dude of me.dudes) {
+    if (dude.alive) return false;
   }
   return true;
+};
+
+/**
+ * none when enter scene, etc
+ * started for when dudes button is clicked
+ * finished for when dudes are finished
+ * when leave scene, sets back to none
+ */
+export const myDudeStates = {
+  none: "none",
+  started: "started",
+  finished: "finished",
+};
+
+export const updateUI = (me) => {
+  const myInventoryDiv = document.getElementById("my-upgrades");
+  myInventoryDiv.textContent = `
+  my upgrade level: ${me.upgradeLevel} | 
+  ${upgradeTypes[0]}: ${me.upgrades[0]} |
+   ${upgradeTypes[1]}: ${me.upgrades[1]} |
+    ${upgradeTypes[2]}: ${me.upgrades[2]} |
+    my inventory: ${me.inventory}
+  `;
+
+  const coinHTML = `<span>${me.coins} <img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
+
+  const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
+  if (myMoneyGodModeDiv) {
+    myMoneyGodModeDiv.innerHTML = coinHTML;
+  }
+
+  const myMoneyDiv = document.getElementById("my-money");
+  if (myMoneyDiv) {
+    myMoneyDiv.innerHTML = coinHTML;
+  }
 };
