@@ -2,7 +2,6 @@
 import { bgColor } from "./utilities.js";
 import { addTexture } from "./game_scene/shop.js";
 import { changeScene, scenes } from "./main.js";
-import { drawPlantShop } from "./game_scene/plants.js";
 let speckleTextureImage;
 let textureImage;
 let animation;
@@ -10,6 +9,7 @@ let animationContainer;
 let startButton;
 let isInitialized = false;
 const logoImage = document.getElementById("logo");
+const loadingDiv = document.getElementById("loading");
 
 export function preload() {
   textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
@@ -32,7 +32,7 @@ export function setup() {
     renderer: "svg",
     loop: true,
     autoplay: true,
-    path: "./assets/intro-lottie.json",
+    path: "./assets/intro-lottie-2.json",
   });
 
   // need DOM to be loaded first so don't update svg until lottie is loaded
@@ -45,6 +45,7 @@ export function setup() {
   });
 
   isInitialized = true;
+  loadingDiv.style.display = "none";
 }
 
 export function enter() {
@@ -54,7 +55,10 @@ export function enter() {
 }
 export function update() {}
 
-export function draw() {}
+export function draw() {
+  background(bgColor);
+  addTexture(speckleTextureImage, textureImage);
+}
 
 export function mousePressed() {
   changeScene(scenes.chooseType);
