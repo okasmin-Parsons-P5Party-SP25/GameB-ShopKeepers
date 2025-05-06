@@ -99,7 +99,7 @@ export const upgradeChoices = {
 };
 
 // index of item refers to its level
-export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgradeChoices.pet];
+export const upgradeTypes = [upgradeChoices.decor, upgradeChoices.light, upgradeChoices.pet];
 export const bakeryUpgradeImages = {
   decor: { barrels: "", menu: "", sideshelf: "", roof: "" },
   light: { sign: "", signLight: "" },

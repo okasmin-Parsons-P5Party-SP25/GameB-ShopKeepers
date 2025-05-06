@@ -84,7 +84,7 @@ function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
     );
   }
   // decor
-  if (upgrades[1] === true) {
+  if (upgrades[0] === true) {
     for (const [name, img] of Object.entries(bakeryUpgradeImages.decor)) {
       if (name !== "roof" && name !== "menu") {
         image(img, x, upgradeY + 20, decorImgSize, decorImgSize);
@@ -106,7 +106,7 @@ function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
     );
   }
   // light
-  if (upgrades[0] === true) {
+  if (upgrades[1] === true) {
     blendMode(BLEND);
     image(bakeryUpgradeImages.light.signLight, x, upgradeY - 30, decorImgSize, decorImgSize);
     if ((frameCount * 0.1) % 4 < 2) {
