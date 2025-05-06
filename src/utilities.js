@@ -68,7 +68,7 @@ export const inventoryTypes = {
 };
 
 // inventory items are sold for more as upgrade shop
-const sellMultiplier = [1, 2, 4, 6];
+const sellMultiplier = [1, 1.5, 2, 2.5];
 
 export const getInventoryCost = (idx, me) => {
   let buy;
@@ -76,14 +76,14 @@ export const getInventoryCost = (idx, me) => {
   const level = me.upgradeLevel;
 
   if (idx === 0) {
-    buy = 1;
+    buy = 5;
     sell = 10;
   } else if (idx === 1) {
-    buy = 5;
-    sell = 30;
+    buy = 30;
+    sell = 80;
   } else if (idx === 2) {
-    buy = 10;
-    sell = 50;
+    buy = 100;
+    sell = 250;
   }
   return {
     buy,
@@ -99,7 +99,7 @@ export const upgradeChoices = {
 };
 
 // index of item refers to its level
-export const upgradeTypes = [upgradeChoices.light, upgradeChoices.decor, upgradeChoices.pet];
+export const upgradeTypes = [upgradeChoices.decor, upgradeChoices.light, upgradeChoices.pet];
 export const bakeryUpgradeImages = {
   decor: { barrels: "", menu: "", sideshelf: "", roof: "" },
   light: { sign: "", signLight: "" },
@@ -180,6 +180,8 @@ export const getShopPosition = (idx) => {
   };
 };
 
+const maxNumDudes = 10;
+
 export const dudeGetAllInventory = (guest) => {
   if (!guest.shopType || !guest.inventory) return;
 
@@ -187,21 +189,12 @@ export const dudeGetAllInventory = (guest) => {
     Array(num).fill({ itemString: inventoryTypes[guest.shopType][idx], itemIdx: idx })
   );
 
+  if (itemStrings.length > maxNumDudes) {
+    return itemStrings.slice(0, maxNumDudes);
+  }
+
   return itemStrings;
 };
-
-// export const dudesBuyAllInventory = (guest) => {
-//   if (!guest.shopType || !guest.inventory) return;
-//   let totalCoins = 0;
-//   for (let i = 0; i < guest.inventory.length; i++) {
-//     const numItems = guest.inventory[i];
-//     const itemCost = getInventoryCost(i, guest).sell;
-//     totalCoins += numItems * itemCost;
-//   }
-
-//   guest.inventory = [0, 0, 0];
-//   guest.coins += totalCoins;
-// };
 
 export const dudeBuySingleItem = (guest, itemIdx) => {
   if (!guest.shopType || !guest.inventory) return;
@@ -238,14 +231,48 @@ export const getInventoryStrings = (guest) => {
   return inventoryObj;
 };
 
-// check if every dude is dead for each guest
-export const checkDudesDone = (guests) => {
-  for (const guest of guests) {
-    const dudes = guest.dudes;
-    if (!dudes.length) return false;
-    for (const dude of dudes) {
-      if (dude.alive) return false;
-    }
+// check if every dude is dead
+export const checkDudesDone = (me) => {
+  // dudes haven't started or already finished
+  if (me.dudesState !== myDudeStates.started) return false;
+
+  for (const dude of me.dudes) {
+    if (dude.alive) return false;
   }
   return true;
+};
+
+/**
+ * none when enter scene, etc
+ * started for when dudes button is clicked
+ * finished for when dudes are finished
+ * when leave scene, sets back to none
+ */
+export const myDudeStates = {
+  none: "none",
+  started: "started",
+  finished: "finished",
+};
+
+export const updateUI = (me) => {
+  const myInventoryDiv = document.getElementById("my-upgrades");
+  myInventoryDiv.textContent = `
+  my upgrade level: ${me.upgradeLevel} | 
+  ${upgradeTypes[0]}: ${me.upgrades[0]} |
+   ${upgradeTypes[1]}: ${me.upgrades[1]} |
+    ${upgradeTypes[2]}: ${me.upgrades[2]} |
+    my inventory: ${me.inventory}
+  `;
+
+  const coinHTML = `<span>${me.coins} <img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
+
+  const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
+  if (myMoneyGodModeDiv) {
+    myMoneyGodModeDiv.innerHTML = coinHTML;
+  }
+
+  const myMoneyDiv = document.getElementById("my-money");
+  if (myMoneyDiv) {
+    myMoneyDiv.innerHTML = coinHTML;
+  }
 };

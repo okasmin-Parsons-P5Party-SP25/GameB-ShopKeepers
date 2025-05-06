@@ -15,22 +15,26 @@ import {
   getInventoryStrings,
   closeAllPopups,
   checkDudesDone,
+  myDudeStates,
+  updateUI,
 } from "./utilities.js";
-import { me, shared, guests, changeScene, scenes } from "./main.js";
+import { me, guests, changeScene, scenes } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
 import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
-import { drawBigCreature } from "./game_scene/bigCreature.js";
 
 let textureImage;
 let speckleTextureImage;
+let coinImg;
+
 const logoImage = document.getElementById("logo");
 let coinImg;
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const littleDudesButton = document.getElementById("test-dude-button");
+const quizButton = document.getElementById("quiz-button");
+const bigCreatureQuizPrompt = document.getElementById("big-creature-quiz");
 
 export function preload() {
-  // console.log("hi from playScene preload");
   for (const upgradeType of upgradeTypes) {
     for (const imgName of Object.keys(plantUpgradeImages[upgradeType])) {
       plantUpgradeImages[upgradeType][imgName] = loadImage(
@@ -61,41 +65,47 @@ export function preload() {
   preloadDudes();
   textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
   speckleTextureImage = loadImage("./assets/textures/cardboard-texture.jpg");
-  coinImg = loadImage("./assets/coin.png");
-
 }
 
 export function enter() {
-  logoImage.style.display = "block";
+  logoImage.style.display = "flex";
 
-  shared.dudesDone = false;
-
+  me.dudesState = myDudeStates.none;
+  clearDudes(me);
   closeAllPopups();
   upgradeMarketButton.style.display = "block";
   littleDudesButton.style.display = "block";
-  // console.log("me from playScene", me);
-  // console.log("shared form playScene", shared);
+  quizButton.style.display = "block";
   updateUI(me);
 
-  const testDudeButton = document.getElementById("test-dude-button");
-  testDudeButton.addEventListener("click", handleDudes);
+  littleDudesButton.addEventListener("click", () => {
+    startDudes();
+    closeAllPopups();
+  });
 }
 
 export function update() {
   updateUI(me);
-  if (frameCount % 20 === 0 && !shared.dudesDone) {
-    shared.dudesDone = checkDudesDone(guests);
-    if (shared.dudesDone === true) {
-      for (const guest of guests) {
-        clearDudes(guest);
-      }
+
+  if (me.dudesState === myDudeStates.finished) {
+    bigCreatureQuizPrompt.style.display = "flex";
+    closeAllPopups();
+  }
+
+  if (me.dudesState === myDudeStates.started) {
+    if (checkDudesDone(me)) {
+      me.dudesState = myDudeStates.finished;
+      clearDudes(me);
     }
   }
 }
 
 export function leave() {
+  me.dudesState = myDudeStates.none;
   upgradeMarketButton.style.display = "none";
   littleDudesButton.style.display = "none";
+  quizButton.style.display = "none";
+  bigCreatureQuizPrompt.display = "none";
   closeAllPopups();
 }
 
@@ -103,32 +113,49 @@ export function draw() {
   background(bgColor);
 
   drawShops(guests);
+  drawDudes(me);
 
   addTexture(speckleTextureImage, textureImage);
 
-  if (shared.dudesDone === true) {
-    drawBigCreature();
+  if (coinImg) {
+    image(coinImg); // adjust position and size as needed
   }
   if (coinImg) {
     image(coinImg); // adjust position and size as needed
   }
 }
 
-const handleDudes = () => {
-  shared.dudesDone = false;
+const startDudes = () => {
+  //set me dudes state to started
+  me.dudesState = myDudeStates.started;
+
+  //get my index in guests list
+  let myidx = undefined;
+
   for (let i = 0; i < guests.length; i++) {
-    const guest = guests[i];
-    if (!guest.shopType) continue;
-    const { x, y } = getShopPosition(i);
-    clearDudes(guest);
-    setUpDudes(guest, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
+    if (guests[i] === me) {
+      myidx = i;
+      break;
+    }
   }
+
+  if (myidx === undefined) return;
+
+  //get my shop position
+  const { x, y } = getShopPosition(myidx);
+
+  // make sure I don't have any dudes from last time
+  clearDudes(me);
+
+  // setup new dudes
+  setUpDudes(me, x + purchaseDetectionRadius, y - purchaseDetectionRadius);
 };
 
 export function mousePressed() {
-  if (shared.dudesDone === true) {
+  if (me.dudesState === myDudeStates.finished) {
+    bigCreatureQuizPrompt.style.display = "none";
+    me.dudesState = myDudeStates.none;
     changeScene(scenes.quiz);
-    shared.dudesDone = false;
   }
 }
 
@@ -181,15 +208,13 @@ export const updateUI = (me) => {
     my inventory: ${me.inventory}
   `;
 
-  const coinHTML = `<span>${me.coins} <img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
-
   const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
   if (myMoneyGodModeDiv) {
-    myMoneyGodModeDiv.innerHTML = coinHTML;
+    myMoneyGodModeDiv.textContent = `${me.coins} 🪙`;
   }
 
   const myMoneyDiv = document.getElementById("my-money");
   if (myMoneyDiv) {
-    myMoneyDiv.innerHTML = coinHTML;
+    myMoneyDiv.textContent = `${me.coins} 🪙`;
   }
 };

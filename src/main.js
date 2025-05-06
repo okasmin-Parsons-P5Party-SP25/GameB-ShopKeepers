@@ -6,15 +6,9 @@ import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 import DOMCursors from "./DOMCursors.js";
-import {
-  p5Events,
-  canvasDims,
-  // godMode,
-  // shopTypes,
-  //  closeAllPopups
-} from "./utilities.js";
+import { p5Events, canvasDims, myDudeStates } from "./utilities.js";
 
-export let shared;
+// export let shared;
 export let guests;
 export let me;
 
@@ -29,12 +23,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main");
-
-  shared = partyLoadShared("shared", {
-    quizCoins: 50,
-    dudesDone: false, //true when dudes have bought everything from every guest
-  });
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main_start");
 
   me = partyLoadMyShared({
     shopType: undefined, // one of shopTypes,
@@ -43,6 +32,8 @@ window.preload = function () {
     upgrades: [false, false, false], // index refers to upgrade level, true if purchased
     upgradeLevel: 0, // increase to 1, 2, or 3 with each upgrade purchase
     dudes: [],
+    dudesState: myDudeStates.none,
+    quizCoins: 25, // amount of coins to be won during quiz - updates each round - see quiz.js
   });
 
   guests = partyLoadGuestShareds();
@@ -50,13 +41,6 @@ window.preload = function () {
 };
 
 window.setup = function () {
-  // if (godMode === true) {
-  //   me.coins += 1000;
-  //   me.shopType = me.shopType ? me.shopType : shopTypes.bakery;
-  //   me.inventory = me.inventory[0] === 0 ? [(2, 2, 2)] : me.inventory;
-  // }
-
-  // console.log("window setup");
   createCanvas(canvasDims.width, canvasDims.height);
   noFill();
   noStroke();
@@ -66,12 +50,9 @@ window.setup = function () {
 
   Object.values(scenes).forEach((scene) => scene.setup?.());
 
-  // console.log("change scene before");
-  // console.log({ me, shared });
   changeScene(scenes.start);
-  // console.log("change scene after");
 
-  setupQuizUI(me, shared);
+  setupQuizUI(me);
   setupChooseTypeUI(me);
   setupUpgradeMarketUI(me);
 
@@ -102,8 +83,6 @@ export function changeScene(newScene) {
     console.error("newScene is already currentScene");
     return;
   }
-  //ensure all popups are closed when change scene
-  // closeAllPopups();
 
   currentScene?.leave?.();
   currentScene = newScene;

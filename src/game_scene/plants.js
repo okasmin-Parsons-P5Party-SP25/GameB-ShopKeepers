@@ -45,7 +45,7 @@ export function drawPlantShop(x, y, level, upgrades, inventory) {
   const upgradeW = shopWidth * 2.5;
   let upgradex, upgradey;
   //decor
-  if (upgrades[1] === true) {
+  if (upgrades[0] === true) {
     for (const [name, img] of Object.entries(plantUpgradeImages.decor)) {
       upgradeH = (upgradeW * img.height) / img.width;
       upgradex = x - shopWidth / 2 - 20;
@@ -55,7 +55,7 @@ export function drawPlantShop(x, y, level, upgrades, inventory) {
   }
   // console.log(upgradeH, upgradeW, upgradex, upgradey);
   //light
-  if (upgrades[0] === true) {
+  if (upgrades[1] === true) {
     const img = plantUpgradeImages.light.lightnormal;
     upgradeH = (upgradeW * img.height) / img.width;
     upgradex = x - shopWidth / 2 - 20;
