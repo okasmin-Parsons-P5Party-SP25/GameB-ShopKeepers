@@ -6,16 +6,9 @@ import { setupQuizUI } from "./quiz.js";
 import { setupChooseTypeUI } from "./chooseShopType.js";
 import { setupUpgradeMarketUI } from "./upgradeMarket.js";
 import DOMCursors from "./DOMCursors.js";
-import {
-  p5Events,
-  canvasDims,
-  myDudeStates,
-  // godMode,
-  // shopTypes,
-  //  closeAllPopups
-} from "./utilities.js";
+import { p5Events, canvasDims, myDudeStates } from "./utilities.js";
 
-export let shared;
+// export let shared;
 export let guests;
 export let me;
 
@@ -32,10 +25,6 @@ let currentScene; // the scene being displayed
 window.preload = function () {
   partyConnect("wss://demoserver.p5party.org", "shop_keepers_main_start");
 
-  shared = partyLoadShared("shared", {
-    quizCoins: 50, // amount of coins to be won during quiz - updates each round - see quiz.js
-  });
-
   me = partyLoadMyShared({
     shopType: undefined, // one of shopTypes,
     inventory: [0, 0, 0], // index refers to inventory level, value is ammount; see inventoryTypes
@@ -44,6 +33,7 @@ window.preload = function () {
     upgradeLevel: 0, // increase to 1, 2, or 3 with each upgrade purchase
     dudes: [],
     dudesState: myDudeStates.none,
+    quizCoins: 25, // amount of coins to be won during quiz - updates each round - see quiz.js
   });
 
   guests = partyLoadGuestShareds();
@@ -60,12 +50,9 @@ window.setup = function () {
 
   Object.values(scenes).forEach((scene) => scene.setup?.());
 
-  // console.log("change scene before");
-  // console.log({ me, shared });
   changeScene(scenes.start);
-  // console.log("change scene after");
 
-  setupQuizUI(me, shared);
+  setupQuizUI(me);
   setupChooseTypeUI(me);
   setupUpgradeMarketUI(me);
 
@@ -96,8 +83,6 @@ export function changeScene(newScene) {
     console.error("newScene is already currentScene");
     return;
   }
-  //ensure all popups are closed when change scene
-  // closeAllPopups();
 
   currentScene?.leave?.();
   currentScene = newScene;

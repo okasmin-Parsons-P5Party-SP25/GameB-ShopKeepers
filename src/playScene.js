@@ -71,13 +71,17 @@ export function enter() {
   logoImage.style.display = "flex";
 
   me.dudesState = myDudeStates.none;
+  clearDudes(me);
   closeAllPopups();
   upgradeMarketButton.style.display = "block";
   littleDudesButton.style.display = "block";
   quizButton.style.display = "block";
   updateUI(me);
 
-  littleDudesButton.addEventListener("click", startDudes);
+  littleDudesButton.addEventListener("click", () => {
+    startDudes();
+    closeAllPopups();
+  });
 }
 
 export function update() {
@@ -85,6 +89,7 @@ export function update() {
 
   if (me.dudesState === myDudeStates.finished) {
     bigCreatureQuizPrompt.style.display = "flex";
+    closeAllPopups();
   }
 
   if (me.dudesState === myDudeStates.started) {
