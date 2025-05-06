@@ -29,7 +29,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main_css");
 
   shared = partyLoadShared("shared", {
     quizCoins: 50,
