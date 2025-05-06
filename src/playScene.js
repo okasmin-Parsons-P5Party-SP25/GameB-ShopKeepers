@@ -10,6 +10,7 @@ import {
   purchaseDetectionRadius,
   bakeryUpgradeImages,
   plantUpgradeImages,
+  bookUpgradeImages,
   clearDudes,
   getInventoryStrings,
   closeAllPopups,
@@ -25,6 +26,7 @@ import { drawBigCreature } from "./game_scene/bigCreature.js";
 let textureImage;
 let speckleTextureImage;
 const logoImage = document.getElementById("logo");
+let coinImg;
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const littleDudesButton = document.getElementById("test-dude-button");
@@ -34,6 +36,11 @@ export function preload() {
     for (const imgName of Object.keys(plantUpgradeImages[upgradeType])) {
       plantUpgradeImages[upgradeType][imgName] = loadImage(
         `./assets/plant/upgrades/${upgradeType}/${imgName}.png`
+      );
+    }
+    for (const imgName of Object.keys(bookUpgradeImages[upgradeType])) {
+      bookUpgradeImages[upgradeType][imgName] = loadImage(
+        `./assets/books/upgrades/${upgradeType}/${imgName}.png`
       );
     }
     for (const imgName of Object.keys(bakeryUpgradeImages[upgradeType])) {
@@ -53,9 +60,9 @@ export function preload() {
     itemImages[item] = loadImage(`./assets/books/items/${item}.png`);
   }
   preloadDudes();
-
   textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
   speckleTextureImage = loadImage("./assets/textures/cardboard-texture.jpg");
+  coinImg = loadImage("./assets/coin.png");
 }
 
 export function enter() {
@@ -98,6 +105,9 @@ export function draw() {
 
   if (me.dudesState === myDudeStates.finished) {
     drawBigCreature();
+  }
+  if (coinImg) {
+    image(coinImg); // adjust position and size as needed
   }
 }
 
@@ -163,5 +173,12 @@ export const drawShops = (guests) => {
       );
       pop();
     }
+  }
+
+  for (let i = 0; i < guests.length; i++) {
+    const guest = guests[i];
+    if (!guest.shopType) continue;
+    // console.log("drawing dudes", guest.dudes.length);
+    drawDudes(guest);
   }
 };

@@ -14,7 +14,6 @@ import {
   // shopTypes,
   //  closeAllPopups
 } from "./utilities.js";
-// import { drawPlantShop } from "./game_scene/plants.js";
 
 export let shared;
 export let guests;
@@ -31,7 +30,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main_start");
 
   shared = partyLoadShared("shared", {
     quizCoins: 50, // amount of coins to be won during quiz - updates each round - see quiz.js
