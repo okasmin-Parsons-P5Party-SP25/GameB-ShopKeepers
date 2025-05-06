@@ -68,7 +68,7 @@ export const inventoryTypes = {
 };
 
 // inventory items are sold for more as upgrade shop
-const sellMultiplier = [1, 2, 4, 6];
+const sellMultiplier = [1, 1.5, 2, 2.5];
 
 export const getInventoryCost = (idx, me) => {
   let buy;
@@ -76,14 +76,14 @@ export const getInventoryCost = (idx, me) => {
   const level = me.upgradeLevel;
 
   if (idx === 0) {
-    buy = 1;
+    buy = 5;
     sell = 10;
   } else if (idx === 1) {
-    buy = 5;
-    sell = 30;
+    buy = 30;
+    sell = 80;
   } else if (idx === 2) {
-    buy = 10;
-    sell = 50;
+    buy = 100;
+    sell = 250;
   }
   return {
     buy,
@@ -180,6 +180,8 @@ export const getShopPosition = (idx) => {
   };
 };
 
+const maxNumDudes = 10;
+
 export const dudeGetAllInventory = (guest) => {
   if (!guest.shopType || !guest.inventory) return;
 
@@ -187,21 +189,12 @@ export const dudeGetAllInventory = (guest) => {
     Array(num).fill({ itemString: inventoryTypes[guest.shopType][idx], itemIdx: idx })
   );
 
+  if (itemStrings.length > maxNumDudes) {
+    return itemStrings.slice(0, maxNumDudes);
+  }
+
   return itemStrings;
 };
-
-// export const dudesBuyAllInventory = (guest) => {
-//   if (!guest.shopType || !guest.inventory) return;
-//   let totalCoins = 0;
-//   for (let i = 0; i < guest.inventory.length; i++) {
-//     const numItems = guest.inventory[i];
-//     const itemCost = getInventoryCost(i, guest).sell;
-//     totalCoins += numItems * itemCost;
-//   }
-
-//   guest.inventory = [0, 0, 0];
-//   guest.coins += totalCoins;
-// };
 
 export const dudeBuySingleItem = (guest, itemIdx) => {
   if (!guest.shopType || !guest.inventory) return;

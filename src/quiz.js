@@ -20,7 +20,7 @@ const revealedAnswerDiv = document.getElementById("answer-revealed");
 const closeButton = document.getElementById("close-quiz");
 const nextButton = document.getElementById("next-exit-quiz-button");
 
-const onSubmit = (me, shared) => {
+const onSubmit = (me) => {
   if (!guessed || !correctAnswer) return;
 
   const correct = guessed === correctAnswer;
@@ -32,9 +32,9 @@ const onSubmit = (me, shared) => {
   const greatWork = "Correct!";
 
   if (correct) {
-    me.coins += shared.quizCoins;
+    me.coins += me.quizCoins;
   } else {
-    me.coins += shared.quizCoins / 10;
+    me.coins += 15;
   }
 
   revealedAnswerDiv.innerHTML = ""; // Clear previous content
@@ -51,7 +51,7 @@ const onSubmit = (me, shared) => {
     coinMsg.classList.add("coin-message");
 
     const coinText = document.createElement("span");
-    coinText.textContent = `+${shared.quizCoins}`;
+    coinText.textContent = `+${me.quizCoins}`;
 
     const coinImgElement = document.createElement("img");
     coinImgElement.src = "assets/coin.png"; // ✅ Image source set
@@ -88,7 +88,7 @@ const onSubmit = (me, shared) => {
     revealedAnswerDiv.appendChild(button);
   });
 
-  shared.quizCoins *= 2; // Double for next round
+  me.quizCoins *= 2; // Double for next round
 };
 
 // open
@@ -158,11 +158,11 @@ const generateQuiz = async () => {
  * attach event listeners
  */
 
-export const setupQuizUI = (me, shared) => {
+export const setupQuizUI = (me) => {
   quizButton.addEventListener("click", () => changeScene(scenes.quiz));
   closeButton.addEventListener("click", onClickClose);
   nextButton.addEventListener("click", onClickNext);
 
   // submit quiz button
-  submitButton.addEventListener("click", () => onSubmit(me, shared));
+  submitButton.addEventListener("click", () => onSubmit(me));
 };
