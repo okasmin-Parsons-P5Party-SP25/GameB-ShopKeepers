@@ -271,13 +271,15 @@ export const updateUI = (me) => {
     my inventory: ${me.inventory}
   `;
 
+  const coinHTML = `<span>${me.coins} <img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
+
   const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
   if (myMoneyGodModeDiv) {
-    myMoneyGodModeDiv.textContent = `${me.coins} 🪙`;
+    myMoneyGodModeDiv.innerHTML = coinHTML;
   }
 
   const myMoneyDiv = document.getElementById("my-money");
   if (myMoneyDiv) {
-    myMoneyDiv.textContent = `${me.coins} 🪙`;
+    myMoneyDiv.innerHTML = coinHTML;
   }
 };

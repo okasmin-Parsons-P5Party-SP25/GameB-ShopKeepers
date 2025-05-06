@@ -40,10 +40,11 @@
             <div class="ui-button-icon"></div>
             unleash dudes
           </button>
+          <button id="quiz-button" class="ui-button">
+            <div class="ui-button-icon">?</div>
+          </button>
           <div id="god-mode-container" class="hidden">
             <button id="choose-type-button">choose shop type</button>
-            <button id="quiz-button">play quiz</button>
-
             <div id="my-info">
               <div id="my-upgrades"></div>
               <div id="my-money-godMode"></div>
@@ -62,6 +63,14 @@
           id="loading-image"
         />
         <p id="loading-text">loading...</p>
+      </div>
+      <div id="big-creature-quiz">
+        <div id="quiz-creature-image-container">
+          <img src="assets/bigCreatures/2.png" alt="Big Creature Quiz" id="quiz-creature-image" />
+        </div>
+        <div id="quiz-creature-text-container">
+          <p id="loading-text">click to play the quiz and win more coins</p>
+        </div>
       </div>
       <div id="popup-container">
         <div id="quiz" class="hidden popupItem">
@@ -105,7 +114,6 @@
               <p>click on items to add them to your inventory!</p>
             </div>
           </div>
-
           <!-- Tab Content -->
           <div class="tab-content" id="inventory-tab">
             <!-- <h4>inventory</h4> -->

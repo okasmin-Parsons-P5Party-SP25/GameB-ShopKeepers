@@ -21,15 +21,17 @@ import {
 import { me, guests, changeScene, scenes } from "./main.js";
 import { addTexture, drawShop } from "./game_scene/shop.js";
 import { preloadDudes, setUpDudes, drawDudes } from "./game_scene/dudes.js";
-import { drawBigCreature } from "./game_scene/bigCreature.js";
 
 let textureImage;
 let speckleTextureImage;
-const logoImage = document.getElementById("logo");
 let coinImg;
+
+const logoImage = document.getElementById("logo");
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const littleDudesButton = document.getElementById("test-dude-button");
+const quizButton = document.getElementById("quiz-button");
+const bigCreatureQuizPrompt = document.getElementById("big-creature-quiz");
 
 export function preload() {
   for (const upgradeType of upgradeTypes) {
@@ -66,12 +68,13 @@ export function preload() {
 }
 
 export function enter() {
-  logoImage.style.display = "block";
+  logoImage.style.display = "flex";
 
   me.dudesState = myDudeStates.none;
   closeAllPopups();
   upgradeMarketButton.style.display = "block";
   littleDudesButton.style.display = "block";
+  quizButton.style.display = "block";
   updateUI(me);
 
   littleDudesButton.addEventListener("click", startDudes);
@@ -79,6 +82,10 @@ export function enter() {
 
 export function update() {
   updateUI(me);
+
+  if (me.dudesState === myDudeStates.finished) {
+    bigCreatureQuizPrompt.style.display = "flex";
+  }
 
   if (me.dudesState === myDudeStates.started) {
     if (checkDudesDone(me)) {
@@ -92,6 +99,8 @@ export function leave() {
   me.dudesState = myDudeStates.none;
   upgradeMarketButton.style.display = "none";
   littleDudesButton.style.display = "none";
+  quizButton.style.display = "none";
+  bigCreatureQuizPrompt.display = "none";
   closeAllPopups();
 }
 
@@ -103,9 +112,6 @@ export function draw() {
 
   addTexture(speckleTextureImage, textureImage);
 
-  if (me.dudesState === myDudeStates.finished) {
-    drawBigCreature();
-  }
   if (coinImg) {
     image(coinImg); // adjust position and size as needed
   }
@@ -139,6 +145,7 @@ const startDudes = () => {
 
 export function mousePressed() {
   if (me.dudesState === myDudeStates.finished) {
+    bigCreatureQuizPrompt.style.display = "none";
     me.dudesState = myDudeStates.none;
     changeScene(scenes.quiz);
   }
@@ -173,12 +180,5 @@ export const drawShops = (guests) => {
       );
       pop();
     }
-  }
-
-  for (let i = 0; i < guests.length; i++) {
-    const guest = guests[i];
-    if (!guest.shopType) continue;
-    // console.log("drawing dudes", guest.dudes.length);
-    drawDudes(guest);
   }
 };
