@@ -98,7 +98,7 @@ button:hover {
     display: none;
   }
 
-  #questions-screen {
+  #questions-screen, #answers-screen {
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
