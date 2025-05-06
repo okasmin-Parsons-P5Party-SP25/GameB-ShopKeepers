@@ -66,10 +66,58 @@ button:hover {
     align-items: center;
   }
 
-  #submit-quiz {
-    background-color: #c4d6bc;
-    width: 96px;
+
+  .answer-button.selected-button {
+    background-color: black;
+    color: white;
   }
+
+  .correct-answer {
+    border: 2px solid #C6CA42;
+    pointer-events: none;
+  }
+
+  .incorrect-answer {
+    pointer-events: none;
+  }
+
+  .correct-answer.correct-select {
+    background-color: #C6CA42;
+    color: white;
+    pointer-events: none;
+  }
+
+  .wrong-answer.incorrect-select {
+    background-color: #F26B4E;
+    color: white;
+    pointer-events: none;
+  }
+
+  .wrong-answer {
+    pointer-events: none;
+  }
+
+.coin-message span {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -20px;
+}
+img.coin-icon {
+  position: relative;
+  vertical-align: bottom;
+}
+
+#submit-quiz, #next-exit-quiz-button {
+  background-color: black;
+  color: white;
+  width: 30%;
+  font-family: "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  margin: 20px 0;
+  font-size: 14px;
+  letter-spacing: 0.75ch;
+  padding: 20px 0;
+}
 
   #answers-screen.hidden {
     display: none;
@@ -79,15 +127,38 @@ button:hover {
     display: none;
   }
 
-  #questions-screen {
+  #questions-screen, #answers-screen {
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+  }
+
+  .answer-heading {
+    padding-top: 0;
   }
 
   .answer-button {
-    width: 75%;
+    width: 100%;
+    font-size: 20px;
+    padding: 20px 0;
+    border-radius: 10px;
+    background-color: #F2EBDC;
+    color: black;
+    margin: 20px 0;
   }
+
+  .correct-answer, .wrong-answer {
+    width: 100%;
+    font-size: 20px;
+    padding: 20px 0;
+    border-radius: 10px;
+  }
+
+  .answer-button:hover {
+    background-color: snow;
+    border: 1px solid black;
+  }
+
 }
 
 #quiz.hidden {
@@ -95,6 +166,7 @@ button:hover {
 }
 
 #choose-type {
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,7 +227,7 @@ button:hover {
   justify-content: center;
   gap: 4rem;
   width: 100%;
-  padding: 0 2rem;
+  padding: 0;
 }
 
 .shop-type-option {
@@ -257,10 +329,19 @@ canvas {
 }
 
 .close-button {
-  right: 10px;
-  top: 10px;
+  left: -63.5px;
+  top: -12px;
+  padding: 22.5px 15px;
+  font-size: 30px;
   position: absolute;
-  font-weight: 700;
+  font-weight: 500;
+  border: 1px solid black;
+  font-family: "helvetica neue", sans-serif;
+  border-right: 1px solid black;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 #ui-container {
@@ -280,11 +361,12 @@ canvas {
 
 #upgrade-market p {
   margin: 0;
-  padding-left: 12px;
 }
 
 #my-money {
   text-align: left;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 #upgrade-market.hidden {
@@ -294,7 +376,7 @@ canvas {
 .market-choices {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: 10px 5px 5px 5px;
 }
 
 .market-choice-button {
@@ -345,6 +427,34 @@ h4 {
   padding-bottom: 20px;
 }
 
+.market-choice-upgrade {
+  height: 300px;
+}
+
+.market-choice-upgrade .item{
+  position: absolute;
+  text-transform: uppercase;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.market-choice-upgrade div.buy {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-transform: lowercase;
+}
+
+.market-choice-button:hover .item-label {
+  font-weight: bold;
+}
+
+.market-choice-button:hover {
+  background-color: #F2EBDC;
+}
+
 .market-choice-button .item-label {
   position: absolute;
   text-transform: uppercase;
@@ -357,8 +467,8 @@ h4 {
 }
 
 .market-choice-button .item-image {
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 60px;
+  padding-bottom: 50px;
   width: 80%;
   height: 80%;
   border-radius: 10px;
@@ -399,21 +509,21 @@ h4 {
   margin-bottom: 0;
 }
 
-.inv-tab {
+.tab-button.inv-tab {
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
 }
-.upg-tab {
+.tab-button.upg-tab {
   position: absolute;
   top: 0;
   right: 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
 }
 
 .tab-button {
@@ -455,6 +565,7 @@ h4 {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-left: 12px;
 }
 
 .market-header-row {
@@ -463,9 +574,6 @@ h4 {
   display: flex;
   flex-direction: row;
   width: 100%;
-}
-.market-header-row :last-child {
-  margin-left: 36px;
 }
 
 #god-mode-container.hidden {

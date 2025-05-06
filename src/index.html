@@ -42,6 +42,7 @@
           </button>
           <button id="quiz-button" class="ui-button">
             <div class="ui-button-icon">?</div>
+            quiz
           </button>
           <div id="god-mode-container" class="hidden">
             <button id="choose-type-button">choose shop type</button>
@@ -83,7 +84,9 @@
             <button id="submit-quiz">submit</button>
           </div>
           <div id="answers-screen" class="hidden">
-            <h4>the answer...</h4>
+            <h1>quiz</h1>
+            <h3>QUESTION</h3>
+            <h4 id="question-copy"></h4>
             <div id="answer-revealed"></div>
             <button id="next-exit-quiz-button">close</button>
           </div>
@@ -102,10 +105,19 @@
           <button class="close-button" id="close-upgrade-market">X</button>
           <!-- Tab Buttons -->
           <div class="tabs">
-            <button class="tab-button active" data-tab="inventory">Inventory</button>
-            <button class="tab-button" data-tab="shop-upgrades">Shop Upgrades</button>
+            <button class="tab-button inv-tab active" data-tab="inventory">Inventory</button>
+            <button class="tab-button upg-tab" data-tab="shop-upgrades">Upgrades</button>
           </div>
-
+          <div class="market-header-row">
+            <div class="market-header-column wallet">
+              <div id="my-money"></div>
+              <p>my balance</p>
+            </div>
+            <div class="market-header-column">
+              <p class="add-to-inv">click on items to add them to your inventory!</p>
+            </div>
+            </div>
+  
           <!-- Tab Content -->
           <div class="tab-content" id="inventory-tab">
             <!-- <h4>inventory</h4> -->

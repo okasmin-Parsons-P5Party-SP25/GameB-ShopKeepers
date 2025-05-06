@@ -12,8 +12,17 @@ const upgradeMarketDiv = document.getElementById("upgrade-market");
 const inventoryDiv = document.getElementById("inventory-choices");
 const upgradesDiv = document.getElementById("shop-upgrade-choices");
 
+const inventoryNameMap = {
+  plant1: "Rubber",
+  plant2: "Fern",
+  plant3: "Cactus",
+  book1: "Short Story",
+  book2: "Novel",
+  card: "B-Day Card",
+};
+
 const getCoinHTML = (amount) => {
-  return `<span>${amount} <img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
+  return `<span>${amount}<img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
 };
 
 // open
@@ -118,7 +127,7 @@ export const setInventory = (me) => {
 
     // Label
     const label = document.createElement("span");
-    label.textContent = inventory;
+    label.textContent = inventoryNameMap[inventory] || inventory;
     label.classList.add("item-label");
 
     itemImageContainer.appendChild(img);
@@ -187,13 +196,14 @@ const setUpgrades = (me) => {
     // note: idx here refers to the inventory level
     const button = document.createElement("button");
     // button.id = `upgrade-${idx}`;
-    button.classList.add("market-choice-button");
+    button.classList.add("market-choice-button", "market-choice-upgrade");
 
     const itemDiv = document.createElement("div");
 
     // TODO render image here instead of text?
     const itemImageContainer = document.createElement("div");
     itemImageContainer.textContent = upgrade;
+    itemImageContainer.classList.add("item");
     itemDiv.append(itemImageContainer);
 
     const { buy } = getUpgradeCost(idx);

@@ -28,24 +28,70 @@ const onSubmit = (me) => {
   questionsScreenDiv.classList.toggle("hidden");
   answerScreenDiv.classList.toggle("hidden");
 
-  const lost = "better luck next time! ";
-  const greatWork = "great work! ";
-  const reveal = `the correct answer was: ${correctAnswer}`;
+  const questionCopy = document.getElementById("question-copy");
+  questionCopy.textContent = question.textContent;
 
-  let text = "";
+  const lost = "Incorrect...";
+  const greatWork = "Correct!";
 
   if (correct) {
-    me.coins += shared.quizCoins;
-    text = greatWork + reveal;
+    me.coins += me.quizCoins;
   } else {
-    me.coins += shared.quizCoins / 10;
-    text = lost + reveal;
+    me.coins += 15;
   }
 
-  revealedAnswerDiv.textContent = text;
+  revealedAnswerDiv.innerHTML = ""; // Clear previous content
 
-  // increase win amount each time quiz is played
-  shared.quizCoins = shared.quizCoins * 2;
+  // Add result header
+  const resultHeading = document.createElement("h3");
+  resultHeading.textContent = correct ? greatWork : lost;
+  resultHeading.classList.add("answer-heading");
+  revealedAnswerDiv.appendChild(resultHeading);
+
+  // Add coin reward message if correct
+  if (correct) {
+    const coinMsg = document.createElement("div");
+    coinMsg.classList.add("coin-message");
+
+    const coinText = document.createElement("span");
+    coinText.textContent = `+${me.quizCoins}`;
+
+    const coinImgElement = document.createElement("img");
+    coinImgElement.src = "assets/coin.png"; // ✅ Image source set
+    coinImgElement.alt = "Coin";
+    coinImgElement.classList.add("coin-icon");
+
+    coinImgElement.width = 25; // width in pixels
+    coinImgElement.height = 25; // height in pixels
+
+    coinMsg.appendChild(coinText);
+    coinMsg.appendChild(coinImgElement);
+    revealedAnswerDiv.appendChild(coinMsg);
+  }
+
+  // Render all answer choices again with correct/selected classes
+  const allAnswers = Array.from(answersDiv.children).map((btn) => btn.textContent);
+
+  allAnswers.forEach((answer) => {
+    const button = document.createElement("button");
+    button.textContent = answer;
+    button.classList.add("answer-button");
+
+    if (answer === correctAnswer) {
+      button.classList.add("correct-answer");
+    } else {
+      button.classList.add("wrong-answer");
+    }
+
+    if (answer === guessed) {
+      button.classList.add(answer === correctAnswer ? "correct-select" : "incorrect-select");
+    }
+
+    button.disabled = true;
+    revealedAnswerDiv.appendChild(button);
+  });
+
+  me.quizCoins *= 2; // Double for next round
 };
 
 // open

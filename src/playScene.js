@@ -27,7 +27,6 @@ let speckleTextureImage;
 let coinImg;
 
 const logoImage = document.getElementById("logo");
-let coinImg;
 
 const upgradeMarketButton = document.getElementById("upgrade-market-button");
 const littleDudesButton = document.getElementById("test-dude-button");
@@ -65,6 +64,7 @@ export function preload() {
   preloadDudes();
   textureImage = loadImage("./assets/textures/white-paper-texture.jpg");
   speckleTextureImage = loadImage("./assets/textures/cardboard-texture.jpg");
+  coinImg = loadImage("./assets/coin.png");
 }
 
 export function enter() {
@@ -117,9 +117,6 @@ export function draw() {
 
   addTexture(speckleTextureImage, textureImage);
 
-  if (coinImg) {
-    image(coinImg); // adjust position and size as needed
-  }
   if (coinImg) {
     image(coinImg); // adjust position and size as needed
   }
@@ -188,33 +185,5 @@ export const drawShops = (guests) => {
       );
       pop();
     }
-  }
-
-  for (let i = 0; i < guests.length; i++) {
-    const guest = guests[i];
-    if (!guest.shopType) continue;
-    // console.log("drawing dudes", guest.dudes.length);
-    drawDudes(guest);
-  }
-};
-
-export const updateUI = (me) => {
-  const myInventoryDiv = document.getElementById("my-upgrades");
-  myInventoryDiv.textContent = `
-  my upgrade level: ${me.upgradeLevel} | 
-  ${upgradeTypes[0]}: ${me.upgrades[0]} |
-   ${upgradeTypes[1]}: ${me.upgrades[1]} |
-    ${upgradeTypes[2]}: ${me.upgrades[2]} |
-    my inventory: ${me.inventory}
-  `;
-
-  const myMoneyGodModeDiv = document.getElementById("my-money-godMode");
-  if (myMoneyGodModeDiv) {
-    myMoneyGodModeDiv.textContent = `${me.coins} 🪙`;
-  }
-
-  const myMoneyDiv = document.getElementById("my-money");
-  if (myMoneyDiv) {
-    myMoneyDiv.textContent = `${me.coins} 🪙`;
   }
 };
