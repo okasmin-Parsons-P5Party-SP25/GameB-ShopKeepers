@@ -28,6 +28,9 @@ const onSubmit = (me, shared) => {
   questionsScreenDiv.classList.toggle("hidden");
   answerScreenDiv.classList.toggle("hidden");
 
+  const questionCopy = document.getElementById("question-copy");
+  questionCopy.textContent = question.textContent;
+
   const lost = "Incorrect...";
   const greatWork = "Correct!";
 
@@ -61,8 +64,8 @@ const onSubmit = (me, shared) => {
     coinImgElement.width = 25; // width in pixels
     coinImgElement.height = 25; // height in pixels
 
-    coinMsg.appendChild(coinImgElement);
     coinMsg.appendChild(coinText);
+    coinMsg.appendChild(coinImgElement);
     revealedAnswerDiv.appendChild(coinMsg);
   }
 

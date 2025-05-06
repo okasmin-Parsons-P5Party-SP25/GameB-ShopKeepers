@@ -58,6 +58,7 @@ button:hover {
 }
 
 #quiz {
+
   #answers-container {
     display: flex;
     flex-direction: column;
@@ -65,18 +66,45 @@ button:hover {
     align-items: center;
   }
 
+  .answer-button.selected-button {
+    background-color: black;
+    color: white;
+  }
+
   .correct-answer {
-    background-color: #d4edda;
-    color: #155724;
-    margin: 20px 0;
+    border: 2px solid #C6CA42;
     pointer-events: none;
   }
+
+  .incorrect-answer {
+    pointer-events: none;
+  }
+
+  .correct-answer.correct-select {
+    background-color: #C6CA42;
+    color: white;
+    pointer-events: none;
+  }
+
+  .wrong-answer.incorrect-select {
+    background-color: #F26B4E;
+    color: white;
+    pointer-events: none;
+  }
+
   .wrong-answer {
-    background-color: #f8d7da;
-    color: #721c24;
-    margin: 20px 0;
     pointer-events: none;
   }
+
+.coin-message span {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -20px;
+}
+img.coin-icon {
+  position: relative;
+  vertical-align: bottom;
+}
 
   #submit-quiz, #next-exit-quiz-button {
     background-color: black;
@@ -104,11 +132,18 @@ button:hover {
     flex-direction: column;
   }
 
+  .answer-heading {
+    padding-top: 0;
+  }
+
   .answer-button {
     width: 100%;
     font-size: 20px;
     padding: 20px 0;
     border-radius: 10px;
+    background-color: #F2EBDC;
+    color: black;
+    margin: 20px 0;
   }
 
   .correct-answer, .wrong-answer {
@@ -293,11 +328,13 @@ canvas {
 .close-button {
   left: -62px;
   top: -12px;
-  padding: 23.5px 15px;
+  padding: 22.5px 15px;
   font-size: 30px;
   position: absolute;
-  font-weight: 300;
+  font-weight: 500;
   border: 1px solid black;
+  font-family: "helvetica neue", sans-serif;
+  border-right: 1px solid black;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 0;
