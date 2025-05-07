@@ -58,6 +58,7 @@ button:hover {
 }
 
 #quiz {
+
   #answers-container {
     display: flex;
     flex-direction: column;
@@ -65,31 +66,58 @@ button:hover {
     align-items: center;
   }
 
-  .correct-answer {
-    background-color: #d4edda;
-    color: #155724;
-    margin: 20px 0;
-    pointer-events: none;
+
+  .answer-button.selected-button {
+    background-color: black;
+    color: white;
   }
-  .wrong-answer {
-    background-color: #f8d7da;
-    color: #721c24;
-    margin: 20px 0;
+
+  .correct-answer {
+    border: 2px solid #C6CA42;
     pointer-events: none;
   }
 
-  #submit-quiz,
-  #next-exit-quiz-button {
-    background-color: black;
-    color: white;
-    width: 30%;
-    font-family: "Helvetica Neue", sans-serif;
-    text-transform: uppercase;
-    margin: 20px 0;
-    font-size: 14px;
-    letter-spacing: 0.75ch;
-    padding: 20px 0;
+  .incorrect-answer {
+    pointer-events: none;
   }
+
+  .correct-answer.correct-select {
+    background-color: #C6CA42;
+    color: white;
+    pointer-events: none;
+  }
+
+  .wrong-answer.incorrect-select {
+    background-color: #F26B4E;
+    color: white;
+    pointer-events: none;
+  }
+
+  .wrong-answer {
+    pointer-events: none;
+  }
+
+.coin-message span {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -20px;
+}
+img.coin-icon {
+  position: relative;
+  vertical-align: bottom;
+}
+
+#submit-quiz, #next-exit-quiz-button {
+  background-color: black;
+  color: white;
+  width: 30%;
+  font-family: "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  margin: 20px 0;
+  font-size: 14px;
+  letter-spacing: 0.75ch;
+  padding: 20px 0;
+}
 
   #answers-screen.hidden {
     display: none;
@@ -99,11 +127,14 @@ button:hover {
     display: none;
   }
 
-  #questions-screen,
-  #answers-screen {
+  #questions-screen, #answers-screen {
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
+  }
+
+  .answer-heading {
+    padding-top: 0;
   }
 
   .answer-button {
@@ -111,10 +142,12 @@ button:hover {
     font-size: 20px;
     padding: 20px 0;
     border-radius: 10px;
+    background-color: #F2EBDC;
+    color: black;
+    margin: 20px 0;
   }
 
-  .correct-answer,
-  .wrong-answer {
+  .correct-answer, .wrong-answer {
     width: 100%;
     font-size: 20px;
     padding: 20px 0;
@@ -125,6 +158,7 @@ button:hover {
     background-color: snow;
     border: 1px solid black;
   }
+
 }
 
 #quiz.hidden {
@@ -132,6 +166,7 @@ button:hover {
 }
 
 #choose-type {
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -192,7 +227,7 @@ button:hover {
   justify-content: center;
   gap: 4rem;
   width: 100%;
-  padding: 0 2rem;
+  padding: 0;
 }
 
 .shop-type-option {
@@ -294,13 +329,15 @@ canvas {
 }
 
 .close-button {
-  left: -62px;
+  left: -63.5px;
   top: -12px;
-  padding: 23.5px 15px;
+  padding: 22.5px 15px;
   font-size: 30px;
   position: absolute;
-  font-weight: 300;
+  font-weight: 500;
   border: 1px solid black;
+  font-family: "helvetica neue", sans-serif;
+  border-right: 1px solid black;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 0;
@@ -324,11 +361,12 @@ canvas {
 
 #upgrade-market p {
   margin: 0;
-  padding-left: 12px;
 }
 
 #my-money {
   text-align: left;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 #upgrade-market.hidden {
@@ -338,16 +376,36 @@ canvas {
 .market-choices {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: 10px 5px 5px 5px;
 }
 
-.market-choice-button {
+.market-choice-button, .market-choice-upgrade {
+  position: relative;
   background-color: #f6f4e7;
   width: 90%;
   padding-bottom: 35px;
   font-size: 20px;
   position: relative;
   border-radius: 10px;
+}
+
+.market-choice-upgrade img.upgrade-image {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130%;
+  height: 130%;
+}
+
+.market-choice-upgrade span.upgrade-label {
+  position: absolute;
+  font-size: 25px;
+  font-weight: 400;
+  text-transform: uppercase;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .ui-button {
@@ -389,6 +447,38 @@ h4 {
   padding-bottom: 20px;
 }
 
+.market-choice-upgrade {
+  height: 300px;
+}
+
+.market-choice-upgrade .item {
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.market-choice-upgrade div.buy {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-transform: lowercase;
+}
+
+.market-choice-button:hover .item-label {
+  font-weight: bold;
+}
+
+.market-choice-upgrade:hover span.upgrade-label {
+  font-weight: bold;
+}
+
+.market-choice-button:hover {
+  background-color: #F2EBDC;
+}
+
 .market-choice-button .item-label {
   position: absolute;
   text-transform: uppercase;
@@ -401,10 +491,10 @@ h4 {
 }
 
 .market-choice-button .item-image {
-  padding-top: 30px;
-  padding-bottom: 20px;
-  width: 80%;
-  height: 80%;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  width: 65%;
+  height: 65%;
   border-radius: 10px;
 }
 
@@ -443,21 +533,21 @@ h4 {
   margin-bottom: 0;
 }
 
-.inv-tab {
+.tab-button.inv-tab {
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
 }
-.upg-tab {
+.tab-button.upg-tab {
   position: absolute;
   top: 0;
   right: 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
 }
 
 .tab-button {
@@ -499,6 +589,7 @@ h4 {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-left: 12px;
 }
 
 .market-header-row {
@@ -507,9 +598,6 @@ h4 {
   display: flex;
   flex-direction: row;
   width: 100%;
-}
-.market-header-row :last-child {
-  margin-left: 36px;
 }
 
 #god-mode-container.hidden {
@@ -584,7 +672,7 @@ h4 {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* same as 100% here, but more explicit */
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -625,8 +713,8 @@ h4 {
 /* Applied after Lottie animation is loaded */
 .splash-animation-svg {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   transform: scale(1.2);
   transform-origin: center center;
 }

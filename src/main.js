@@ -23,7 +23,7 @@ export const scenes = {
 let currentScene; // the scene being displayed
 
 window.preload = function () {
-  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main_start");
+  partyConnect("wss://demoserver.p5party.org", "shop_keepers_main_may_7");
 
   me = partyLoadMyShared({
     shopType: undefined, // one of shopTypes,

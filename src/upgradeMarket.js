@@ -12,6 +12,25 @@ const upgradeMarketDiv = document.getElementById("upgrade-market");
 const inventoryDiv = document.getElementById("inventory-choices");
 const upgradesDiv = document.getElementById("shop-upgrade-choices");
 
+const inventoryNameMap = {
+  plant1: "Rubber",
+  plant2: "Fern",
+  plant3: "Cactus",
+  book1: "Short Story",
+  book2: "Novel",
+  card: "B-Day Card",
+};
+
+const upgradeImageMap = {
+  light: "upgrade_light.png",
+  decor: "upgrade_decor.png",
+  pet: "upgrade_pet.png",
+};
+
+const getCoinHTML = (amount) => {
+  return `<span>${amount}<img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
+};
+
 // open
 const onClickUpgradeMarket = () => {
   closeAllPopups();
@@ -68,7 +87,7 @@ const handleBuyInventory = (me, idx, cost) => {
 export const updateAmountText = (me, idx) => {
   const el = document.getElementById(`market-supply-${idx}`);
   if (el) {
-    el.textContent = `supply: ${me.inventory[idx]}`;
+    el.textContent = `${me.inventory[idx]}`;
   }
 };
 
@@ -82,7 +101,7 @@ const updateSellText = (me, idx, el = undefined, sell = undefined) => {
     ammount = getInventoryCost(idx, me).sell;
   }
 
-  div.textContent = `sell: ${ammount} 🪙`;
+  div.innerHTML = `sell<br>${getCoinHTML(ammount)}`;
 };
 
 export const setInventory = (me) => {
@@ -114,7 +133,7 @@ export const setInventory = (me) => {
 
     // Label
     const label = document.createElement("span");
-    label.textContent = inventory;
+    label.textContent = inventoryNameMap[inventory] || inventory;
     label.classList.add("item-label");
 
     itemImageContainer.appendChild(img);
@@ -125,7 +144,7 @@ export const setInventory = (me) => {
 
     const buyDiv = document.createElement("div");
     buyDiv.classList.add("buy");
-    buyDiv.textContent = `buy: ${buy} 🪙`;
+    buyDiv.innerHTML = `buy<br>${getCoinHTML(buy)}`;
     itemDiv.append(buyDiv);
 
     const sellDiv = document.createElement("div");
@@ -137,7 +156,7 @@ export const setInventory = (me) => {
     const ammountDiv = document.createElement("div");
     ammountDiv.id = `market-supply-${idx}`;
     ammountDiv.classList.add("supply");
-    ammountDiv.textContent = `supply: ${me.inventory[idx]}`;
+    ammountDiv.textContent = `${me.inventory[idx]}`;
     itemDiv.append(ammountDiv);
 
     button.append(itemDiv);
@@ -148,10 +167,9 @@ export const setInventory = (me) => {
   });
 };
 
-const handleBuyUpgrade = (me, idx, cost, purchasedDiv) => {
+const handleBuyUpgrade = (me, idx, cost, purchasedDiv, buttonEl) => {
   // check if can afford
   if (cost > me.coins) {
-    // TODO make this visible in UI somehow
     console.log("cannot afford");
     return;
   }
@@ -174,6 +192,7 @@ const handleBuyUpgrade = (me, idx, cost, purchasedDiv) => {
   }
 };
 
+
 const updatePurchasedText = (me, el, idx) => {
   el.textContent = el.textContent + (me.upgrades[idx] === true ? " purchased" : "");
 };
@@ -183,20 +202,37 @@ const setUpgrades = (me) => {
     // note: idx here refers to the inventory level
     const button = document.createElement("button");
     // button.id = `upgrade-${idx}`;
-    button.classList.add("market-choice-button");
+    button.classList.add("market-choice-upgrade");
 
     const itemDiv = document.createElement("div");
 
-    // TODO render image here instead of text?
     const itemImageContainer = document.createElement("div");
-    itemImageContainer.textContent = upgrade;
+    itemImageContainer.classList.add("item-upgrade");
+
+    const img = document.createElement("img");
+    const imageFile = upgradeImageMap[upgrade] || "";
+    img.src = `assets/icons/${imageFile}`;
+    img.alt = upgrade;
+    img.classList.add("upgrade-image");
+    img.onerror = () => {
+      img.src = ""; // fallback image
+    };
+
+    itemImageContainer.appendChild(img);
+
+    // Optionally, add a label or keep the text name below the image
+    const label = document.createElement("span");
+    label.textContent = upgrade;
+    label.classList.add("upgrade-label");
+    itemImageContainer.appendChild(label);
+
     itemDiv.append(itemImageContainer);
 
     const { buy } = getUpgradeCost(idx);
 
     const buyDiv = document.createElement("div");
     buyDiv.classList.add("buy");
-    buyDiv.textContent = `buy: ${buy} 🪙`;
+    buyDiv.innerHTML = `buy<br>${getCoinHTML(buy)}`;
     itemDiv.append(buyDiv);
 
     const purchasedDiv = document.createElement("div");
