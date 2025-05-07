@@ -764,6 +764,7 @@ h4 {
   height: 80%;
   img {
     height: 800px;
+    width: auto;
   }
 
   p {
