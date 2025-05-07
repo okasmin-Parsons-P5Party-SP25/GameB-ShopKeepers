@@ -21,6 +21,12 @@ const inventoryNameMap = {
   card: "B-Day Card",
 };
 
+const upgradeImageMap = {
+  light: "upgrade_light.png",
+  decor: "upgrade_decor.png",
+  pet: "upgrade_pet.png",
+};
+
 const getCoinHTML = (amount) => {
   return `<span>${amount}<img src="./assets/coin.png" style="width: 25px; height: 25px; vertical-align: middle;" /></span>`;
 };
@@ -180,9 +186,6 @@ const handleBuyUpgrade = (me, idx, cost, purchasedDiv, buttonEl) => {
 
   updatePurchasedText(me, purchasedDiv, idx);
 
-  // ✅ Add the purchased-item class
-  buttonEl.classList.add("purchased-item");
-
   // apply the upgrade price multiplier to each item
   for (let i = 0; i < 3; i++) {
     updateSellText(me, i);
@@ -199,28 +202,28 @@ const setUpgrades = (me) => {
     // note: idx here refers to the inventory level
     const button = document.createElement("button");
     // button.id = `upgrade-${idx}`;
-    button.classList.add("market-choice-button", "market-choice-upgrade");
+    button.classList.add("market-choice-upgrade");
 
     const itemDiv = document.createElement("div");
 
     const itemImageContainer = document.createElement("div");
-    itemImageContainer.classList.add("item");
+    itemImageContainer.classList.add("item-upgrade");
 
-/*     // Create the image element
     const img = document.createElement("img");
-    img.src = `assets/${me.shopType}/upgrades/decor/full-decor.png`;
+    const imageFile = upgradeImageMap[upgrade] || "";
+    img.src = `assets/icons/${imageFile}`;
     img.alt = upgrade;
-    img.classList.add("item-image");
+    img.classList.add("upgrade-image");
     img.onerror = () => {
       img.src = ""; // fallback image
     };
 
-    itemImageContainer.appendChild(img); */
+    itemImageContainer.appendChild(img);
 
     // Optionally, add a label or keep the text name below the image
     const label = document.createElement("span");
     label.textContent = upgrade;
-    label.classList.add("item-label");
+    label.classList.add("upgrade-label");
     itemImageContainer.appendChild(label);
 
     itemDiv.append(itemImageContainer);

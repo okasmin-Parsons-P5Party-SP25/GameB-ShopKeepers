@@ -379,13 +379,33 @@ canvas {
   gap: 10px 5px 5px 5px;
 }
 
-.market-choice-button {
+.market-choice-button, .market-choice-upgrade {
+  position: relative;
   background-color: #f6f4e7;
   width: 90%;
   padding-bottom: 35px;
   font-size: 20px;
   position: relative;
   border-radius: 10px;
+}
+
+.market-choice-upgrade img.upgrade-image {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130%;
+  height: 130%;
+}
+
+.market-choice-upgrade span.upgrade-label {
+  position: absolute;
+  font-size: 25px;
+  font-weight: 400;
+  text-transform: uppercase;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .ui-button {
@@ -448,6 +468,10 @@ h4 {
 }
 
 .market-choice-button:hover .item-label {
+  font-weight: bold;
+}
+
+.market-choice-upgrade:hover span.upgrade-label {
   font-weight: bold;
 }
 
