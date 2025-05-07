@@ -73,7 +73,7 @@ function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
     } else if (frameCount % 40 > 10) {
       imgNum = 2;
     }
-
+    push();
     imageMode(CENTER);
     image(
       bakeryUpgradeImages.pet[`cat${imgNum}`],
@@ -82,6 +82,7 @@ function drawBakeryUpgrades(upgrades, x, y, shopWidth, shopHeight, shopLength) {
       decorImgSize / 2,
       decorImgSize / 2
     );
+    pop();
   }
   // decor
   if (upgrades[0] === true) {
