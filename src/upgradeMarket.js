@@ -161,10 +161,9 @@ export const setInventory = (me) => {
   });
 };
 
-const handleBuyUpgrade = (me, idx, cost, purchasedDiv) => {
+const handleBuyUpgrade = (me, idx, cost, purchasedDiv, buttonEl) => {
   // check if can afford
   if (cost > me.coins) {
-    // TODO make this visible in UI somehow
     console.log("cannot afford");
     return;
   }
@@ -181,11 +180,15 @@ const handleBuyUpgrade = (me, idx, cost, purchasedDiv) => {
 
   updatePurchasedText(me, purchasedDiv, idx);
 
+  // ✅ Add the purchased-item class
+  buttonEl.classList.add("purchased-item");
+
   // apply the upgrade price multiplier to each item
   for (let i = 0; i < 3; i++) {
     updateSellText(me, i);
   }
 };
+
 
 const updatePurchasedText = (me, el, idx) => {
   el.textContent = el.textContent + (me.upgrades[idx] === true ? " purchased" : "");
@@ -200,10 +203,26 @@ const setUpgrades = (me) => {
 
     const itemDiv = document.createElement("div");
 
-    // TODO render image here instead of text?
     const itemImageContainer = document.createElement("div");
-    itemImageContainer.textContent = upgrade;
     itemImageContainer.classList.add("item");
+
+/*     // Create the image element
+    const img = document.createElement("img");
+    img.src = `assets/${me.shopType}/upgrades/decor/full-decor.png`;
+    img.alt = upgrade;
+    img.classList.add("item-image");
+    img.onerror = () => {
+      img.src = ""; // fallback image
+    };
+
+    itemImageContainer.appendChild(img); */
+
+    // Optionally, add a label or keep the text name below the image
+    const label = document.createElement("span");
+    label.textContent = upgrade;
+    label.classList.add("item-label");
+    itemImageContainer.appendChild(label);
+
     itemDiv.append(itemImageContainer);
 
     const { buy } = getUpgradeCost(idx);
